@@ -407,22 +407,18 @@ _loc1.showFightCells = function(_loc2_, _loc3_)
          _loc3_ = _loc8_.p2;
       }
       this._bShowingFightCells = true;
-      _loc2_ = 0;
-      while(_loc2_ < _loc2_.length)
-      {
-         _loc5_ = ank["\x1e\n\x07"]["\x12\r"].decode64(_loc2_.charAt(_loc2_)) << 6;
-         _loc5_ += ank["\x1e\n\x07"]["\x12\r"].decode64(_loc2_.charAt(_loc2_ + 1));
-         this.api.gfx.select(_loc5_,dofus.Constants.TEAMS_COLOR[0],"startPosition");
-         _loc2_ += 2;
-      }
-      _loc3_ = 0;
-      while(_loc3_ < _loc3_.length)
-      {
-         _loc4_ = ank["\x1e\n\x07"]["\x12\r"].decode64(_loc3_.charAt(_loc3_)) << 6;
-         _loc4_ += ank["\x1e\n\x07"]["\x12\r"].decode64(_loc3_.charAt(_loc3_ + 1));
-         this.api.gfx.select(_loc4_,dofus.Constants.TEAMS_COLOR[1],"startPosition");
-         _loc3_ += 2;
-      }
+     // Bucle del equipo aliado 
+     for (var i = 0; i < _loc2_.length; i += 2) {
+          var cellID = ank["\x1e\n\x07"]["\x12\r"].decode64(_loc2_.charAt(i)) << 6;
+          cellID += ank["\x1e\n\x07"]["\x12\r"].decode64(_loc2_.charAt(i + 1));
+          this.api.gfx.select(cellID, dofus.Constants.TEAMS_COLOR[0], "startPosition");
+     }
+     // Bucle del equipo enemigo 
+     for (var j = 0; j < _loc3_.length; j += 2) {
+          var cellID = ank["\x1e\n\x07"]["\x12\r"].decode64(_loc3_.charAt(j)) << 6;
+          cellID += ank["\x1e\n\x07"]["\x12\r"].decode64(_loc3_.charAt(j + 1));
+          this.api.gfx.select(cellID, dofus.Constants.TEAMS_COLOR[1], "startPosition");
+     }
    }
 };
 _loc1.showTriggers = function()
