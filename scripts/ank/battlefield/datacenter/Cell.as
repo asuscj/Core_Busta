@@ -26,53 +26,42 @@ _loc1.__get__isTactic = function(_loc2_)
    }
    return _loc2_;
 };
-_loc1.turnTactic = function(_loc2_, _loc3_)
-{
-   var _loc4_ = this.isTrigger;
-   if(this.nPermanentLevel == 0)
-   {
-      this.nPermanentLevel = 1;
-   }
-   this.layerGroundNum = 0;
-   this.groundSlope = 1;
-   this.layerObject1Rot = 0;
-   var _loc3_;
-   var _loc5_;
-   if(!this.lineOfSight)
-   {
-      this.layerObject1Num = dofus.Constants.getTacticGfx(_loc3_.subarea,0);
-      if(!dofus.Constants.DEBUG)
-      {
-      }
-   }
-   else if(this.movement == 0 || this.movement == 1)
-   {
-      this.layerObject1Num = 10002;
-   }
-   else
-   {
-      _loc3_ = ank.battlefield["\x1e\n\x07"]["\x1e\x16\x1a"].getCaseCoordonnee(_loc2_,this.num);
-      _loc5_ = Math.abs(_loc3_.x) % 2 == Math.abs(_loc3_.y) % 2;
-      this.layerObject1Num = _loc5_ ? dofus.Constants.getTacticGfx(_loc3_.subarea,1) : dofus.Constants.getTacticGfx(_loc3_.subarea,3);
-      if(!dofus.Constants.DEBUG)
-      {
-      }
-   }
-   if(this.layerObject2Num != 25)
-   {
-      if(!this.lineOfSight)
-      {
-         this.layerObject2Num = dofus.Constants.getTacticLayerObject2(_loc3_.subarea);
-      }
-      else if(_loc4_)
-      {
-         this.layerObject2Num = 1030;
-      }
-      else
-      {
-         this.layerObject2Num = 0;
-      }
-   }
+_loc1.turnTactic = function(mapHandler, oMapData) {
+    // Nos aseguramos de que no quede ningún gráfico del mapa original.
+    this.layerGroundNum = 0;
+    this.layerObject1Num = 0;
+    this.layerObject2Num = 0;
+    this.layerObjectExternal = "";
+    this.groundSlope = 1;
+    this.layerObject1Rot = 0;
+    
+    // Guardamos el estado de la celda para el respaldo (backup)
+    if (this.nPermanentLevel == 0) {
+        this.nPermanentLevel = 1;
+    }
+    // DIBUJAR LOS NUEVOS GRÁFICOS TÁCTICOS
+    var cellCoords;
+    var isEven;
+
+    if (!this.lineOfSight) {
+        // Celda de obstáculo (sin línea de visión)
+        this.layerObject1Num = dofus.Constants.getTacticGfx(oMapData.subarea, 0);
+
+    } else if (this.movement == 0 || this.movement == 1) {
+        // Celda caminable pero no para colocar personaje (azul claro)
+        this.layerObject1Num = 10002;
+        
+    } else {
+        // Celda de posicionamiento normal (azul oscuro y blanco)
+        cellCoords = ank.battlefield["\x1e\n\x07"]["\x1e\x16\x1a"].getCaseCoordonnee(mapHandler, this.num);
+        isEven = Math.abs(cellCoords.x) % 2 == Math.abs(cellCoords.y) % 2;
+        this.layerObject1Num = isEven ? dofus.Constants.getTacticGfx(oMapData.subarea, 1) : dofus.Constants.getTacticGfx(oMapData.subarea, 3);
+    }
+    
+    // Lógica adicional para triggers (glifos, trampas), si es necesario
+    if (this.isTrigger) {
+        this.layerObject2Num = 1030; // ID del gráfico para triggers
+    }
 };
 _loc1.addProperty("isTactic",function()
 {

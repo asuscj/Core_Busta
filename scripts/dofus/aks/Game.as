@@ -152,10 +152,16 @@ _loc1.onJoin = function(_loc2_)
    }
    _loc4_.mostrarBotones();
    this.api.gfx.cleanMap(1);
-   if(this.api.datacenter.Game.isTacticMode)
-   {
-      this.api.datacenter.Game.isTacticMode = true;
-   }
+
+//INICIO DE LA CORRECCIÓN PARA onJoin
+if (this.api.datacenter.Game.isTacticMode) 
+{
+    var mapHandler = this.api.ui.getUIComponent("Map");
+    if (mapHandler != undefined) 
+    {
+        mapHandler.applyTacticMode(true); 
+    }
+}
    if(_loc7_)
    {
       this.api.ui.loadUIComponent("ChallengeMenu","ChallengeMenu",{labelReady:this.api.lang.getText("READY"),labelCancel:this.api.lang.getText("CANCEL_SMALL"),cancelButton:_loc10_,ready:false},{bStayIfPresent:true});
@@ -403,23 +409,28 @@ _loc1.onStartToPlay = function()
    this.api.ui.unloadUIComponent("ChallengeMenu");
    this.api.gfx.unSelect(true);
    this.api.gfx.mapHandler.showingFightCells = false;
-   if(!this.api.gfx.gridHandler.bGridVisible)
-   {
-      this.api.gfx.drawGrid();
-   }
-   this.api.datacenter.Game.setInteractionType("move");
-   this.api.gfx.setInteraction(ank.battlefield.Constants.INTERACTION_CELL_NONE);
-   this.api.kernel.GameManager.signalFightActivity();
-   this.api.datacenter.Game.isRunning = true;
-   var _loc2_ = this.api.datacenter.Sprites.getItems();
-   for(var _loc3_ in _loc2_)
-   {
-      this.api.gfx.addSpriteExtraClip(_loc3_,dofus.Constants.CIRCLE_FILE,dofus.Constants.TEAMS_COLOR[_loc2_[_loc3_].Team]);
-   }
-   if(this.api.datacenter.Game.isTacticMode)
-   {
-      this.api.datacenter.Game.isTacticMode = true;
-   }
+if(!this.api.gfx.gridHandler.bGridVisible)
+{
+   this.api.gfx.drawGrid();
+}
+this.api.datacenter.Game.setInteractionType("move");
+this.api.gfx.setInteraction(ank.battlefield.Constants.INTERACTION_CELL_NONE);
+this.api.kernel.GameManager.signalFightActivity();
+this.api.datacenter.Game.isRunning = true;
+var _loc2_ = this.api.datacenter.Sprites.getItems();
+for(var _loc3_ in _loc2_)
+{
+   this.api.gfx.addSpriteExtraClip(_loc3_,dofus.Constants.CIRCLE_FILE,dofus.Constants.TEAMS_COLOR[_loc2_[_loc3_].Team]);
+}
+
+// ### INICIO DE LA CORRECCIÓN PARA onStartToPlay ###
+if (this.api.datacenter.Game.isTacticMode) {
+    var mapHandler = this.api.ui.getUIComponent("Map");
+    if (mapHandler != undefined) {
+        // Le ordenamos de nuevo que se asegure de estar en modo táctico
+        mapHandler.applyTacticMode(true); 
+    }
+}
    this.api.ui.getUIComponent("FightOptionButtons").onGameRunning();
 };
 _loc1.onReconnect = function()

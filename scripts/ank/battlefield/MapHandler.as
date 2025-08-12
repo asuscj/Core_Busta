@@ -690,4 +690,10 @@ _loc1.updateCell = function(nCellNum, oNewCell, sMaskHex, nPermanentLevel)
    this.build(this._oDatacenter.Map,nCellNum);
 };
 _loc1.bInteractive = false;
+_loc1.applyTacticMode = function(bTactic) {
+    var nCellCount = this.getCellCount();
+    for (var i = 0; i < nCellCount; i++) {
+        this.tacticModeRefreshCell(i, bTactic);
+    }
+};
 #endinitclip
