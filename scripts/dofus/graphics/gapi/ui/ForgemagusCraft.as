@@ -151,106 +151,76 @@ _loc1.validateDrop = function(sTargetGrid, oItem, nValue)
          _loc13_ = false;
          switch(sTargetGrid)
          {
-            case "_ctrItem":
-               if(this._nForgemagusItemType != oItem.type || !oItem.enhanceable)
-               {
-                  return undefined;
-               }
-               _loc4_ = -1;
-               while(true)
-               {
-                  _loc4_ = _loc4_ + 1;
-                  if(_loc4_ >= this._eaLocalDataProvider.length)
-                  {
-                     break;
-                  }
-                  _loc9_ = false;
-                  _loc7_ = -1;
-                  while(true)
-                  {
-                     _loc7_ = _loc7_ + 1;
-                     if(_loc7_ >= dofus["\r\x14"].gapi.ui.ForgemagusCraft.ITEMS_ALLOWED_AS_SIGNATURE.length)
-                     {
-                        break;
-                     }
-                     if(dofus["\r\x14"].gapi.ui.ForgemagusCraft.ITEMS_ALLOWED_AS_SIGNATURE[_loc7_] == this._eaLocalDataProvider[_loc4_].unicID)
-                     {
-                        _loc9_ = true;
-                     }
-                  }
-                  _loc8_ = -1;
-                  while(true)
-                  {
-                     _loc8_ = _loc8_ + 1;
-                     if(_loc8_ >= dofus["\r\x14"].gapi.ui.ForgemagusCraft.TYPES_ALLOWED_AS_COMPONENT.length)
-                     {
-                        break;
-                     }
-                     if(dofus["\r\x14"].gapi.ui.ForgemagusCraft.TYPES_ALLOWED_AS_COMPONENT[_loc8_] == this._eaLocalDataProvider[_loc4_].type)
-                     {
-                        _loc9_ = true;
-                     }
-                  }
-                  if(!_loc9_)
-                  {
-                     this.api.network.Exchange.movementItem(false,this._eaLocalDataProvider[_loc4_],this._eaLocalDataProvider[_loc4_].Quantity);
-                  }
-               }
-               _loc12_ = true;
-               break;
+      case "_ctrItem":
+         if(this._nForgemagusItemType != oItem.type || !oItem.enhanceable)
+         {
+        return undefined;
+         }
+    // BUCLE 1 REEMPLAZADO CON 'FOR'
+    for (var i = 0; i < this._eaLocalDataProvider.length; i++)
+    {
+        var isAllowed = false;
+        var currentItem = this._eaLocalDataProvider[i];
+        // BUCLE 2 REEMPLAZADO CON 'FOR'
+        for (var j = 0; j < dofus.gapi.ui.ForgemagusCraft.ITEMS_ALLOWED_AS_SIGNATURE.length; j++)
+        {
+            if (dofus.gapi.ui.ForgemagusCraft.ITEMS_ALLOWED_AS_SIGNATURE[j] == currentItem.unicID)
+            {
+                isAllowed = true;
+                break; // Sale del bucle j.
+            }
+        }
+        
+        // BUCLE 3 REEMPLAZADO CON 'FOR'
+        for (var k = 0; k < dofus.gapi.ui.ForgemagusCraft.TYPES_ALLOWED_AS_COMPONENT.length; k++)
+        {
+            if (dofus.gapi.ui.ForgemagusCraft.TYPES_ALLOWED_AS_COMPONENT[k] == currentItem.type)
+            {
+                isAllowed = true;
+                break; // Sale del bucle k.
+            }
+        }
+
+        if (!isAllowed)
+        {
+            this.api.network.Exchange.movementItem(false, currentItem, currentItem.Quantity);
+        }
+    }
+
+    _loc12_ = true;
+    break;
             case "_ctrRune":
-               _loc2_ = -1;
-               while(true)
-               {
-                  _loc2_ = _loc2_ + 1;
-                  if(_loc2_ >= this._eaLocalDataProvider.length)
-                  {
-                     break;
+                        // Recorre todos los items en el panel de forjamagia
+                        for (var i = 0; i < this._eaLocalDataProvider.length; i++) {
+                           var currentItem = this._eaLocalDataProvider[i];
+                        // Recorre la lista de tipos de item permitidos como runas
+                        for (var j = 0; j < dofus.gapi.ui.ForgemagusCraft.TYPES_ALLOWED_AS_COMPONENT.length; j++) {
+                           var allowedType = dofus.gapi.ui.ForgemagusCraft.TYPES_ALLOWED_AS_COMPONENT[j];
+                        // Si el item es una runa, pero NO es la que acabamos de soltar, la devuelve al inventario.
+                        if (allowedType == currentItem.type && currentItem.unicID != oItem.unicID) {
+                           this.api.network.Exchange.movementItem(false, currentItem, currentItem.Quantity);
+                              }
+                           }
                   }
-                  _loc6_ = -1;
-                  while(true)
-                  {
-                     _loc6_ = _loc6_ + 1;
-                     if(_loc6_ >= dofus["\r\x14"].gapi.ui.ForgemagusCraft.TYPES_ALLOWED_AS_COMPONENT.length)
-                     {
-                        break;
-                     }
-                     if(dofus["\r\x14"].gapi.ui.ForgemagusCraft.TYPES_ALLOWED_AS_COMPONENT[_loc6_] == this._eaLocalDataProvider[_loc2_].type && this._eaLocalDataProvider[_loc2_].unicID != oItem.unicID)
-                     {
-                        this.api.network.Exchange.movementItem(false,this._eaLocalDataProvider[_loc2_],this._eaLocalDataProvider[_loc2_].Quantity);
-                     }
-                  }
-               }
                break;
             case "_ctrSignature":
-               _loc3_ = -1;
-               while(true)
-               {
-                  _loc3_ = _loc3_ + 1;
-                  if(_loc3_ >= this._eaLocalDataProvider.length)
-                  {
-                     break;
-                  }
-                  _loc5_ = -1;
-                  while(true)
-                  {
-                     _loc5_ = _loc5_ + 1;
-                     if(_loc5_ >= dofus["\r\x14"].gapi.ui.ForgemagusCraft.ITEMS_ALLOWED_AS_SIGNATURE.length)
-                     {
-                        break;
-                     }
-                     if(dofus["\r\x14"].gapi.ui.ForgemagusCraft.ITEMS_ALLOWED_AS_SIGNATURE[_loc5_] == this._eaLocalDataProvider[_loc3_].unicID)
-                     {
-                        this.api.network.Exchange.movementItem(false,this._eaLocalDataProvider[_loc3_],this._eaLocalDataProvider[_loc3_].Quantity);
-                     }
+                  // Recorre todos los items en el panel de forjamagia
+               for (var i = 0; i < this._eaLocalDataProvider.length; i++) {
+                  var currentItem = this._eaLocalDataProvider[i];
+                  // Recorre la lista de runas de firma permitidas
+               for (var j = 0; j < dofus.gapi.ui.ForgemagusCraft.ITEMS_ALLOWED_AS_SIGNATURE.length; j++) {
+                  var signatureID = dofus.gapi.ui.ForgemagusCraft.ITEMS_ALLOWED_AS_SIGNATURE[j];
+            // Si el item es una runa de firma, la devuelve al inventario (para asegurar que solo haya una).
+               if (signatureID == currentItem.unicID) {
+                this.api.network.Exchange.movementItem(false, currentItem, currentItem.Quantity);
                   }
                }
-               if(this.getCurrentCraftLevel() < 100)
-               {
-                  _loc13_ = true;
-                  this.api.kernel.showMessage(undefined,this.api.lang.getText("CRAFT_LEVEL_DOESNT_ALLOW_A_SIGNATURE"),"ERROR_CHAT");
-               }
-               _loc12_ = true;
+             }
+    if (this.getCurrentCraftLevel() < 100) {
+        _loc13_ = true;
+        this.api.kernel.showMessage(undefined, this.api.lang.getText("CRAFT_LEVEL_DOESNT_ALLOW_A_SIGNATURE"), "ERROR_CHAT");
+    }
+    _loc12_ = true;
          }
          if(!_loc13_)
          {

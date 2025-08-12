@@ -121,11 +121,6 @@ _loc1.ReturnResetOptions = function()
    var _loc2_ = this.api.kernel.OptionsManager.getOption("hideReset");
    this.aks.send("wz" + _loc2_);
 };
-_loc1.ReturnPrestigeOptions = function()
-{
-   var _loc2_ = this.api.kernel.OptionsManager.getOption("hidePrestige");
-   this.aks.send("wZ" + _loc2_);
-};
 _loc1.onJoin = function(_loc2_)
 {
    this.api.ui.getUIComponent("Zoom").callClose();

@@ -246,6 +246,7 @@ _loc1.postProcess = function(sType, sAction, bError, sData)
                     }
                     _global.dofus["\x12\x03"][_loc21_] = _loc16_;
                 }
+                break;
         }
         break;
       case "H":
@@ -503,6 +504,7 @@ _loc1.postProcess = function(sType, sAction, bError, sData)
                {
                   this.aks.send("AtS");
                }
+               break;
             case "V":
                this.aks.Account.onRegionalVersion(sData.substr(2));
                this.iniciarVoto();
@@ -1521,60 +1523,38 @@ _loc1.postProcess = function(sType, sAction, bError, sData)
                this.api.ui.getUIComponent("Contenido").CargaObj(sData.substr(2));
                break;
             case "r":
-               _loc6_ = sData.substr(2).split(";");
-               api = _global.API;
-               _loc24_ = this.api.ui.getUIComponent("Banner");
-               _loc9_ = new Object();
-               _loc20_ = new ank["\x1e\n\x07"]["\x0e\x1c"]();
-               _loc5_ = -1;
-               while(true)
-               {
-                  _loc5_ += 1;
-                  if(_loc5_ >= _loc6_.length)
-                  {
-                     break;
-                  }
-                  if(_loc6_[_loc5_].split(",")[2] == 2)
-                  {
-                     _loc9_.position = Number(_loc6_[_loc5_].split(",")[0]);
-                     _loc9_.name = _loc6_[_loc5_].split(",")[1];
-                     _loc9_.estado = _loc6_[_loc5_].split(",")[4] + "/" + _loc6_[_loc5_].split(",")[3];
-                     _loc9_.finalizado = _loc6_[_loc5_].split(",")[5];
-                     _loc20_.push(_loc9_);
-                  }
-                  else if(_loc6_[_loc5_].split(",")[2] == 1)
-                  {
-                     _loc9_.position = Number(_loc6_[_loc5_].split(",")[0]);
-                     _loc9_.name = _loc6_[_loc5_].split(",")[1];
-                     _loc9_.estado = _loc6_[_loc5_].split(",")[4] + "/" + _loc6_[_loc5_].split(",")[3];
-                     _loc9_.finalizado = _loc6_[_loc5_].split(",")[5];
-                     _loc20_.push(_loc9_);
-                  }
-                  else if(_loc6_[_loc5_].split(",")[2] == 4)
-                  {
-                     _loc9_.position = Number(_loc6_[_loc5_].split(",")[0]);
-                     _loc9_.name = _loc6_[_loc5_].split(",")[1];
-                     _loc9_.estado = _loc6_[_loc5_].split(",")[4] + "/" + _loc6_[_loc5_].split(",")[3];
-                     _loc9_.finalizado = _loc6_[_loc5_].split(",")[5];
-                     _loc20_.push(_loc9_);
-                  }
-                  else
-                  {
-                     _loc9_.position = Number(_loc6_[_loc5_].split(",")[0]);
-                     _loc9_.name = _loc6_[_loc5_].split(",")[1];
-                     _loc9_.estado = _loc6_[_loc5_].split(",")[4] + "/" + _loc6_[_loc5_].split(",")[3];
-                     _loc9_.finalizado = _loc6_[_loc5_].split(",")[5];
-                     _loc20_.push(_loc9_);
-                  }
-                  _loc9_ = new Object();
-               }
-               _loc24_.objetivodesc.btncompletar._visible = false;
-               _loc24_.panelobjev.generalObjetivos._winBackground.title = this.api.lang.getText("OBJETIVE_TITLE");
-               _loc24_.panelobjev.generalObjetivos._dgMembers.columnsNames = ["Nº",this.api.lang.getText("OBJETIVE"),"%"];
-               _loc24_.panelobjev.generalObjetivos._dgMembers.dataProvider = _loc20_;
-               _loc24_.panelobjev.gotoAndPlay(2);
-               _loc24_.Objetivos = true;
-               break;
+                    _loc6_ = sData.substr(2).split(";");
+                    var api = _global.API; // Renombrado para evitar conflicto
+                    _loc24_ = this.api.ui.getUIComponent("Banner");
+                    _loc9_ = new Object();
+                    _loc20_ = new ank.gapi.controls.util.Sort(); // Usando la clase correcta si es conocida
+
+                    // BUCLE CORREGIDO
+                    for (var i = 0; i < _loc6_.length; i++) {
+                        var objetivoData = _loc6_[i].split(",");
+                        if (objetivoData[2] == 2 || objetivoData[2] == 1 || objetivoData[2] == 4) {
+                            _loc9_.position = Number(objetivoData[0]);
+                            _loc9_.name = objetivoData[1];
+                            _loc9_.estado = objetivoData[4] + "/" + objetivoData[3];
+                            _loc9_.finalizado = objetivoData[5];
+                            _loc20_.push(_loc9_);
+                        } else {
+                            _loc9_.position = Number(objetivoData[0]);
+                            _loc9_.name = objetivoData[1];
+                            _loc9_.estado = objetivoData[4] + "/" + objetivoData[3];
+                            _loc9_.finalizado = objetivoData[5];
+                            _loc20_.push(_loc9_);
+                        }
+                        _loc9_ = new Object();
+                    }
+
+                    _loc24_.objetivodesc.btncompletar._visible = false;
+                    _loc24_.panelobjev.generalObjetivos._winBackground.title = this.api.lang.getText("OBJETIVE_TITLE");
+                    _loc24_.panelobjev.generalObjetivos._dgMembers.columnsNames = ["Nº", this.api.lang.getText("OBJETIVE"), "%"];
+                    _loc24_.panelobjev.generalObjetivos._dgMembers.dataProvider = _loc20_;
+                    _loc24_.panelobjev.gotoAndPlay(2);
+                    _loc24_.Objetivos = true;
+                    break;
             case "y":
                _loc9_ = sData.substr(2).split(",");
                api = _global.API;

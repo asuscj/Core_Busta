@@ -360,6 +360,10 @@ _loc1.click = function(oEvent)
          }
          break;
       case "_btnClose":
+         //  CÓDIGO CORREGIDO 
+         //  Llama función de limpieza primero.
+         this.onUnload(); 
+         // Cierra el componente como antes.
          this.callClose();
          break;
       case "_btnValidate":
@@ -416,6 +420,71 @@ _loc1.getOgrineTaxe = function(bOgrine)
 _loc1.updateOgrineTaxe = function(bOgrine)
 {
    this._lblLocalOgrineTaxe.text = "Taxe à " + this.TaxOg + "% : " + this.getOgrineTaxe(bOgrine);
+};
+_loc1.onUnload = function()
+{
+   // Cancela al botón de cerrar
+   this._btnClose.removeEventListener("click", this);
+   this._cgGrid.removeEventListener("dblClickItem",this);
+   this._cgGrid.removeEventListener("dropItem",this);
+   this._cgGrid.removeEventListener("dragItem",this);
+   this._cgGrid.removeEventListener("selectItem",this);
+   this._cgGrid.removeEventListener("overItem",this);
+   this._cgGrid.removeEventListener("outItem",this);
+   this._cgLocal.removeEventListener("dblClickItem",this);
+   this._cgLocal.removeEventListener("dropItem",this);
+   this._cgLocal.removeEventListener("dragItem",this);
+   this._cgLocal.removeEventListener("selectItem",this);
+   this._cgLocal.removeEventListener("overItem",this);
+   this._cgLocal.removeEventListener("outItem",this);
+   this._cgDistant.removeEventListener("selectItem",this);
+   this._cgDistant.removeEventListener("overItem",this);
+   this._cgDistant.removeEventListener("outItem",this);
+   // Campo de búsqueda
+    this._tiSearch.removeEventListener("change",this);
+    // ComboBox de tipos
+    this._cbTypes.removeEventListener("itemSelected",this);
+   // Cancela al botón de validar
+   this._btnValidate.removeEventListener("click", this);
+   this._btnTransfertToExchange.removeEventListener("click",this);
+   this._btnFilterEquipement.removeEventListener("click",this);
+   this._btnFilterNonEquipement.removeEventListener("click",this);
+   this._btnFilterRessoureces.removeEventListener("click",this);
+   this._btnFilterSoul.removeEventListener("click",this);
+   this._btnFilterCards.removeEventListener("click",this);
+   this._btnFilterRunes.removeEventListener("click",this);
+   this._btnPrivateChat.removeEventListener("click",this);
+   // Cancela a los datos del intercambio
+   this.api.datacenter.Exchange.removeEventListener("localKamaChange", this);
+   // Listeners de los "over" y "out" de los filtros
+   this._btnFilterEquipement.removeEventListener("over",this);
+   this._btnFilterSoul.removeEventListener("over",this);
+   this._btnFilterCards.removeEventListener("over",this);
+   this._btnFilterSoul.removeEventListener("out",this);
+   this._btnFilterCards.removeEventListener("out",this);
+   this._btnFilterRunes.removeEventListener("out",this);
+   this._btnFilterRunes.removeEventListener("over",this);
+   this._btnFilterNonEquipement.removeEventListener("over",this);
+   this._btnFilterRessoureces.removeEventListener("over",this);
+   this._btnFilterEquipement.removeEventListener("out",this);
+   this._btnFilterNonEquipement.removeEventListener("out",this);
+   this._btnFilterRessoureces.removeEventListener("out",this);
+   // Listeners del API DataCenter (faltaban la mayoría)
+   this.api.datacenter.Exchange.removeEventListener("localKamaChange", this);
+   this.api.datacenter.Exchange.removeEventListener("distantKamaChange",this);
+   this.api.datacenter.Exchange.removeEventListener("localOgrineChange",this);
+   this.api.datacenter.Exchange.removeEventListener("distantOgrineChange",this);
+   this.api.datacenter.Player.removeEventListener("playerOgrineChange",this);
+   // Caso especial: onRollOver/onRollOut (se limpian con null)
+   this._lblOgrine.onRollOver = null;
+   this._lblOgrine.onRollOut = null;
+    // Si el intervalo está activo, se detiene.
+    if (active) {
+       clearInterval(interval);
+        active = false; // Reseteamos el estado
+    }
+    // Detener otros temporizadores
+    ank.utils.Timer.killTimersOf(this);
 };
 _loc1.TaxOg = 0;
 _loc1.MinOg = 1500;

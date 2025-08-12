@@ -198,7 +198,6 @@ _loc1.initData = function()
          _loc5_ = new dofus.datacenter["\f\f"](0,Number(_loc3_.id));
          this["prevItem" + _loc2_] = _loc5_;
          this._mcTabViewer["shop" + _loc2_].newP._visible = false;
-         item;
          this._mcTabViewer["shop" + _loc2_]._ldritem.contentPath = _loc5_.iconFile;
          if(_loc3_.nuevo)
          {

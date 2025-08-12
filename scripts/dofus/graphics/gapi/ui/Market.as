@@ -119,10 +119,13 @@ _loc1.change = function(oEvent)
          }
          if(this.precioKamas.text.length >= 1 && _global.parseInt(this.precioKamas.text) > 0)
          {
-            if(this.Misogrinas.text.length >= 1 && _global.parseInt(this.Misogrinas.text) > 0)
+         if(this.Misogrinas.text.length >= 1 && _global.parseInt(this.Misogrinas.text) > 0)
             {
-               this.lbltasaK.text = "Tax 1 x " + this.formatDecimals(_global.parseInt(this.Misogrinas.text) / _global.parseInt(this.precioKamas.text),0);
-               this.lbltax.text = this.api.lang.getText("YOU_WIN_X_OGRINES") + " " + (Number(this.precioKamas.text) - Math.round(_global.parseInt(this.precioKamas.text) * this.TaxOg / 100) + " Ogrines");
+            this.lbltasaK.text = "Tax 1 x " + this.formatDecimals(_global.parseInt(this.Misogrinas.text) / _global.parseInt(this.precioKamas.text),0);
+            //Calcula el valor final lo guarda en una variable
+            var precioConImpuestos = Number(this.precioKamas.text) - Math.round(_global.parseInt(this.precioKamas.text) * this.TaxOg / 100);
+            // Construye el texto de forma limpia
+            this.lbltax.text = this.api.lang.getText("YOU_WIN_X_OGRINES") + " " + precioConImpuestos + " Ogrines";
             }
             if(this.formatDecimals(_global.parseInt(this.Misogrinas.text) / _global.parseInt(this.precioKamas.text),0) <= 0)
             {
@@ -139,7 +142,6 @@ _loc1.change = function(oEvent)
             if(_global.parseInt(this.precioKamas.text) > _global.parseInt(this.Misogrinas.text))
             {
                this.precioKamas.text = this.Misogrinas.text;
-               break;
             }
             if(this.lblError.text !== "")
             {
