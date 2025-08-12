@@ -39,7 +39,7 @@ Para compilar y usar este core, necesitarás tener instalado Adobe Flash CS6.
 
 1.  **Clona el repositorio:**
     ```sh
-    git clone [https://github.com/(TU](https://github.com/(TU) USUARIO)/(LINK-AL-REPOSITORIO).git
+    git clone https://github.com/asuscj/Core_Busta
     ```
 
 4.  **Compila el Core:**
