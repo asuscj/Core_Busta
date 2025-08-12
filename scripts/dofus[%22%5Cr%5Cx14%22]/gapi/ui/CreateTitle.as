@@ -1,3 +1,4 @@
+#initclip 95
 _global.dofus["\r\x14"].gapi.ui.CreateTitle = function()
 {
    super();
@@ -78,3 +79,4 @@ _loc1.addProperty("puntos",function()
 ,_loc1.__set__puntos);
 _loc1.Puntos = 0;
 _global.dofus["\r\x14"].gapi.ui.CreateTitle.CLASS_NAME = "CreateTitle";
+#endinitclip

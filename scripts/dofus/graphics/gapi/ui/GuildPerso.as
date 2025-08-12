@@ -1,3 +1,4 @@
+#initclip 31
 if(!dofus)
 {
    _global.dofus = new Object();
@@ -110,3 +111,4 @@ _loc1.sData = "";
 _loc1._aLogros = new Array();
 ASSetPropFlags(_loc1,null,1);
 _global.dofus["\r\x14"].gapi.ui.GuildPerso.CLASS_NAME = "GuildPerso";
+#endinitclip

@@ -1,3 +1,4 @@
+#initclip 62
 if(!dofus)
 {
    _global.dofus = new Object();
@@ -148,3 +149,4 @@ _loc1.draw = function(sGuildName, sSpriteName, oEmblem, sFile, nFrame, nPvpGain,
    }
 };
 ASSetPropFlags(_loc1,null,1);
+#endinitclip

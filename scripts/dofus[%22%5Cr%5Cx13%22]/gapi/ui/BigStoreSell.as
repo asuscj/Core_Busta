@@ -1,3 +1,4 @@
+#initclip 52
 var _loc1 = dofus["\r\x14"].gapi.ui.BigStoreSell.prototype;
 _loc1.createChildren = function()
 {
@@ -190,3 +191,4 @@ _loc1.yes = function(_loc2_)
       this.populateComboBox(_loc2_.target.params.itemQuantity - _loc2_.target.params.quantity);
    }
 };
+#endinitclip

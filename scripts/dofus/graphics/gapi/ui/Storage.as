@@ -1,3 +1,4 @@
+#initclip 143
 var _loc1 = dofus["\r\x14"].gapi.ui.Storage.prototype;
 var interval;
 var list = "";
@@ -244,3 +245,4 @@ _loc1.dblClickItem = function(_loc2_)
          this.moveItem(_loc4_,false,_loc5_);
    }
 };
+#endinitclip

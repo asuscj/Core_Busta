@@ -1,3 +1,4 @@
+#initclip 103
 if(!dofus)
 {
    _global.dofus = new Object();
@@ -41,3 +42,4 @@ _loc1.onInventoryShortcutRemoved = function(_loc2_)
    _loc2_.removeItemAt(_loc3_);
 };
 ASSetPropFlags(_loc1,null,1);
+#endinitclip

@@ -1,3 +1,4 @@
+#initclip 152
 var _loc1 = ank.gapi.controls.ProgressBar.prototype;
 _loc1.__get__showAnimOnLoad = function()
 {
@@ -219,3 +220,4 @@ _loc1._nUberValue = undefined;
 _loc1.addProperty("showAnimOnLoad",_loc1.__get__showAnimOnLoad,_loc1.__set__showAnimOnLoad);
 _loc1.addProperty("showGradient",_loc1.__get__showAnimOnLoad,_loc1.__set__showGradient);
 _loc1.addProperty("uberValue",_loc1.__get__uberValue,_loc1.__set__uberValue);
+#endinitclip

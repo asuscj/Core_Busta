@@ -1,3 +1,4 @@
+#initclip 146
 if(!dofus)
 {
    _global.dofus = new Object();
@@ -1196,3 +1197,4 @@ _loc1._bRemovedFromInventory = false;
 _loc1._sEffects = "";
 _global.dofus.datacenter["\f\f"].LEVEL_STEP = [0,10,21,33,46,60,75,91,108,126,145,165,186,208,231,255,280,306,333,361];
 _global.dofus.datacenter["\f\f"].DATE_ID = 0;
+#endinitclip

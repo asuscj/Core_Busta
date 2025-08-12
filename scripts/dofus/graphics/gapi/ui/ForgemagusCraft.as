@@ -1,3 +1,4 @@
+#initclip 135
 var _loc1 = dofus["\r\x14"].gapi.ui.ForgemagusCraft.prototype;
 _loc1.addListeners = function()
 {
@@ -403,3 +404,4 @@ _loc1.click = function(oEvent)
          break;
    }
 };
+#endinitclip

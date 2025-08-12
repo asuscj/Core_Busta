@@ -1,3 +1,4 @@
+#initclip 77
 if(!dofus)
 {
    _global.dofus = new Object();
@@ -135,3 +136,4 @@ _loc1.addProperty("loot",function()
 _loc1.valueS = false;
 ASSetPropFlags(_loc1,null,1);
 _global.dofus["\r\x14"].gapi.ui.LootBox.CLASS_NAME = "LootBox";
+#endinitclip

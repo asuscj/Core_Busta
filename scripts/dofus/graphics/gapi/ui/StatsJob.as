@@ -1,3 +1,4 @@
+#initclip 81
 var _loc1 = dofus["\r\x14"].gapi.ui.StatsJob.prototype;
 _loc1.createChildren = function()
 {
@@ -400,3 +401,4 @@ _loc1.getStatsCostString = function(oBoost)
 {
    return this.api.lang.getText("COST") + " : " + oBoost.cost + " " + this.api.lang.getText("POUR") + " " + oBoost.count;
 };
+#endinitclip

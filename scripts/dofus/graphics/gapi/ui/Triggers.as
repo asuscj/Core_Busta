@@ -1,3 +1,4 @@
+#initclip 154
 _global.dofus["\r\x14"].gapi.ui.Triggers = function()
 {
    super();
@@ -128,60 +129,71 @@ _loc1.change = function(oEvent)
 };
 _loc1.click = function(oEvent)
 {
-   var _loc0_;
-   loop0:
-   switch(oEvent.target._name)
-   {
-      case "_btnOK":
-         if(this._txtMapaInicio.text != "" && this._txtCeldaInicio.text != "" && this._txtMapaFin.text != "" && this._txtCeldaFin.text != "")
-         {
-            if(_global.CELDA_START)
+    var _loc0_;
+    
+    // La etiqueta "loop0:" ha sido eliminada
+    switch(oEvent.target._name)
+    {
+        case "_btnOK":
+            if(this._txtMapaInicio.text != "" && this._txtCeldaInicio.text != "" && this._txtMapaFin.text != "" && this._txtCeldaFin.text != "")
             {
-               this.api.gfx.clearZone(_global.CELDA_START,0,5);
+                if(_global.CELDA_START)
+                {
+                    this.api.gfx.clearZone(_global.CELDA_START,0,5);
+                }
+                if(_global.CELDA_END)
+                {
+                    this.api.gfx.clearZone(_global.CELDA_END,0,4);
+                }
+                this.api.kernel.DebugConsole.process("ADD_TRIGGER 0 " + this._txtMapaFin.text + "," + this._txtCeldaFin.text + " " + this._txtMapaInicio.text + "," + this._txtCeldaInicio.text + " " + this._txtCondicion.text);
+                _global.CELDA_END = _loc0_;
+                _global.CELDA_START = _loc0_;
+                _global.MAPA_END = _loc0_;
+                _global.MAPA_START = _loc0_;
+                this._btnOK._visible = false;
             }
-            if(_global.CELDA_END)
+            break;
+
+        case "_btnTeleport":
+            this.api.kernel.DebugConsole.process("TELEPORT " + this._txtTeleport.text);
+            break;
+
+        case "_btnTactico":
+            this.api.gfx.activateTacticMode(this._btnTactico.selected);
+            break;
+
+        case "_btnClose":
+        case "_btnCancel":
+            this.callClose();
+            break;
+
+        case "_btnStart":
+        case "_btnEnd":
+        case "_btnBorrar":
+            this._btnStart.selected = false;
+            this._btnEnd.selected = false;
+            this._btnBorrar.selected = false;
+            oEvent.target.selected = true;
+            
+            // Switch anidado
+            switch(oEvent.target)
             {
-               this.api.gfx.clearZone(_global.CELDA_END,0,4);
+                case this._btnStart:
+                    _global.COLOR_TRIGGER = 5;
+                    this.api.gfx.addPointerShape("C",0,65280,this.api.datacenter.Player.data.cellNum);
+                    break; // CORREGIDO
+                
+                case this._btnEnd:
+                    _global.COLOR_TRIGGER = 4;
+                    this.api.gfx.addPointerShape("C",0,16711680,this.api.datacenter.Player.data.cellNum);
+                    break; // CORREGIDO
+                
+                case this._btnBorrar:
+                    _global.COLOR_TRIGGER = 3;
+                    this.api.gfx.addPointerShape("C",0,16777215,this.api.datacenter.Player.data.cellNum);
             }
-            this.api.kernel.DebugConsole.process("ADD_TRIGGER 0 " + this._txtMapaFin.text + "," + this._txtCeldaFin.text + " " + this._txtMapaInicio.text + "," + this._txtCeldaInicio.text + " " + this._txtCondicion.text);
-            _global.CELDA_END = _loc0_;
-            _global.CELDA_START = _loc0_;
-            _global.MAPA_END = _loc0_;
-            _global.MAPA_START = _loc0_;
-            this._btnOK._visible = false;
-         }
-         break;
-      case "_btnTeleport":
-         this.api.kernel.DebugConsole.process("TELEPORT " + this._txtTeleport.text);
-         break;
-      case "_btnTactico":
-         this.api.gfx.activateTacticMode(this._btnTactico.selected);
-         break;
-      case "_btnClose":
-      case "_btnCancel":
-         this.callClose();
-         break;
-      case "_btnStart":
-      case "_btnEnd":
-      case "_btnBorrar":
-         this._btnStart.selected = false;
-         this._btnEnd.selected = false;
-         this._btnBorrar.selected = false;
-         oEvent.target.selected = true;
-         switch(oEvent.target)
-         {
-            case this._btnStart:
-               _global.COLOR_TRIGGER = 5;
-               this.api.gfx.addPointerShape("C",0,65280,this.api.datacenter.Player.data.cellNum);
-               break loop0;
-            case this._btnEnd:
-               _global.COLOR_TRIGGER = 4;
-               this.api.gfx.addPointerShape("C",0,16711680,this.api.datacenter.Player.data.cellNum);
-               break loop0;
-            case this._btnBorrar:
-               _global.COLOR_TRIGGER = 3;
-               this.api.gfx.addPointerShape("C",0,16777215,this.api.datacenter.Player.data.cellNum);
-         }
-   }
+    }
 };
+
 _global.dofus["\r\x14"].gapi.ui.Triggers.CLASS_NAME = "Triggers";
+#endinitclip

@@ -1,3 +1,4 @@
+#initclip 91
 var _loc1 = dofus.datacenter.Team.prototype;
 _loc1.refreshSwordSprite = function()
 {
@@ -25,3 +26,4 @@ _loc1.refreshSwordSprite = function()
       this.mc.draw();
    }
 };
+#endinitclip

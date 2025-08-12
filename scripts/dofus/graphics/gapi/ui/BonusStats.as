@@ -1,3 +1,4 @@
+#initclip 72
 _global.dofus["\r\x14"].gapi.ui.BonusStats = function()
 {
    super();
@@ -79,3 +80,4 @@ _loc1.addProperty("stat",function()
 ,_loc1.__set__Stat);
 ASSetPropFlags(_loc1,null,1);
 _global.dofus["\r\x14"].gapi.ui.BonusStats.CLASS_NAME = "BonusStats";
+#endinitclip

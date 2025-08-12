@@ -1,3 +1,4 @@
+#initclip 55
 if(!dofus)
 {
    _global.dofus = new Object();
@@ -132,3 +133,4 @@ _loc1.updateData = function()
    this._lblLatestUpdate._visible = _loc2_.infosMember != "";
 };
 _global.dofus["\r\x14"].gapi.controls.GuildInformationsViewer.CLASS_NAME = "GuildInformationsViewer";
+#endinitclip

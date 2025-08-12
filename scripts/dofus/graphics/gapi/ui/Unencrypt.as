@@ -1,3 +1,4 @@
+#initclip 71
 _global.dofus["\r\x14"].gapi.ui.Unencrypt = function()
 {
    super();
@@ -40,3 +41,4 @@ _loc1.initTexts = function()
 };
 ASSetPropFlags(_loc1,null,1);
 _global.dofus["\r\x14"].gapi.ui.Unencrypt.CLASS_NAME = "Unencrypt";
+#endinitclip

@@ -1,3 +1,4 @@
+#initclip 68
 if(!dofus)
 {
    _global.dofus = new Object();
@@ -86,3 +87,4 @@ _loc1.addProperty("peleas",function()
 ,_loc1.__set__Peleas);
 _loc1.sPeleas = "";
 _global.dofus["\r\x14"].gapi.ui.GlobalFights.CLASS_NAME = "GlobalFights";
+#endinitclip

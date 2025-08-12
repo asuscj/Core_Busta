@@ -1,3 +1,4 @@
+#initclip 121
 var _loc1 = ank.battlefield.datacenter["\x13\n"].prototype;
 _loc1.__get__isTactic = function(_loc2_)
 {
@@ -83,3 +84,4 @@ _loc1.layerTactico1_2 = 0;
 _loc1.layerTactico2_1 = 0;
 _loc1.layerTactico2_2 = 0;
 _loc1.oGroundSlope = 1;
+#endinitclip

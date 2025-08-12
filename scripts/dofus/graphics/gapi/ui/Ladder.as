@@ -1,3 +1,4 @@
+#initclip 125
 if(!dofus)
 {
    _global.dofus = new Object();
@@ -369,3 +370,4 @@ _loc1.addProperty("data",function()
 _loc1._oTipos = new Object();
 ASSetPropFlags(_loc1,null,1);
 _global.dofus["\r\x14"].gapi.ui.Ladder.CLASS_NAME = "Ladder";
+#endinitclip

@@ -1,3 +1,4 @@
+#initclip 100
 var _loc1 = _global.ank.battlefield["\x1c\n"].prototype;
 _loc1.setObject2Frame = function(nCellNum, frame)
 {
@@ -19,3 +20,4 @@ _loc1.activateTacticMode = function(_loc2_)
 {
    this.mapHandler.tacticMode(_loc2_);
 };
+#endinitclip

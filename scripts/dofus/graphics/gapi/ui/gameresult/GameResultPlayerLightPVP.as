@@ -1,3 +1,4 @@
+#initclip 17
 if(!dofus)
 {
    _global.dofus = new Object();
@@ -196,3 +197,4 @@ _loc1.addProperty("list",function()
 ASSetPropFlags(_loc1,null,1);
 _loc1._mcList = "";
 _global.dofus["\r\x14"].gapi.ui.GameResultLight.CLASS_NAME = "GameResultLight";
+#endinitclip

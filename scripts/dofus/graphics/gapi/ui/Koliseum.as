@@ -1,3 +1,4 @@
+#initclip 53
 this.api = _global.API;
 _global.dofus["\r\x14"].gapi.ui.Koliseum = function()
 {
@@ -187,3 +188,4 @@ _loc1._nInscritosss = 0;
 _loc1._nTiempo = 1800;
 ASSetPropFlags(_loc1,null,1);
 _global.dofus["\r\x14"].gapi.ui.Koliseum.CLASS_NAME = "Koliseum";
+#endinitclip

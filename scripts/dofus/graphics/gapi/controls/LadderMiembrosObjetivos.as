@@ -1,3 +1,4 @@
+#initclip 12
 _global.dofus["\r\x14"].gapi.controls.LadderMiembrosObjetivos = function()
 {
    super();
@@ -81,3 +82,4 @@ _loc1.addProperty("list",function()
 ,_loc1.__set__list);
 _loc1.Nombre = "";
 ASSetPropFlags(_loc1,null,1);
+#endinitclip

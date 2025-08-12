@@ -1,3 +1,4 @@
+#initclip 127
 var _loc1 = _global.ank.battlefield["\r\x16"].prototype;
 _loc1.applyBottomColor = function(_loc2_)
 {
@@ -72,3 +73,4 @@ _loc1.aplicarEmblema = function(mc, mc1, mc2)
       }
    }
 };
+#endinitclip

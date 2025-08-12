@@ -1,3 +1,4 @@
+#initclip 96
 _global.dofus["\r\x14"].gapi.ui.bigstore.BigStorePriceItemNoBuy = function()
 {
    super();
@@ -117,3 +118,4 @@ _loc1.addProperty("row",function()
 }
 ,_loc1.__set__row,_loc1.__get__row);
 ASSetPropFlags(_loc1,null,1);
+#endinitclip

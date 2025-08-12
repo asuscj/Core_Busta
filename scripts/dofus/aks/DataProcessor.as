@@ -1,3 +1,4 @@
+#initclip 159
 var _loc1 = dofus.aks["\x11\f"].prototype;
 _loc1.process = function(sData)
 {
@@ -48,83 +49,69 @@ _loc1.postProcess = function(sType, sAction, bError, sData)
    var _loc37_;
    var _loc41_;
    var _loc43_;
-   loop10:
    switch(sType)
-   {
-      case "X":
-      default:
-         if(_loc0_ !== "$")
-         {
-         }
-      case "Ñ":
-         switch(sAction)
-         {
+{
+    case "X":
+    default:
+        if(_loc0_ !== "$")
+        {
+        }
+    case "Ñ":
+        switch(sAction)
+        {
             case "A":
-               _loc15_ = sData.substr(2).split(";");
-               _loc10_ = 0;
-               while(_loc10_ < _loc15_.length)
-               {
-                  _loc7_ = _loc15_[_loc10_].split(",");
-                  _global.GFX[_loc7_[0]] = _loc7_[1];
-                  _loc10_ += 1;
-               }
-               break;
+                var _loc15_ = sData.substr(2).split(";");
+                for(var _loc10_ = 0; _loc10_ < _loc15_.length; _loc10_++)
+                {
+                    var _loc7_ = _loc15_[_loc10_].split(",");
+                    _global.GFX[_loc7_[0]] = _loc7_[1];
+                }
+                break;
             case "a":
-               _global.FIGHT_AUTO_SKIP = sData.substr(2) == "1";
-               break;
+                _global.FIGHT_AUTO_SKIP = sData.substr(2) == "1";
+                break;
             case "B":
-               _loc15_ = sData.substr(2).split(";");
-               _loc10_ = 0;
-               while(_loc10_ < _loc15_.length)
-               {
-                  _loc7_ = _loc15_[_loc10_].split(",");
-                  _global.NIVEL[_loc7_[0]] = _loc7_[1];
-                  _loc10_ += 1;
-               }
-               break;
+                var _loc15_ = sData.substr(2).split(";");
+                for(var _loc10_ = 0; _loc10_ < _loc15_.length; _loc10_++)
+                {
+                    var _loc7_ = _loc15_[_loc10_].split(",");
+                    _global.NIVEL[_loc7_[0]] = _loc7_[1];
+                }
+                break;
             case "b":
-               _global.MAX_DATA_LENGTH = _global.parseInt(sData.substr(2));
-               break;
+                _global.MAX_DATA_LENGTH = _global.parseInt(sData.substr(2));
+                break;
             case "C":
-               _loc15_ = sData.substr(2).split("*");
-               _loc10_ = 0;
-               while(_loc10_ < _loc15_.length)
-               {
-                  _loc23_ = _loc15_[_loc10_].split("~");
-                  _loc18_ = new Object();
-                  _loc13_ = _loc23_[1].split("|");
-                  _loc8_ = 0;
-                  while(_loc8_ < _loc13_.length)
-                  {
-                     if(!(_loc13_[_loc8_] == null || _loc13_[_loc8_] == "null" || _loc13_[_loc8_] == ""))
-                     {
-                        if(_loc8_ == 2)
+                var _loc15_ = sData.substr(2).split("*");
+                for(var _loc10_ = 0; _loc10_ < _loc15_.length; _loc10_++)
+                {
+                    var _loc23_ = _loc15_[_loc10_].split("~");
+                    var _loc18_ = new Object();
+                    var _loc13_ = _loc23_[1].split("|");
+                    for(var _loc8_ = 0; _loc8_ < _loc13_.length; _loc8_++)
+                    {
+                        if(!(_loc13_[_loc8_] == null || _loc13_[_loc8_] == "null" || _loc13_[_loc8_] == ""))
                         {
-                           _loc7_ = _loc13_[_loc8_].split(";");
-                           _loc11_ = -1;
-                           _loc17_ = new Array();
-                           while(true)
-                           {
-                              _loc11_ += 1;
-                              if(_loc11_ >= _loc7_.length)
-                              {
-                                 break;
-                              }
-                              _loc17_.push(_loc7_[_loc11_].split(","));
-                           }
-                           _loc18_[_loc8_] = _loc17_;
+                            if(_loc8_ == 2)
+                            {
+                                var _loc7_ = _loc13_[_loc8_].split(";");
+                                var _loc17_ = new Array();
+                                // RECONSTRUIDO: Convertido de while(true) a for
+                                for(var _loc11_ = 0; _loc11_ < _loc7_.length; _loc11_++)
+                                {
+                                    _loc17_.push(_loc7_[_loc11_].split(","));
+                                }
+                                _loc18_[_loc8_] = _loc17_;
+                            }
+                            else
+                            {
+                                _loc18_[_loc8_] = _loc13_[_loc8_].split(",");
+                            }
                         }
-                        else
-                        {
-                           _loc18_[_loc8_] = _loc13_[_loc8_].split(",");
-                        }
-                     }
-                     _loc8_ += 1;
-                  }
-                  _global.RECOMPENSAS[_loc23_[0]] = _loc18_;
-                  _loc10_ += 1;
-               }
-               break;
+                    }
+                    _global.RECOMPENSAS[_loc23_[0]] = _loc18_;
+                }
+                break;
             case "c":
                this.api.kernel.clearCache();
                break;
@@ -247,20 +234,20 @@ _loc1.postProcess = function(sType, sAction, bError, sData)
             case "z":
                _global.URL_LINK_COMPRA = sData.substr(2);
                break;
-            case "Z":
-               _loc7_ = sData.substr(2).split(";");
-               for(_loc35_ in _loc7_)
-               {
-                  _loc21_ = _loc7_[_loc35_].split(",")[0];
-                  _loc16_ = _loc7_[_loc35_].split(",")[1];
-                  if(!_global.isNaN(_loc16_))
-                  {
-                     _loc16_ = Number(_loc16_);
-                  }
-                  _global.dofus["\x12\x03"][_loc21_] = _loc16_;
-               }
-         }
-         break;
+             case "Z":
+                var _loc7_ = sData.substr(2).split(";");
+                for(var _loc35_ in _loc7_)
+                {
+                    var _loc21_ = _loc7_[_loc35_].split(",")[0];
+                    var _loc16_ = _loc7_[_loc35_].split(",")[1];
+                    if(!_global.isNaN(_loc16_))
+                    {
+                        _loc16_ = Number(_loc16_);
+                    }
+                    _global.dofus["\x12\x03"][_loc21_] = _loc16_;
+                }
+        }
+        break;
       case "H":
          switch(sAction)
          {
@@ -1025,6 +1012,7 @@ _loc1.postProcess = function(sType, sAction, bError, sData)
                break;
             case "p":
                this.aks.Exchange.onPayMovement(!bError,sData.substr(2));
+
                break;
             case "s":
                this.aks.Exchange.onStorageMovement(!bError,sData.substr(3));
@@ -1811,150 +1799,151 @@ _loc1.postProcess = function(sType, sAction, bError, sData)
                this.api.ui.getUIComponent("MarketShop").RefreshPoints(_loc32_);
          }
          break;
-      case "b":
-         switch(sAction)
-         {
+       case "b":
+        switch(sAction)
+        {
             case "A":
-               this.api.ui.loadUIComponent("EscogerNivel","EscogerNivel",{nivel:Number(sData.substr(2))});
-               break loop10;
+                this.api.ui.loadUIComponent("EscogerNivel","EscogerNivel",{nivel:Number(sData.substr(2))});
+                break; // CORREGIDO
             case "B":
-               this.api.ui.loadUIAutoHideComponent("CrearItem","CrearItem");
-               break loop10;
+                this.api.ui.loadUIAutoHideComponent("CrearItem","CrearItem");
+                break; // CORREGIDO
             case "b":
-               if(this.api.ui.getUIComponent("CrearItem") != undefined)
-               {
-                  this.api.ui.getUIComponent("CrearItem").newData(sData.substr(2));
-               }
-               break loop10;
+                if(this.api.ui.getUIComponent("CrearItem") != undefined)
+                {
+                    this.api.ui.getUIComponent("CrearItem").newData(sData.substr(2));
+                }
+                break; // CORREGIDO
             case "C":
-               this.api.ui.loadUIAutoHideComponent("CambiarColor","CambiarColor");
-               break loop10;
+                this.api.ui.loadUIAutoHideComponent("CambiarColor","CambiarColor");
+                break; // CORREGIDO
             case "Z":
-               _loc25_ = sData.substr(2).split("@");
-               this.api.ui.loadUIAutoHideComponent("Logros","Logros",{data:_loc25_[0],categorias:_loc25_[1]});
-               break loop10;
+                var _loc25_ = sData.substr(2).split("@");
+                this.api.ui.loadUIAutoHideComponent("Logros","Logros",{data:_loc25_[0],categorias:_loc25_[1]});
+                break; // CORREGIDO
             case "z":
-               this.api.ui.loadUIAutoHideComponent("Recompensas","Recompensas",{data:sData.substr(2)});
-               break loop10;
+                this.api.ui.loadUIAutoHideComponent("Recompensas","Recompensas",{data:sData.substr(2)});
+                break; // CORREGIDO
             case "D":
-               _loc36_ = sData.substr(2);
-               this.api.ui.loadUIAutoHideComponent("Reportes","Reportes",{miembros:_loc36_});
-               break loop10;
+                var _loc36_ = sData.substr(2);
+                this.api.ui.loadUIAutoHideComponent("Reportes","Reportes",{miembros:_loc36_});
+                break; // CORREGIDO
             case "G":
-               this.api.ui.loadUIAutoHideComponent("CambiarEmblema","CambiarEmblema");
-               break loop10;
+                this.api.ui.loadUIAutoHideComponent("CambiarEmblema","CambiarEmblema");
+                break; // CORREGIDO
             case "I":
-               _loc25_ = sData.substr(2).split("|");
-               this.api.ui.loadUIComponent("SistemaRecurso","SistemaRecurso",{precio:Number(_loc25_[0]),tipos:_loc25_[1],objetos:_loc25_[2],ogrinas:_loc25_[3]});
-               break loop10;
+                var _loc25_ = sData.substr(2).split("|");
+                this.api.ui.loadUIComponent("SistemaRecurso","SistemaRecurso",{precio:Number(_loc25_[0]),tipos:_loc25_[1],objetos:_loc25_[2],ogrinas:_loc25_[3]});
+                break; // CORREGIDO
             case "L":
-               _loc37_ = sData.substr(2).split("#");
-               this.api.ui.loadUIAutoHideComponent("Ladder","Ladder",{data:_loc37_[0],pvpRanking:_loc37_[1],koloReward:_loc37_[2],infoReward:_loc37_[3]});
-               break loop10;
+                var _loc37_ = sData.substr(2).split("#");
+                this.api.ui.loadUIAutoHideComponent("Ladder","Ladder",{data:_loc37_[0],pvpRanking:_loc37_[1],koloReward:_loc37_[2],infoReward:_loc37_[3]});
+                break; // CORREGIDO
             case "l":
-               if(this.api.ui.getUIComponent("Ladder") != undefined)
-               {
-                  this.api.ui.getUIComponent("Ladder").registrar(sData.substr(2));
-               }
-               break loop10;
+                if(this.api.ui.getUIComponent("Ladder") != undefined)
+                {
+                    this.api.ui.getUIComponent("Ladder").registrar(sData.substr(2));
+                }
+                break; // CORREGIDO
             case "M":
-               this.api.ui.loadUIAutoHideComponent("Mimobionte","Mimobionte");
-               break loop10;
+                this.api.ui.loadUIAutoHideComponent("Mimobionte","Mimobionte");
+                break; // CORREGIDO
             case "m":
-               this.api.ui.loadUIAutoHideComponent("TransformarMontura","TransformarMontura",{data:sData.substr(2)});
-               break loop10;
+                this.api.ui.loadUIAutoHideComponent("TransformarMontura","TransformarMontura",{data:sData.substr(2)});
+                break; // CORREGIDO
             case "N":
-               this.api.ui.loadUIAutoHideComponent("CambiarNombre","CambiarNombre",{color:sData.substr(2)});
-               break loop10;
+                this.api.ui.loadUIAutoHideComponent("CambiarNombre","CambiarNombre",{color:sData.substr(2)});
+                break; // CORREGIDO
             case "n":
-               this.api.datacenter.Player.Name(sData.substr(2));
-               if(this.api.ui.getUIComponent("CambiarNombre") != undefined)
-               {
-                  this.api.ui.getUIComponent("CambiarNombre").close();
-               }
-               break loop10;
+                this.api.datacenter.Player.Name(sData.substr(2));
+                if(this.api.ui.getUIComponent("CambiarNombre") != undefined)
+                {
+                    this.api.ui.getUIComponent("CambiarNombre").close();
+                }
+                break; // CORREGIDO
             case "ñ":
-               this.api.ui.loadUIAutoHideComponent("Ornamento","Ornamento",{ornamentos:sData.substr(2)});
-               break loop10;
+                this.api.ui.loadUIAutoHideComponent("Ornamento","Ornamento",{ornamentos:sData.substr(2)});
+                break; // CORREGIDO
             case "Ñ":
-               this.api.ui.loadUIAutoHideComponent("CreateTitle","CreateTitle");
-               break loop10;
+                this.api.ui.loadUIAutoHideComponent("CreateTitle","CreateTitle");
+                break; // CORREGIDO
             case "o":
-               _global.RESTRINGIR_COLOR_DIA = sData.charAt(2) == "1";
-               break loop10;
+                _global.RESTRINGIR_COLOR_DIA = sData.charAt(2) == "1";
+                break; // CORREGIDO
             case "O":
-               switch(sData.charAt(2))
-               {
-                  case "C":
-                     _loc28_ = sData.substr(3).split("^");
-                     this.api.ui.loadUIAutoHideComponent("Servicios","Servicios",{creditos:_global.parseInt(_loc28_[0]),ogrinas:_global.parseInt(_loc28_[1]),data:_loc28_[2]});
-                     break;
-                  case "b":
-                     _loc28_ = sData.substr(3).split("^");
-                     this.api.ui.loadUIAutoHideComponent("ServiciosCl","ServiciosCl",{ogrinas:_global.parseInt(_loc28_[0]),data:_loc28_[1]});
-               }
-               break loop10;
-            case "P":
-               _loc41_ = sData.substr(2).split(",");
-               this.api.ui.getUIComponent("Banner").tiempoRPG(Number(_loc41_[0]),_loc41_[1] == "1");
-               break loop10;
-            case "w":
-               this.api.ui.loadUIAutoHideComponent("Auras","Auras",{auras:sData.substr(2)});
-               break loop10;
-            case "p":
-               this.api.ui.getUIComponent("PanelNPC").refrescar(sData.substr(2));
-               break loop10;
-            case "R":
-               switch(sData.charAt(2))
-               {
-                  case "I":
-                     if(this.api.ui.getUIComponent("Banner") != undefined)
-                     {
-                        this.api.ui.getUIComponent("Banner").iniciarCronometro(sData.substring(3));
-                     }
-                     break;
-                  case "S":
-                     if(this.api.ui.getUIComponent("Banner") != undefined)
-                     {
-                        this.api.ui.getUIComponent("Banner").pararCronometro();
+                switch(sData.charAt(2))
+                {
+                    case "C":
+                        var _loc28_ = sData.substr(3).split("^");
+                        this.api.ui.loadUIAutoHideComponent("Servicios","Servicios",{creditos:_global.parseInt(_loc28_[0]),ogrinas:_global.parseInt(_loc28_[1]),data:_loc28_[2]});
                         break;
-                     }
-               }
-               break loop10;
+                    case "b":
+                        var _loc28_ = sData.substr(3).split("^");
+                        this.api.ui.loadUIAutoHideComponent("ServiciosCl","ServiciosCl",{ogrinas:_global.parseInt(_loc28_[0]),data:_loc28_[1]});
+                }
+                break; // CORREGIDO
+            case "P":
+                var _loc41_ = sData.substr(2).split(",");
+                this.api.ui.getUIComponent("Banner").tiempoRPG(Number(_loc41_[0]),_loc41_[1] == "1");
+                break; // CORREGIDO
+            case "w":
+                this.api.ui.loadUIAutoHideComponent("Auras","Auras",{auras:sData.substr(2)});
+                break; // CORREGIDO
+            case "p":
+                this.api.ui.getUIComponent("PanelNPC").refrescar(sData.substr(2));
+                break; // CORREGIDO
+            case "R":
+                switch(sData.charAt(2))
+                {
+                    case "I":
+                        if(this.api.ui.getUIComponent("Banner") != undefined)
+                        {
+                            this.api.ui.getUIComponent("Banner").iniciarCronometro(sData.substring(3));
+                        }
+                        break;
+                    case "S":
+                        if(this.api.ui.getUIComponent("Banner") != undefined)
+                        {
+                            this.api.ui.getUIComponent("Banner").pararCronometro();
+                            break;
+                        }
+                }
+                break; // CORREGIDO
             case "r":
-               switch(sData.charAt(2))
-               {
-                  case "P":
-                     _loc43_ = sData.substr(3).split(";");
-                     this.api.ui.loadUIComponent("Ruleta","Ruleta",{premios:_loc43_[0],ficha:Number(_loc43_[1])});
-                     break;
-                  case "G":
-                     this.api.ui.getUIComponent("Ruleta").ganador(sData.substr(3));
-               }
-               break loop10;
+                switch(sData.charAt(2))
+                {
+                    case "P":
+                        var _loc43_ = sData.substr(3).split(";");
+                        this.api.ui.loadUIComponent("Ruleta","Ruleta",{premios:_loc43_[0],ficha:Number(_loc43_[1])});
+                        break;
+                    case "G":
+                        this.api.ui.getUIComponent("Ruleta").ganador(sData.substr(3));
+                }
+                break; // CORREGIDO
             case "S":
-               switch(sData.charAt(2))
-               {
-                  case "P":
-                     this.api.ui.loadUIComponent("SistemaItems","SistemaItems",{tipos:sData.substr(4),icono:(sData.charAt(3) == "K" ? "Kamas" : "Ogrinas")});
-                     break;
-                  case "O":
-                     this.api.ui.getUIComponent("SistemaItems").setObjetos(sData.substr(3));
-               }
-               break loop10;
+                switch(sData.charAt(2))
+                {
+                    case "P":
+                        this.api.ui.loadUIComponent("SistemaItems","SistemaItems",{tipos:sData.substr(4),icono:(sData.charAt(3) == "K" ? "Kamas" : "Ogrinas")});
+                        break;
+                    case "O":
+                        this.api.ui.getUIComponent("SistemaItems").setObjetos(sData.substr(3));
+                }
+                break; // CORREGIDO
             case "t":
-               this.api.ui.loadUIAutoHideComponent("Titulos","Titulos",{titulos:sData.substr(2)});
-               break loop10;
+                this.api.ui.loadUIAutoHideComponent("Titulos","Titulos",{titulos:sData.substr(2)});
+                break; // CORREGIDO
             case "T":
-               _loc36_ = sData.substr(2).split(";");
-               this.api.ui.loadUIComponent("Loteria","Loteria",{coste:_loc36_[0],premio:_loc36_[1]});
-               break loop10;
+                var _loc36_ = sData.substr(2).split(";");
+                this.api.ui.loadUIComponent("Loteria","Loteria",{coste:_loc36_[0],premio:_loc36_[1]});
+                break; // CORREGIDO
             case "v":
-               this.api.ui.getUIComponent("Loteria").updatePrice(sData.substr(2));
-               break loop10;
+                this.api.ui.getUIComponent("Loteria").updatePrice(sData.substr(2));
+                break; // CORREGIDO
             case "V":
-               this.api.ui.unloadUIComponent("Panel");
-               this.api.ui.unloadLastUIAutoHideComponent();
-         }
-   }
+                this.api.ui.unloadUIComponent("Panel");
+                this.api.ui.unloadLastUIAutoHideComponent();
+        }
+}
 };
+#endinitclip

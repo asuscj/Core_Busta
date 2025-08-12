@@ -1,3 +1,4 @@
+#initclip 88
 if(!dofus)
 {
    _global.dofus = new Object();
@@ -395,6 +396,7 @@ _loc1.over = function(oEvent)
          this.gapi.showTooltip(this.item2nombre,_root._xmouse,_root._ymouse - 65,{bXLimit:true,bYLimit:false});
          break;
       case this.infoitem3:
+
          this.gapi.showTooltip(this.item3nombre,_root._xmouse,_root._ymouse - 65,{bXLimit:true,bYLimit:false});
          break;
       case this.infoitem4:
@@ -489,3 +491,4 @@ _loc1.addProperty("datos",function()
 _loc1._datos = "";
 ASSetPropFlags(_loc1,null,1);
 _global.dofus["\r\x14"].gapi.ui.LoginReward.CLASS_NAME = "LoginReward";
+#endinitclip

@@ -1,3 +1,4 @@
+#initclip 64
 _global.dofus["\r\x14"].gapi.ui.CambiarColor = function()
 {
    super();
@@ -115,3 +116,4 @@ _loc1.click = function(oEvent)
 };
 ASSetPropFlags(_loc1,null,1);
 _global.dofus["\r\x14"].gapi.ui.CambiarColor.CLASS_NAME = "CambiarColor";
+#endinitclip

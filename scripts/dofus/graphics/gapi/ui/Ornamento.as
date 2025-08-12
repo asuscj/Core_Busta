@@ -1,3 +1,4 @@
+#initclip 42
 if(!dofus)
 {
    _global.dofus = new Object();
@@ -186,3 +187,4 @@ _loc1._sNombre = "";
 _loc1._aLogros = new Array();
 ASSetPropFlags(_loc1,null,1);
 _global.dofus["\r\x14"].gapi.ui.Ornamento.CLASS_NAME = "Ornamento";
+#endinitclip

@@ -1,3 +1,4 @@
+#initclip 85
 var _loc1 = dofus["\r\x14"].gapi.ui["\x0e\x03"]["\x0e\x02"].prototype;
 _loc1.init = function()
 {
@@ -60,3 +61,4 @@ _loc1.addListeners = function()
    };
    this._btnRemove.addEventListener("click",this);
 };
+#endinitclip

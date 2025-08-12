@@ -1,3 +1,4 @@
+#initclip 124
 _global.dofus["\r\x14"].gapi.ui.MobStats = function()
 {
    super();
@@ -516,3 +517,4 @@ _loc1._lastStr = "";
 ASSetPropFlags(_loc1,null,1);
 _global.dofus["\r\x14"].gapi.ui.MobStats.CLASS_NAME = "MobStats";
 _global.dofus["\r\x14"].gapi.ui.MobStats.ANIM_LIST = ["static","walk","run","hit","bonus","anim0","anim1","anim2","anim3","anim4","anim5","anim6","anim7","anim8","anim9","anim10","anim11","anim12","anim12","anim13","anim14","anim15","anim16","anim17","anim18","anim111","anim112","anim113","anim114","anim115","anim116","anim117","emote1","emote2","emote3","emote4","emote5","emote6","emote7","emote8","emote9","emote10","emote11","emote12","emote13","emote14","emote15","emote16","emote17","emote18","emote19","emote20","emote21","emoteStatic1","emoteStatic14","emoteStatic15","emoteStatic16","emoteStatic19","emoteStatic20","emoteStatic21","die"];
+#endinitclip

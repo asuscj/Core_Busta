@@ -1,3 +1,4 @@
+#initclip 156
 if(!dofus)
 {
    _global.dofus = new Object();
@@ -61,3 +62,4 @@ _loc1._nMonsterId = 0;
 _loc1._nQuestId = 0;
 _loc1._nPreviousQuestId = 0;
 ASSetPropFlags(_loc1,null,1);
+#endinitclip

@@ -1,3 +1,4 @@
+#initclip 30
 var _loc1 = dofus["\r\x14"].gapi.controls.BannerSpriteInfos.prototype;
 _loc1.addListeners = function()
 {
@@ -106,3 +107,4 @@ _loc1.initData = function()
    }
    this.updateStates();
 };
+#endinitclip

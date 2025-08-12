@@ -1,3 +1,4 @@
+#initclip 36
 if(!dofus)
 {
    _global.dofus = new Object();
@@ -178,3 +179,4 @@ _loc1.addProperty("data",function()
 _loc1._aLogros = new Array();
 ASSetPropFlags(_loc1,null,1);
 _global.dofus["\r\x14"].gapi.ui.Logros.CLASS_NAME = "Logros";
+#endinitclip

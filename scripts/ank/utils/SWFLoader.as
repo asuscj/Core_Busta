@@ -1,3 +1,4 @@
+#initclip 73
 var _loc1 = ank["\x1e\n\x07"]["\x1e\x0b\x15"].prototype;
 _loc1.onLoadComplete = function(mc)
 {
@@ -95,3 +96,4 @@ _loc1.onLoadInit = function(mc)
    }
    this.broadcastMessage("onLoadInit",mc,this._aArgs);
 };
+#endinitclip

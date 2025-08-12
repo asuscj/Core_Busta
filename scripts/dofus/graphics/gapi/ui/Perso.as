@@ -1,3 +1,4 @@
+#initclip 58
 if(!dofus)
 {
    _global.dofus = new Object();
@@ -101,3 +102,4 @@ _loc1.click = function(oEvent)
 ASSetPropFlags(_loc1,null,1);
 _loc1._sTitulo = "";
 _global.dofus["\r\x14"].gapi.ui.Perso.CLASS_NAME = "Perso";
+#endinitclip

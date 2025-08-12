@@ -1,3 +1,4 @@
+#initclip 137
 _global.dofus["\r\x14"].gapi.ui.EditGroupMob = function()
 {
    super();
@@ -439,3 +440,4 @@ _loc1._sData = "";
 _loc1._cSprite;
 ASSetPropFlags(_loc1,null,1);
 _global.dofus["\r\x14"].gapi.ui.EditGroupMob.CLASS_NAME = "EditGroupMob";
+#endinitclip

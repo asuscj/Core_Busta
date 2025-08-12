@@ -1,3 +1,4 @@
+#initclip 83
 var _loc1 = dofus["\r\x14"].gapi.ui.spells.SpellsItem.prototype;
 _loc1.setValue = function(_loc2_, _loc3_, _loc4_)
 {
@@ -124,3 +125,4 @@ _loc1.out = function(oEvent)
          _loc2_.ui.hideTooltip();
    }
 };
+#endinitclip

@@ -1,3 +1,4 @@
+#initclip 93
 var _loc1 = dofus["\x0b\b"].GameManager.prototype;
 _global.dofus["\x0b\b"].GameManager.MINIMAL_SPELL_LAUNCH_DELAY = 0;
 _loc1.showPlayerPopupMenu = function(_loc2_, _loc3_, _loc4_, _loc5_, _loc6_, _loc7_, _loc8_, _loc9_, _loc10_)
@@ -308,3 +309,4 @@ _loc1.Comandos = function()
    _loc3_.addItem(this.api.lang.getText("SELECT_TITLE"),this.api.network,this.api.network.send,["Zt"]);
    _loc3_.show(_root._xmouse,_root._ymouse);
 };
+#endinitclip

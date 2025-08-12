@@ -1,3 +1,4 @@
+#initclip 51
 if(!dofus)
 {
    _global.dofus = new Object();
@@ -221,3 +222,4 @@ _loc1.addProperty("type",_loc1.__get__type,function()
 );
 ASSetPropFlags(_loc1,null,1);
 dofus.datacenter.InventoryShortcutItem.OBJI_DEFAULT_FRAME = "H0";
+#endinitclip

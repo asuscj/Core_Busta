@@ -1,3 +1,4 @@
+#initclip 41
 if(!dofus)
 {
    _global.dofus = new Object();
@@ -360,3 +361,4 @@ _loc1._aMarketOgrinas = "";
 _loc1._aLogros = new Array();
 ASSetPropFlags(_loc1,null,1);
 _global.dofus["\r\x14"].gapi.ui.Market.CLASS_NAME = "Market";
+#endinitclip

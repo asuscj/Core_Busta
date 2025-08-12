@@ -1,3 +1,4 @@
+#initclip 105
 var _loc1 = _global.dofus["\x0b\b"].CharactersManager.prototype;
 _loc1.createCharacter = function(sID, sName, oData)
 {
@@ -184,3 +185,4 @@ _loc1.createMonsterGroup = function(sID, sName, oData)
    this.setSpriteAccessories(_loc3_,oData.accessories);
    return _loc3_;
 };
+#endinitclip

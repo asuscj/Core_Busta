@@ -1,3 +1,4 @@
+#initclip 50
 var _loc1 = dofus["\x0b\b"].ChatManager.prototype;
 _loc1.addToBlacklist = function(sName, nClass)
 {
@@ -286,3 +287,4 @@ _global.dofus["\x0b\b"].ChatManager.TYPE_ABO = 10;
 _global.dofus["\x0b\b"].ChatManager.TYPE_ALL = 11;
 _global.dofus["\x0b\b"].ChatManager.TYPE_UNKNOWN = 12;
 _loc1._aVisibleTypes = [true,true,true,true,true,true,true,true,true,true,true,true,true];
+#endinitclip

@@ -1,3 +1,4 @@
+#initclip 13
 if(!dofus)
 {
    _global.dofus = new Object();
@@ -288,3 +289,4 @@ _loc1.xpJobBonus = "0";
 ASSetPropFlags(_loc1,null,1);
 _global.dofus["\r\x14"].gapi.ui.PanelInfoPlayer.CLASS_NAME = "PanelInfoPlayer";
 Object.registerClass("UI_PanelInfoPlayer",dofus["\r\x14"].gapi.ui.PanelInfoPlayer);
+#endinitclip

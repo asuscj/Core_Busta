@@ -1,3 +1,4 @@
+#initclip 78
 var _loc1 = dofus.aks.Spells.prototype;
 _loc1.onSpellMove = function(_loc2_)
 {
@@ -85,3 +86,4 @@ _loc1.Delete = function(_loc2_)
 {
    this.aks.send("SMD" + _loc2_,false);
 };
+#endinitclip

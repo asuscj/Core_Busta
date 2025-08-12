@@ -1,3 +1,4 @@
+#initclip 63
 var _loc1 = _global.dofus.aks.Chat.prototype;
 _loc1.subscribeChannels = function(_loc2_, _loc3_)
 {
@@ -280,3 +281,4 @@ _loc1.onMessage = function(bSuccess, sExtraData)
    }
    this.api.kernel.showMessage(undefined,_loc3_,_loc6_,undefined,_loc4_);
 };
+#endinitclip

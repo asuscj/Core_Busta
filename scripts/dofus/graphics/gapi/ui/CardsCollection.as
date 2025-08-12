@@ -1,3 +1,4 @@
+#initclip 131
 var _loc1 = dofus["\r\x14"].gapi.ui.CardsCollection.prototype;
 _loc1.__set__Mobs = function(sMobs)
 {
@@ -272,6 +273,7 @@ _loc1.cargarHechizos = function(sS)
          _loc2_ = _loc3_[_loc5_].split("@")[0];
          _loc4_.push({id:_loc2_,label:this.api.lang.getSpellText(_loc2_).n + (!this.api.datacenter.Player.isAuthorized ? "" : " (" + _loc2_ + ")")});
       }
+
    }
    else
    {
@@ -463,3 +465,4 @@ _loc1.addProperty("mobs",function()
 {
 }
 ,_loc1.__set__Mobs);
+#endinitclip

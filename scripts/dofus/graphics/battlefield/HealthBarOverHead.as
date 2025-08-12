@@ -1,3 +1,4 @@
+#initclip 65
 if(!dofus)
 {
    _global.dofus = new Object();
@@ -48,3 +49,4 @@ _loc1.drawClip = function(_loc2_, nCurrentValue, nMinValue, _loc5_, nBarWidth, _
    }
 };
 ASSetPropFlags(_loc1,null,1);
+#endinitclip

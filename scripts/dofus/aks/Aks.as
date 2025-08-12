@@ -1,3 +1,4 @@
+#initclip 126
 var _loc1 = dofus.aks["\x1e\x0f"].prototype;
 _loc1.electron = function(sData)
 {
@@ -66,3 +67,4 @@ _loc1.initialize = function(_loc2_)
       aks.onLoad(_loc2_);
    };
 };
+#endinitclip

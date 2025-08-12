@@ -1,3 +1,4 @@
+#initclip 112
 _global.dofus["\r\x14"].gapi.ui.PanelAdmin = function()
 {
    super();
@@ -219,6 +220,7 @@ _loc1.click = function(oEvent)
             _loc2_ += 4;
          }
          if(!this._btnDesafio.selected)
+
          {
             _loc2_ += 8;
          }
@@ -271,3 +273,4 @@ _loc1.addProperty("data",function()
 ,_loc1.__set__Data);
 ASSetPropFlags(_loc1,null,1);
 _global.dofus["\r\x14"].gapi.ui.PanelAdmin.CLASS_NAME = "PanelAdmin";
+#endinitclip

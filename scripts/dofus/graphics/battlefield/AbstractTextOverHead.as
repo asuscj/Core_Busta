@@ -1,3 +1,4 @@
+#initclip 70
 var _loc1 = _global.dofus["\r\x14"].battlefield["\x14"].prototype;
 _loc1.initialize = function()
 {
@@ -28,3 +29,4 @@ _global.dofus["\r\x14"].battlefield["\x14"].TEXT_FORMAT3 = new TextFormat("Font3
 _global.dofus["\r\x14"].battlefield["\x14"].TEXT_FORMAT5 = new TextFormat("Font2",9,16777215,false,false,false,null,null,"center");
 _global.dofus["\r\x14"].battlefield["\x14"].TEXT_FORMAT6 = new TextFormat("Font2",10,16777215,false,false,false,null,null,"center");
 _global.dofus["\r\x14"].battlefield["\x14"].TEXT_FORMAT4 = new TextFormat("Font3",9,16777215,false,false,false,null,null,"center");
+#endinitclip

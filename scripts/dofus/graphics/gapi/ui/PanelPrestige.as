@@ -1,3 +1,4 @@
+#initclip 7
 if(!dofus)
 {
    _global.dofus = new Object();
@@ -184,3 +185,4 @@ ASSetPropFlags(_loc1,null,1);
 _loc1.playerInfo = "";
 _global.dofus["\r\x14"].gapi.ui.PanelPrestige.CLASS_NAME = "PanelPrestige";
 Object.registerClass("UI_PanelPrestige",dofus["\r\x14"].gapi.ui.PanelPrestige);
+#endinitclip

@@ -1,3 +1,4 @@
+#initclip 106
 if(!dofus)
 {
    _global.dofus = new Object();
@@ -357,3 +358,4 @@ _global.dofus["\r\x14"].gapi.controls.ColorUno.CLASS_NAME = "ColorUno";
 _global.dofus["\r\x14"].gapi.controls.ColorUno.MAXIMUM_COLOR_INDEX = 1;
 _loc1._nSelectedColorIndex = 1;
 _global.dofus["\r\x14"].gapi.controls.ColorUno.HEX_CHARS = ["0","1","2","3","4","5","6","7","8","9","A","B","C","D","E","F"];
+#endinitclip

@@ -1,3 +1,4 @@
+#initclip 97
 var _loc1 = dofus.aks.GameActions.prototype;
 _loc1.onModoCriatura = function()
 {
@@ -1498,3 +1499,4 @@ _loc1.onActions = function(_loc2_)
    }
    return undefined;
 };
+#endinitclip

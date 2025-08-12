@@ -1,3 +1,4 @@
+#initclip 75
 var _loc1 = dofus.aks.Quests.prototype;
 _loc1.onList = function(_loc2_)
 {
@@ -33,3 +34,4 @@ _loc1.onList = function(_loc2_)
    this.api.ui.getUIComponent("Quests").setPendingCount(_loc8_);
    this.api.ui.getUIComponent("Temporis").setQuestTemporis(_loc10_);
 };
+#endinitclip

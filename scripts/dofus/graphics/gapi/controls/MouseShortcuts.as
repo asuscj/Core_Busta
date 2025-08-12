@@ -1,3 +1,4 @@
+#initclip 6
 var _loc1 = dofus["\r\x14"].gapi.controls.MouseShortcuts.prototype;
 _loc1.initTexts = function()
 {
@@ -93,92 +94,96 @@ _loc1.updateCurrentTabInformations = function()
 };
 _loc1.click = function(oEvent)
 {
-   var _loc4_;
-   var _loc5_;
-   var _loc3_;
-   loop0:
-   switch(oEvent.target._name)
-   {
-      case "_btnTabSets":
-         this.setCurrentTab("Sets");
-         break;
-      case "_btnTabSpells":
-         this.api.sounds.events.onBannerSpellItemButtonClick();
-         this.setCurrentTab("Spells");
-         break;
-      case "_btnTabItems":
-         this.api.sounds.events.onBannerSpellItemButtonClick();
-         this.setCurrentTab("Items");
-         break;
-      case "_ctrCC":
-         if(this._ctrCC._visible)
-         {
-            if(this.api.kernel.TutorialManager.isTutorialMode)
+    var _loc4_;
+    var _loc5_;
+    var _loc3_;
+    switch(oEvent.target._name)
+    {
+        case "_btnTabSets":
+            this.setCurrentTab("Sets");
+            break;
+
+        case "_btnTabSpells":
+            this.api.sounds.events.onBannerSpellItemButtonClick();
+            this.setCurrentTab("Spells");
+            break;
+
+        case "_btnTabItems":
+            this.api.sounds.events.onBannerSpellItemButtonClick();
+            this.setCurrentTab("Items");
+            break;
+
+        case "_ctrCC":
+            if(this._ctrCC._visible)
             {
-               this.api.kernel.TutorialManager.onWaitingCase({code:"CC_CONTAINER_SELECT"});
-               break;
+                if(this.api.kernel.TutorialManager.isTutorialMode)
+                {
+                    this.api.kernel.TutorialManager.onWaitingCase({code:"CC_CONTAINER_SELECT"});
+                    break;
+                }
+                this.api.kernel.GameManager.switchToSpellLaunch(this.api.datacenter.Player.Spells[0],false);
             }
-            this.api.kernel.GameManager.switchToSpellLaunch(this.api.datacenter.Player.Spells[0],false);
-         }
-         break;
-      default:
-         switch(this._sCurrentTab)
-         {
-            case "Spells":
-               this.api.sounds.events.onBannerSpellSelect();
-               if(this.api.kernel.TutorialManager.isTutorialMode)
-               {
-                  this.api.kernel.TutorialManager.onWaitingCase({code:"SPELL_CONTAINER_SELECT",params:[Number(oEvent.target._name.substr(4))]});
-                  break loop0;
-               }
-               if(this.gapi.getUIComponent("Spells") != undefined)
-               {
-                  return undefined;
-               }
-               _loc4_ = oEvent.target.contentData;
-               if(_loc4_ == undefined)
-               {
-                  return undefined;
-               }
-               this.api.kernel.GameManager.switchToSpellLaunch(_loc4_,true);
-               break loop0;
-            case "Items":
-               if(this.api.kernel.TutorialManager.isTutorialMode)
-               {
-                  this.api.kernel.TutorialManager.onWaitingCase({code:"OBJECT_CONTAINER_SELECT",params:[Number(oEvent.target._name.substr(4))]});
-                  break loop0;
-               }
-               if(Key.isDown(dofus.Constants.CHAT_INSERT_ITEM_KEY) && oEvent.target.contentData != undefined)
-               {
-                  this.api.kernel.GameManager.insertItemInChat(oEvent.target.contentData);
-                  return undefined;
-               }
-               _loc5_ = this.gapi.getUIComponent("Inventory");
-               if(_loc5_ != undefined)
-               {
-                  _loc5_.showItemInfos(oEvent.target.contentData);
-                  break loop0;
-               }
-               _loc3_ = oEvent.target.contentData;
-               if(_loc3_ == undefined)
-               {
-                  return undefined;
-               }
-               if(this.api.datacenter.Player.canUseObject)
-               {
-                  if(_loc3_.canTarget)
-                  {
-                     this.api.kernel.GameManager.switchToItemTarget(_loc3_);
-                     break loop0;
-                  }
-                  if(_loc3_.canUse && oEvent.keyBoard)
-                  {
-                     this.api.network.Items.use(_loc3_.ID);
-                  }
-               }
-               break loop0;
-         }
-   }
+            break;
+
+        default:
+            switch(this._sCurrentTab)
+            {
+                case "Spells":
+                    this.api.sounds.events.onBannerSpellSelect();
+                    if(this.api.kernel.TutorialManager.isTutorialMode)
+                    {
+                        this.api.kernel.TutorialManager.onWaitingCase({code:"SPELL_CONTAINER_SELECT",params:[Number(oEvent.target._name.substr(4))]});
+                        break; // CORREGIDO
+                    }
+                    if(this.gapi.getUIComponent("Spells") != undefined)
+                    {
+                        return undefined;
+                    }
+                    _loc4_ = oEvent.target.contentData;
+                    if(_loc4_ == undefined)
+                    {
+                        return undefined;
+                    }
+                    this.api.kernel.GameManager.switchToSpellLaunch(_loc4_,true);
+                    break; // CORREGIDO
+
+                case "Items":
+                    if(this.api.kernel.TutorialManager.isTutorialMode)
+                    {
+                        this.api.kernel.TutorialManager.onWaitingCase({code:"OBJECT_CONTAINER_SELECT",params:[Number(oEvent.target._name.substr(4))]});
+                        break; // CORREGIDO
+                    }
+                    if(Key.isDown(dofus.Constants.CHAT_INSERT_ITEM_KEY) && oEvent.target.contentData != undefined)
+                    {
+                        this.api.kernel.GameManager.insertItemInChat(oEvent.target.contentData);
+                        return undefined;
+                    }
+                    _loc5_ = this.gapi.getUIComponent("Inventory");
+                    if(_loc5_ != undefined)
+                    {
+                        _loc5_.showItemInfos(oEvent.target.contentData);
+                        break; // CORREGIDO
+                    }
+                    _loc3_ = oEvent.target.contentData;
+                    if(_loc3_ == undefined)
+                    {
+                        return undefined;
+                    }
+                    if(this.api.datacenter.Player.canUseObject)
+                    {
+                        if(_loc3_.canTarget)
+                        {
+                            this.api.kernel.GameManager.switchToItemTarget(_loc3_);
+                            break; // CORREGIDO
+                        }
+                        if(_loc3_.canUse && oEvent.keyBoard)
+                        {
+                            this.api.network.Items.use(_loc3_.ID);
+                        }
+                    }
+                    break; // CORREGIDO
+            }
+    }
 };
 _loc1.dblClick = function(oEvent)
 {
@@ -346,3 +351,4 @@ _loc1.modelChanged = function(oEvent)
       this.updateSets();
    }
 };
+#endinitclip

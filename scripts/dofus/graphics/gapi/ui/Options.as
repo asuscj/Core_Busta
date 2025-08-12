@@ -1,3 +1,4 @@
+#initclip 82
 var _loc1 = dofus["\r\x14"].gapi.ui.Options.prototype;
 _loc1.init = function()
 {
@@ -649,3 +650,4 @@ _loc1.selectRemasteredClipsHD = function(_loc2_)
    }
    this._mcTabViewer._cbRemasteredClipsHD.selectedIndex = _loc2_ != "classic" ? 2 : 1;
 };
+#endinitclip

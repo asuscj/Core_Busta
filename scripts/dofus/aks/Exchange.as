@@ -1,3 +1,4 @@
+#initclip 56
 var _loc1 = dofus.aks.Exchange.prototype;
 _loc1.transfertItems = function(_loc2_, _loc3_)
 {
@@ -60,50 +61,58 @@ _loc1.onCraft = function(bSuccess, sExtraData)
    var _loc11_;
    var _loc12_;
    var _loc4_;
-   loop0:
-   switch(sExtraData.substr(0,1))
-   {
-      case "I":
-         if(!bSuccess)
-         {
+switch(sExtraData.substr(0,1))
+{
+    case "I":
+        if(!bSuccess)
+        {
             this.api.kernel.showMessage(this.api.lang.getText("CRAFT"),this.api.lang.getText("NO_CRAFT_RESULT"),"ERROR_BOX",{name:"Impossible"});
-         }
-         break;
-      case "F":
-         if(!bSuccess && _loc8_)
-         {
+        }
+        break;
+
+    case "F":
+        if(!bSuccess && _loc8_)
+        {
             this.api.kernel.showMessage(this.api.lang.getText("CRAFT"),this.api.lang.getText("CRAFT_FAILED"),"ERROR_BOX",{name:"CraftFailed"});
-         }
-         this.api.kernel.SpeakingItemsManager.triggerEvent(dofus["\x0b\b"].SpeakingItemsManager.SPEAK_TRIGGER_CRAFT_KO);
-         break;
-      case ";":
-         if(bSuccess)
-         {
-            _loc2_ = sExtraData.substr(1).split(";");
+        }
+        this.api.kernel.SpeakingItemsManager.triggerEvent(dofus["\x0b\b"].SpeakingItemsManager.SPEAK_TRIGGER_CRAFT_KO);
+        break;
+
+    case ";":
+        if(bSuccess)
+        {
+            var _loc2_ = sExtraData.substr(1).split(";");
             if(_loc2_.length == 1)
             {
-               _loc9_ = new dofus.datacenter["\f\f"](0,Number(_loc2_[0]),undefined,undefined,undefined);
-               this.api.kernel.showMessage(undefined,this.api.lang.getText("CRAFT_SUCCESS_SELF",[_loc9_.name]),"INFO_CHAT");
-               this.api.kernel.SpeakingItemsManager.triggerEvent(dofus["\x0b\b"].SpeakingItemsManager.SPEAK_TRIGGER_CRAFT_KO);
-               break;
+                var _loc9_ = new dofus.datacenter["\f\f"](0,Number(_loc2_[0]),undefined,undefined,undefined);
+                this.api.kernel.showMessage(undefined,this.api.lang.getText("CRAFT_SUCCESS_SELF",[_loc9_.name]),"INFO_CHAT");
+                this.api.kernel.SpeakingItemsManager.triggerEvent(dofus["\x0b\b"].SpeakingItemsManager.SPEAK_TRIGGER_CRAFT_KO);
+                // Este break es para el if, pero como está al final del case, también sirve.
+                break; 
             }
-            _loc10_ = _loc2_[1].substr(0,1);
-            _loc7_ = _loc2_[1].substr(1);
-            _loc11_ = Number(_loc2_[0]) + ";0";
-            _loc12_ = _loc2_[2];
-            _loc4_ = new Array();
+            var _loc10_ = _loc2_[1].substr(0,1);
+            var _loc7_ = _loc2_[1].substr(1);
+            var _loc11_ = Number(_loc2_[0]) + ";0";
+            var _loc12_ = _loc2_[2];
+            var _loc4_ = new Array();
             _loc4_.push(_loc11_);
             _loc4_.push(_loc12_);
+            
+            // Switch anidado
             switch(_loc10_)
             {
-               case "T":
-                  this.api.kernel.showMessage(undefined,this.api.kernel.ChatManager.parseInlineItems(this.api.lang.getText("CRAFT_SUCCESS_TARGET",[_loc7_]),_loc4_),"INFO_CHAT");
-                  break loop0;
-               case "B":
-                  this.api.kernel.showMessage(undefined,this.api.kernel.ChatManager.parseInlineItems(this.api.lang.getText("CRAFT_SUCCESS_OTHER",[_loc7_]),_loc4_),"INFO_CHAT");
+                case "T":
+                    this.api.kernel.showMessage(undefined,this.api.kernel.ChatManager.parseInlineItems(this.api.lang.getText("CRAFT_SUCCESS_TARGET",[_loc7_]),_loc4_),"INFO_CHAT");
+                    break; // CORREGIDO
+                    
+                case "B":
+                    this.api.kernel.showMessage(undefined,this.api.kernel.ChatManager.parseInlineItems(this.api.lang.getText("CRAFT_SUCCESS_OTHER",[_loc7_]),_loc4_),"INFO_CHAT");
+                    break; // Añadido para seguridad y claridad
             }
-         }
-   }
+        }
+        // Este break es para el case ";" del switch principal
+        break; 
+}
    if(!bSuccess)
    {
       this.api.datacenter.Exchange.clearCoopGarbage();
@@ -460,6 +469,7 @@ _loc1.onCreate = function(bSuccess, sExtraData, Taxs, MinOG)
          _loc29_ = Number(_loc7_[0]);
          _loc28_ = Number(_loc7_[1]);
          this.api.ui.unloadUIComponent("AskYesNoIgnoreExchange");
+
          this.api.ui.unloadUIComponent("AskCancelExchange");
          this.api.ui.loadUIComponent("SecureCraft","SecureCraft",{skillId:_loc28_,maxItem:_loc29_});
          break;
@@ -829,3 +839,4 @@ _loc1.onBigStoreItemsList = function(_loc2_)
    this.api.datacenter.Temporary.Shop.inventory2 = _loc16_;
    this.api.ui.getUIComponent("BigStoreBuy").setItem(_loc17_);
 };
+#endinitclip

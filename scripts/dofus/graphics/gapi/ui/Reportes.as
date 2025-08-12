@@ -1,3 +1,4 @@
+#initclip 117
 if(!dofus)
 {
    _global.dofus = new Object();
@@ -170,3 +171,4 @@ _loc1.addProperty("miembros",function()
 _loc1.index = 0;
 ASSetPropFlags(_loc1,null,1);
 _global.dofus["\r\x14"].gapi.ui.Reportes.CLASS_NAME = "Reportes";
+#endinitclip

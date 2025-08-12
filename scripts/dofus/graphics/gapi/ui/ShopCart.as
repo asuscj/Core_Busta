@@ -1,3 +1,4 @@
+#initclip 28
 _global.dofus["\r\x14"].gapi.ui.ShopCart = function()
 {
    super();
@@ -171,3 +172,4 @@ _loc1.addProperty("listaItems",function()
 _loc1.itemSeleccionado = undefined;
 ASSetPropFlags(_loc1,null,1);
 _global.dofus["\r\x14"].gapi.ui.ShopCart.CLASS_NAME = "ShopCart";
+#endinitclip

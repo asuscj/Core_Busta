@@ -1,3 +1,4 @@
+#initclip 26
 var _loc1 = _global.dofus["\r\x14"].gapi.controls.Chat.prototype;
 _loc1.__get__filters = function()
 {
@@ -422,3 +423,4 @@ ASSetPropFlags(_loc1,null,1);
 _global.dofus["\r\x14"].gapi.controls.Chat.CLASS_NAME = "Chat";
 _global.dofus["\r\x14"].gapi.controls.Chat.OPEN_OFFSET = 350;
 _loc1._bOpened = false;
+#endinitclip

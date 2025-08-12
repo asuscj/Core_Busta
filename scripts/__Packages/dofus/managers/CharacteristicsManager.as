@@ -1,3 +1,4 @@
+#initclip 116
 var _loc1 = dofus["\x0b\b"].CharacteristicsManager.prototype;
 _loc1.initialize = function(oSprite, oAPI)
 {
@@ -110,3 +111,4 @@ _loc1.addProperty("modocriatura",function()
 {
 }
 ,_loc1.__set__modocriatura);
+#endinitclip

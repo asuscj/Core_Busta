@@ -1,3 +1,4 @@
+#initclip 99
 if(!dofus)
 {
    _global.dofus = new Object();
@@ -94,3 +95,4 @@ _loc1.addProperty("data",function()
 ,_loc1.__set__data);
 ASSetPropFlags(_loc1,null,1);
 _global.dofus["\r\x14"].gapi.ui.Zones.CLASS_NAME = "Zones";
+#endinitclip

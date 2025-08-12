@@ -1,3 +1,4 @@
+#initclip 119
 if(!dofus)
 {
    _global.dofus = new Object();
@@ -223,3 +224,4 @@ _loc1.Cg = null;
 _loc1._aFiltersType = [1,2,3,4,5,6,7,8,9,10,11,16,17,18,19,21,22,81,82];
 ASSetPropFlags(_loc1,null,1);
 _global.dofus["\r\x14"].gapi.ui.Mimobionte.CLASS_NAME = "Mimobionte";
+#endinitclip

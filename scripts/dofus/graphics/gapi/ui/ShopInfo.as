@@ -1,3 +1,4 @@
+#initclip 4
 if(!dofus)
 {
    _global.dofus = new Object();
@@ -473,3 +474,4 @@ _loc1.statsItem = "";
 _loc1.lista = "";
 ASSetPropFlags(_loc1,null,1);
 _global.dofus["\r\x14"].gapi.ui.ShopInfo.CLASS_NAME = "ShopInfo";
+#endinitclip

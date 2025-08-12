@@ -1,3 +1,4 @@
+#initclip 115
 _global.dofus["\r\x14"].gapi.controls.BigStoreHistoryViewer = function()
 {
    super();
@@ -43,3 +44,4 @@ _loc1.addProperty("list",function()
 }
 ,_loc1.setList);
 ASSetPropFlags(_loc1,null,1);
+#endinitclip

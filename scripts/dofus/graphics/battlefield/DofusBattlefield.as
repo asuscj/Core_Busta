@@ -1,3 +1,4 @@
+#initclip 89
 var _loc1 = dofus["\r\x14"].battlefield["\x10\x18"].prototype;
 _loc1.getPrestigeName = function(_loc2)
 {
@@ -157,6 +158,7 @@ _loc1.onSpriteRollOver = function(_loc2_, _loc3_)
          else
          {
             _loc5_ += " (" + _loc4_.LP + ")";
+
          }
          this.showSpriteInfosIfWeNeed(_loc4_);
       }
@@ -502,12 +504,12 @@ _loc1.onCellRelease = function(_loc2_)
          }
          if(_loc5_)
          {
-            if(2693 - this.api.datacenter.Basics.gfx_lastActionTime < dofus.Constants.CLICK_MIN_DELAY && (_loc4_ == undefined || !_loc4_.isAdminSonicSpeed))
+            if(8102 - this.api.datacenter.Basics.gfx_lastActionTime < dofus.Constants.CLICK_MIN_DELAY && (_loc4_ == undefined || !_loc4_.isAdminSonicSpeed))
             {
                ank["\x1e\n\x07"]["\x0b\f"].err("T trop rapide du clic");
                return null;
             }
-            this.api.datacenter.Basics.gfx_lastActionTime = 7702;
+            this.api.datacenter.Basics.gfx_lastActionTime = 2684;
             if(this.api.datacenter.Basics.interactionsManager_path.length != 0)
             {
                _loc8_ = ank.battlefield["\x1e\n\x07"]["\x12\r"].compressPath(this.api.datacenter.Basics.interactionsManager_path);
@@ -545,7 +547,7 @@ _loc1.onCellRelease = function(_loc2_)
             delete this.api.datacenter.Basics.spellManager_errorMsg;
          }
          this.api.ui.removeCursor();
-         this.api.kernel.GameManager.lastSpellLaunch = 2271;
+         this.api.kernel.GameManager.lastSpellLaunch = 8296;
          this.api.datacenter.Game.setInteractionType("move");
          break;
       case 3:
@@ -558,7 +560,7 @@ _loc1.onCellRelease = function(_loc2_)
             this.api.datacenter.Player.currentUseObject = null;
          }
          this.api.ui.removeCursor();
-         this.api.kernel.GameManager.lastSpellLaunch = 7653;
+         this.api.kernel.GameManager.lastSpellLaunch = 2893;
          this.api.datacenter.Game.setInteractionType("move");
          break;
       case 4:
@@ -762,3 +764,4 @@ _loc1.onObjectRollOut = function(mcObject)
    this.removeSpriteOverHeadLayer("itemOnCell","text");
    this.removeSprite("itemOnCell",false);
 };
+#endinitclip

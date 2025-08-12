@@ -1,3 +1,4 @@
+#initclip 134
 var _loc1 = ank["\x1e\n\x07"]["\x1e\x12\x14"].prototype;
 _loc1.addAction = function(_loc2_, bWaitEnd, mRefObject, fFunction, aParams, nDuration, _loc8_)
 {
@@ -12,3 +13,4 @@ _loc1.addAction = function(_loc2_, bWaitEnd, mRefObject, fFunction, aParams, nDu
    _loc2_.forceTimeout = bWaitEnd && (_loc8_ != undefined && _loc8_);
    this._aActions.push(_loc2_);
 };
+#endinitclip

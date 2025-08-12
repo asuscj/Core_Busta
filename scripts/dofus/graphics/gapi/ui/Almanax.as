@@ -1,3 +1,4 @@
+#initclip 141
 if(!dofus)
 {
    _global.dofus = new Object();
@@ -147,3 +148,4 @@ _loc1._sBonus = "";
 _loc1._sAvance = "0,365";
 _loc1._bOK = Boolean(false);
 _global.dofus["\r\x14"].gapi.ui.Almanax.CLASS_NAME = "Almanax";
+#endinitclip

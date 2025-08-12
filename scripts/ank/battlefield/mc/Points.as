@@ -1,3 +1,4 @@
+#initclip 86
 var _loc1 = ank.battlefield.mc.Points.prototype;
 _loc1.initialize = function(pointsHandler, _loc3_, _loc4_, _loc5_, _loc6_)
 {
@@ -87,3 +88,4 @@ _loc1.animate = function()
       }
    };
 };
+#endinitclip

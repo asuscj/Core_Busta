@@ -1,3 +1,4 @@
+#initclip 49
 var _loc1 = ank.battlefield["\x1e\x0b\x07"].prototype;
 _loc1["\x1e\x0b\x07"] = function(_loc2_, _loc3_, _loc4_)
 {
@@ -34,3 +35,4 @@ _loc3_.remove();
 _loc1.BUBBLE_TYPE_CHAT = 1;
 _loc1.BUBBLE_TYPE_THINK = 2;
 _loc1._aVisibleTypes = [true,true,true,true,true,true,true,true,true,true,true,true,true];
+#endinitclip

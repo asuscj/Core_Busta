@@ -1,3 +1,4 @@
+#initclip 1
 if(!dofus)
 {
    _global.dofus = new Object();
@@ -714,3 +715,4 @@ _loc1._cantidadActual = 0;
 _loc1._sCurrentTab = "General";
 _loc1._currentStateListener = false;
 ASSetPropFlags(_loc1,null,1);
+#endinitclip

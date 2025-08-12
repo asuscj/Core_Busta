@@ -1,3 +1,4 @@
+#initclip 47
 var _loc1 = _global.dofus["\r\x14"].gapi.ui.Login.prototype;
 _loc1._sServerIP = undefined;
 _loc1._nServerPort = undefined;
@@ -168,3 +169,4 @@ _loc1.constructPortsList = function()
    this._cbPorts.selectedIndex = 1;
    this._sloginservidor = _global.SERVER_IP_ACTUAL;
 };
+#endinitclip

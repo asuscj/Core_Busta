@@ -1,3 +1,4 @@
+#initclip 40
 if(!dofus)
 {
    _global.dofus = new Object();
@@ -223,3 +224,4 @@ _loc1._aTitulos = "";
 _loc1._aLogros = new Array();
 ASSetPropFlags(_loc1,null,1);
 _global.dofus["\r\x14"].gapi.ui.Titulos.CLASS_NAME = "Titulos";
+#endinitclip

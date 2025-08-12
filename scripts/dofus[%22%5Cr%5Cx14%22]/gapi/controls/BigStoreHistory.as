@@ -1,3 +1,4 @@
+#initclip 94
 _global.dofus["\r\x14"].gapi.ui.BigStoreHistory = function()
 {
    super();
@@ -72,3 +73,4 @@ _loc1.__set__data = function(sData)
    this._sData = sData;
 };
 _loc1.addProperty("data",_loc1.__get__data,_loc1.__set__data);
+#endinitclip

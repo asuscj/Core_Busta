@@ -1,3 +1,4 @@
+#initclip 60
 var _loc1 = dofus.datacenter.Exchange.prototype;
 _loc1.__set__distantOgrine = function(nDistantOgrine)
 {
@@ -32,3 +33,4 @@ _loc1.initialize = function(nDistantPlayerID)
 };
 _loc1.addProperty("localOgrine",_loc1.__get__localOgrine,_loc1.__set__localOgrine);
 _loc1.addProperty("distantOgrine",_loc1.__get__distantOgrine,_loc1.__set__distantOgrine);
+#endinitclip

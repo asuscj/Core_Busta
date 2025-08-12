@@ -1,3 +1,4 @@
+#initclip 128
 var _loc1 = _global.dofus["\r\x14"].gapi.ui.Guild.prototype;
 _loc1.__set__Anuncio = function(sValue)
 {
@@ -326,3 +327,4 @@ _loc1.addProperty("anuncio",function()
 ,_loc1.__set__Anuncio);
 _loc1.editado = false;
 _loc1.sAnuncio = "";
+#endinitclip

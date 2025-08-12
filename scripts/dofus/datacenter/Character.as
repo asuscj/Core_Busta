@@ -1,3 +1,4 @@
+#initclip 57
 if(!dofus)
 {
    _global.dofus = new Object();
@@ -276,3 +277,4 @@ _loc1.addProperty("agilidad",_loc1.__get__agilidad,_loc1.__set__agilidad);
 ASSetPropFlags(_loc1,null,1);
 _loc1._nAgilidad = Number(0);
 _loc1.xtraClipTopAnimations = {staticF:true};
+#endinitclip

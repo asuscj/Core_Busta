@@ -1,3 +1,4 @@
+#initclip 158
 if(!dofus)
 {
    _global.dofus = new Object();
@@ -94,3 +95,4 @@ _loc1.addProperty("color",function()
 ASSetPropFlags(_loc1,null,1);
 _loc1._nColor = -1;
 _global.dofus["\r\x14"].gapi.ui.CambiarNombre.CLASS_NAME = "CambiarNombre";
+#endinitclip

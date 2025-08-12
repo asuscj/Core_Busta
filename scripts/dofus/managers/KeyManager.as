@@ -1,3 +1,4 @@
+#initclip 129
 var _loc1 = dofus["\x0b\b"].KeyManager.prototype;
 _loc1.initialize = function(oAPI)
 {
@@ -186,15 +187,15 @@ _loc1.onShortcut = function(_loc2_)
          _loc2_ = false;
          break;
       case "SHOWTRIGGERS":
-         if(this.api.datacenter.Game.isFight || 2044 - this._nLastTriggerShow < dofus.Constants.CLICK_MIN_DELAY)
+         if(this.api.datacenter.Game.isFight || 1493 - this._nLastTriggerShow < dofus.Constants.CLICK_MIN_DELAY)
          {
             break;
          }
          if(!this.api.datacenter.Game.isFight)
          {
-            if(1456 - this._nLastTriggerShow >= dofus.Constants.CLICK_MIN_DELAY)
+            if(7944 - this._nLastTriggerShow >= dofus.Constants.CLICK_MIN_DELAY)
             {
-               this._nLastTriggerShow = 6263;
+               this._nLastTriggerShow = 8086;
                this.api.gfx.mapHandler.showTriggers();
                this.api.gfx.mapHandler.showFightCells();
             }
@@ -251,3 +252,4 @@ _loc1.onShortcut = function(_loc2_)
    }
    return _loc2_;
 };
+#endinitclip

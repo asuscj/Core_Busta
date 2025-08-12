@@ -1,3 +1,4 @@
+#initclip 122
 var _loc1 = dofus["\x10\x16"].prototype;
 _loc1.registerAllClasses = function()
 {
@@ -465,3 +466,4 @@ _loc1.registerAllClasses = function()
    Object.registerClass("SpriteHealthBar",dofus["\r\x14"].gapi.controls.SpriteHealthBar);
    Object.registerClass("UI_Perso",dofus["\r\x14"].gapi.ui.Perso);
 };
+#endinitclip

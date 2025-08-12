@@ -1,3 +1,4 @@
+#initclip 149
 if(!dofus)
 {
    _global.dofus = new Object();
@@ -73,3 +74,4 @@ _loc1.click = function(oEvent)
 };
 ASSetPropFlags(_loc1,null,1);
 _global.dofus["\r\x14"].gapi.ui.ReportBug.CLASS_NAME = "ReportBug";
+#endinitclip

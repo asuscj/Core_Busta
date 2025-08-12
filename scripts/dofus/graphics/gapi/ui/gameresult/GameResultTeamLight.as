@@ -1,3 +1,4 @@
+#initclip 18
 if(!dofus)
 {
    _global.dofus = new Object();
@@ -67,3 +68,4 @@ ASSetPropFlags(_loc1,null,1);
 _loc1._sTitle = "";
 _loc1._eaDataProvider = "";
 _global.dofus["\r\x14"].gapi.ui["\r\x1c"].GameResultTeamLight.CLASS_NAME = "GameResultTeamLight";
+#endinitclip

@@ -1,3 +1,4 @@
+#initclip 138
 if(!dofus)
 {
    _global.dofus = new Object();
@@ -34,3 +35,4 @@ _loc1.addProperty("currentStatus",_loc1.__get__currentStatus,_loc1.__set__curren
 _loc1._bActive = false;
 _loc1._sCurrentStatus = "";
 ASSetPropFlags(_loc1,null,1);
+#endinitclip

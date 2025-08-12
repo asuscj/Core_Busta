@@ -1,3 +1,4 @@
+#initclip 10
 if(!dofus)
 {
    _global.dofus = new Object();
@@ -58,3 +59,4 @@ loc1.addProperty("list",function()
 }
 ,_loc1.__set__list);
 ASSetPropFlags(_loc1,null,1);
+#endinitclip

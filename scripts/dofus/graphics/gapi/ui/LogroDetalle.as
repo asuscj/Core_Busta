@@ -1,3 +1,4 @@
+#initclip 35
 if(!dofus)
 {
    _global.dofus = new Object();
@@ -129,3 +130,4 @@ _loc1._tiene = Number(0);
 _loc1._necesita = Number(0);
 ASSetPropFlags(_loc1,null,1);
 _global.dofus["\r\x14"].gapi.ui.LogroDetalle.CLASS_NAME = "LogroDetalle";
+#endinitclip

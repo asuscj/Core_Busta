@@ -1,3 +1,4 @@
+#initclip 84
 var _loc1 = dofus["\r\x14"].gapi.ui.Spells.prototype;
 _loc1.init = function()
 {
@@ -11,3 +12,4 @@ _loc1.init = function()
          this.gapi.getUIComponent("Banner").shortcuts.setCurrentTab("Spells");
    }
 };
+#endinitclip

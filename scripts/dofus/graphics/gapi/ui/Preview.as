@@ -1,3 +1,4 @@
+#initclip 45
 if(!dofus)
 {
    _global.dofus = new Object();
@@ -143,6 +144,7 @@ _loc1.showMyself = function()
    var _loc5_;
    var _loc9_;
    var _loc7_;
+
    if(_loc20_)
    {
       _loc5_ = this.api.datacenter.Player.mount;
@@ -193,3 +195,4 @@ _loc1.sItems = 0;
 _loc1.tipo = 0;
 ASSetPropFlags(_loc1,null,1);
 _global.dofus["\r\x14"].gapi.ui.Preview.CLASS_NAME = "Preview";
+#endinitclip

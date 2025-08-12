@@ -1,3 +1,4 @@
+#initclip 79
 dofus.datacenter["\x1e\x0b\x01"] = function(id, color, value, selected, param)
 {
    this.api = _global.API;
@@ -77,3 +78,4 @@ _loc1.addProperty("value",_loc1.__get__value,_loc1.__set__value);
 _loc1.addProperty("id",_loc1.__get__id,_loc1.__set__id);
 _loc1.addProperty("selected",_loc1.__get__selected,_loc1.__set__selected);
 ASSetPropFlags(_loc1,null,1);
+#endinitclip

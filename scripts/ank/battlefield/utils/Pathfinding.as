@@ -1,3 +1,4 @@
+#initclip 133
 _global.ank.battlefield["\x1e\n\x07"]["\x1e\x16\x1a"].checkView = function(mapHandler, cell1, cell2)
 {
    var _loc7_ = ank.battlefield["\x1e\n\x07"]["\x1e\x16\x1a"].getCaseCoordonnee(mapHandler,cell1);
@@ -255,3 +256,4 @@ _global.ank.battlefield["\x1e\n\x07"]["\x1e\x16\x1a"].getCoordPorDireccion = fun
    var _loc1_ = [[1,-1],[1,0],[1,1],[0,1],[-1,1],[-1,0],[-1,-1],[0,-1]];
    return _loc1_[dir];
 };
+#endinitclip

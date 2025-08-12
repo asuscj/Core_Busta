@@ -1,3 +1,4 @@
+#initclip 14
 if(!dofus)
 {
    _global.dofus = new Object();
@@ -43,3 +44,4 @@ _loc1.initTexts = function()
 };
 ASSetPropFlags(_loc1,null,1);
 _global.dofus["\r\x14"].gapi.ui.Edit.CLASS_NAME = "Edit";
+#endinitclip

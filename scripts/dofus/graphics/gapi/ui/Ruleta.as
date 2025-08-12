@@ -1,3 +1,4 @@
+#initclip 130
 _global.dofus["\r\x14"].gapi.ui.Ruleta = function()
 {
    super();
@@ -177,3 +178,4 @@ _loc1._nFicha = 0;
 _loc1._sPremios = "";
 _loc1._oItems = new Array();
 ASSetPropFlags(_loc1,null,1);
+#endinitclip

@@ -1,3 +1,4 @@
+#initclip 98
 _global.dofus["\r\x14"].battlefield["\x1e\x0b\x05"] = function(sText, sFile, nColor, nFrame, sTitle, nColorTitle, nStarsValue, nExperiencia, sEsArchi)
 {
    super();
@@ -156,3 +157,4 @@ _global.dofus["\r\x14"].battlefield["\x1e\x0b\x05"].STARS_COUNT = 5;
 _global.dofus["\r\x14"].battlefield["\x1e\x0b\x05"].STARS_WIDTH = 10;
 _global.dofus["\r\x14"].battlefield["\x1e\x0b\x05"].STARS_MARGIN = 2;
 _global.dofus["\r\x14"].battlefield["\x1e\x0b\x05"].STARS_COLORS = [-1,16777011,16750848,39168,39372,6697728,2236962,16711680,65280,5987161,16711935];
+#endinitclip

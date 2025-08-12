@@ -1,3 +1,4 @@
+#initclip 147
 var _loc1 = ank.gapi.controls.Loader.prototype;
 _loc1.__get__tempVars = function()
 {
@@ -37,3 +38,4 @@ _loc1.load = function()
    }
 };
 _loc1.addProperty("tempVars",_loc1.__get__tempVars,_loc1.__set__tempVars);
+#endinitclip

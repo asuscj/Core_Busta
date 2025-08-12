@@ -1,3 +1,4 @@
+#initclip 61
 var _loc1 = dofus["\r\x14"].gapi.ui.Exchange.prototype;
 var interval;
 var list = "";
@@ -427,3 +428,4 @@ _loc1.addProperty("min",function()
 }
 ,_loc1.__set__Min);
 ASSetPropFlags(_loc1,null,1);
+#endinitclip

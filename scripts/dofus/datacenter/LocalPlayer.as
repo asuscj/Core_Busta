@@ -1,3 +1,4 @@
+#initclip 90
 var _loc1 = dofus.datacenter["\x0b\r"].prototype;
 _loc1.__set__ogrine = function(bOgrine)
 {
@@ -232,3 +233,4 @@ _loc1.removeSet = function(nID)
 _loc1.addProperty("huntMatchmakingStatus",_loc1.__get__huntMatchmakingStatus,_loc1.__set__huntMatchmakingStatus);
 _loc1.addProperty("isMule",_loc1.__get__mule,_loc1.__set__mule);
 _loc1.addProperty("Ogrine",_loc1.__get__ogrine,_loc1.__set__ogrine);
+#endinitclip

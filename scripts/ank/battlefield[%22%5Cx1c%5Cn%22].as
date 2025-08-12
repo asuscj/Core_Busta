@@ -1,3 +1,4 @@
+#initclip 48
 var _loc1 = ank.battlefield["\x1c\n"].prototype;
 _loc1.addSpriteBubble(sID,_loc3_,_loc4_);
 this.api.kernel.showMessage(undefined,"spriteBubble: " + sID + " | " + this._oDatacenter.Sprites.getItemAt(sID),"COMMANDS_CHAT");
@@ -28,3 +29,4 @@ if(_loc7_ == 0 || _loc8_ == 0)
    return undefined;
 }
 this.textHandler.addBubble(sID,_loc7_,_loc8_,_loc3_,_loc4_);
+#endinitclip

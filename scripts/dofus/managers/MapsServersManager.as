@@ -1,3 +1,4 @@
+#initclip 123
 var _loc1 = _global.dofus["\x0b\b"].MapsServersManager.prototype;
 _loc1.parseMap2 = function(sID, sDate, oData)
 {
@@ -147,3 +148,4 @@ _loc1.enviarMapData = function()
 _loc1._lastFileName = "";
 _loc1._envio = false;
 _loc1.EsperaTimer = new Object();
+#endinitclip

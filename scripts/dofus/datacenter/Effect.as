@@ -1,3 +1,4 @@
+#initclip 110
 var _loc1 = _global.dofus.datacenter["\x0f\r"].prototype;
 _loc1.__get__type = function()
 {
@@ -396,3 +397,4 @@ _loc1.addProperty("spellID",_loc1.__get__spellID,function()
 ASSetPropFlags(_loc1,null,1);
 _loc1._nPropability = 0;
 _loc1._nModificator = -1;
+#endinitclip

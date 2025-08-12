@@ -1,3 +1,4 @@
+#initclip 24
 if(!dofus)
 {
    _global.dofus = new Object();
@@ -81,3 +82,4 @@ _loc1.updateData = function()
    this._lstLogs.dataProvider = _loc7_;
 };
 _global.dofus["\r\x14"].gapi.controls.GuildBoostsHistoryRankViewer.CLASS_NAME = "GuildBoostsHistoryRankViewer";
+#endinitclip

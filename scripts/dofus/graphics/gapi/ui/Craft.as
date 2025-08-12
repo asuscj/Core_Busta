@@ -1,3 +1,4 @@
+#initclip 144
 var _loc1 = dofus["\r\x14"].gapi.ui.Craft.prototype;
 _loc1.addListeners = function()
 {
@@ -340,3 +341,4 @@ _loc1.setReady = function()
    }
    this.api.network.Exchange.repeatCraft(1);
 };
+#endinitclip

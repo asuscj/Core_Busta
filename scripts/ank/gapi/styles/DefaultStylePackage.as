@@ -1,3 +1,4 @@
+#initclip 69
 if(!ank)
 {
    _global.ank = new Object();
@@ -263,3 +264,4 @@ _global.ank.gapi.styles["\x11\x06"].GuildNotesTextArea = {font:"Verdana",embedfo
 _global.ank.gapi.styles["\x11\x06"].GuildInformationsTextArea = {font:"verdana",embedfonts:false,align:"left",size:10,color:5327420,scrollbarstyle:"BrownScrollBar"};
 _global.ank.gapi.styles["\x11\x06"].WhiteRightMediumTextArea = {font:"verdana",embedfonts:false,align:"right",size:10,color:16777215,scrollbarstyle:"BrownScrollBar"};
 _global.ank.gapi.styles["\x11\x06"].BrownCenterVeryExtraSmallBoldLabel = {labelfont:"Font2",labelembedfonts:true,labelalign:"center",labelsize:8,labelcolor:5327420,labelbold:false,labelitalic:false};
+#endinitclip

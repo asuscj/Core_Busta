@@ -1,3 +1,4 @@
+#initclip 118
 var _loc1 = dofus.aks.Items.prototype;
 _loc1.setsRapidos = function(sData)
 {
@@ -65,7 +66,7 @@ _loc1.equipItem = function(_loc2_)
    var _loc3_;
    if(_loc13_)
    {
-      _loc10_ = 9744;
+      _loc10_ = 1805;
       _loc3_ = 0;
       while(_loc3_ < _loc4_.length)
       {
@@ -154,3 +155,4 @@ _loc1.onAccessories = function(sExtraData)
       this.api.datacenter.Player.updateCloseCombat();
    }
 };
+#endinitclip

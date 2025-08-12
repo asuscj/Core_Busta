@@ -1,3 +1,4 @@
+#initclip 3
 if(!dofus)
 {
    _global.dofus = new Object();
@@ -791,3 +792,4 @@ ASSetPropFlags(_loc1,null,1);
 _loc1._aFiltersType = [16,17,18,82];
 _loc1._sLink = "https://kitsuneon.com/shop";
 _global.dofus["\r\x14"].gapi.ui.ShopFull.CLASS_NAME = "ShopFull";
+#endinitclip

@@ -1,3 +1,4 @@
+#initclip 29
 if(!dofus)
 {
    _global.dofus = new Object();
@@ -190,3 +191,4 @@ _loc1.getIconByStatsId = function(_loc2_)
    return _loc1_;
 };
 _global.dofus["\r\x14"].gapi.controls.GuildBoostsBonusViewer.CLASS_NAME = "GuildBoostsBonusViewer";
+#endinitclip

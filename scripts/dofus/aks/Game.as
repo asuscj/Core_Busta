@@ -1,11 +1,12 @@
+#initclip 120
 var _loc1 = _global.dofus.aks.Game.prototype;
-_loc1.getRankHistoryInfo = function()
-{
-   this.aks.send("gZ",false);
+
+_loc1.getRankHistoryInfo = function() {
+    this.aks.send("gZ",false);
 };
-_loc1.getInformationsGuild = function()
-{
-   this.aks.send("gII",true);
+
+_loc1.getInformationsGuild = function() {
+    this.aks.send("gII",true);
 };
 _loc1.setRankHistory = function(_loc2_)
 {
@@ -521,46 +522,35 @@ _loc1.hunterMatchmakingUnregister = function()
 {
    this.api.network.send("Ghu");
 };
-_loc1.triggerCellFightPos = function(CFP)
-{
-   if(CFP.length < 2)
-   {
-      this.api.kernel.showMessage(undefined,"Pas de cellules de combat sur cette carte.","INFO_CHAT");
-      return undefined;
-   }
-   var _loc8_ = CFP.split("|");
-   var _loc7_ = _loc8_[0];
-   var _loc6_ = _loc8_[1];
-   this.api.datacenter.Basics.aks_team1_starts = new Array();
-   this.api.datacenter.Basics.aks_team2_starts = new Array();
-   var _loc5_ = -2;
-   var _loc3_;
-   while(true)
-   {
-      _loc5_ += 2;
-      if(_loc5_ >= _loc7_.length)
-      {
-         break;
-      }
-      _loc3_ = ank["\x1e\n\x07"]["\x12\r"].decode64(_loc7_.charAt(_loc5_)) << 6;
-      _loc3_ += ank["\x1e\n\x07"]["\x12\r"].decode64(_loc7_.charAt(_loc5_ + 1));
-      this.api.datacenter.Basics.aks_team1_starts.push(_loc3_);
-      this.api.gfx.select(_loc3_,dofus.Constants.TEAMS_COLOR[0],"startPosition");
-   }
-   var _loc4_ = -2;
-   var _loc2_;
-   while(true)
-   {
-      _loc4_ += 2;
-      if(_loc4_ >= _loc6_.length)
-      {
-         break;
-      }
-      _loc2_ = ank["\x1e\n\x07"]["\x12\r"].decode64(_loc6_.charAt(_loc4_)) << 6;
-      _loc2_ += ank["\x1e\n\x07"]["\x12\r"].decode64(_loc6_.charAt(_loc4_ + 1));
-      this.api.datacenter.Basics.aks_team2_starts.push(_loc2_);
-      this.api.gfx.select(_loc2_,dofus.Constants.TEAMS_COLOR[1],"startPosition");
-   }
+_loc1.triggerCellFightPos = function(CFP) {
+    if(CFP.length < 2)
+    {
+        this.api.kernel.showMessage(undefined,"Pas de cellules de combat sur cette carte.","INFO_CHAT");
+        return undefined;
+    }
+    var _loc8_ = CFP.split("|");
+    var _loc7_ = _loc8_[0];
+    var _loc6_ = _loc8_[1];
+    this.api.datacenter.Basics.aks_team1_starts = new Array();
+    this.api.datacenter.Basics.aks_team2_starts = new Array();
+
+    // BUCLE CORREGIDO
+    for(var _loc5_ = 0; _loc5_ < _loc7_.length; _loc5_ += 2)
+    {
+        var _loc3_ = ank["\x1e\n\x07"]["\x12\r"].decode64(_loc7_.charAt(_loc5_)) << 6;
+        _loc3_ += ank["\x1e\n\x07"]["\x12\r"].decode64(_loc7_.charAt(_loc5_ + 1));
+        this.api.datacenter.Basics.aks_team1_starts.push(_loc3_);
+        this.api.gfx.select(_loc3_,dofus.Constants.TEAMS_COLOR[0],"startPosition");
+    }
+
+    // BUCLE CORREGIDO
+    for(var _loc4_ = 0; _loc4_ < _loc6_.length; _loc4_ += 2)
+    {
+        var _loc2_ = ank["\x1e\n\x07"]["\x12\r"].decode64(_loc6_.charAt(_loc4_)) << 6;
+        _loc2_ += ank["\x1e\n\x07"]["\x12\r"].decode64(_loc6_.charAt(_loc4_ + 1));
+        this.api.datacenter.Basics.aks_team2_starts.push(_loc2_);
+        this.api.gfx.select(_loc2_,dofus.Constants.TEAMS_COLOR[1],"startPosition");
+    }
 };
 _loc1.onZoneData = function(sExtraData)
 {
@@ -692,43 +682,42 @@ _loc1.onTurnUpdate = function(sExtraData)
       _loc4_ += 1;
    }
 };
-_loc1.onMapData = function(sExtraData)
-{
-   var _loc3_ = sExtraData.split("|");
-   var _loc5_ = _loc3_[0];
-   var _loc6_ = _loc3_[1];
-   var _loc7_ = _loc3_[2];
-   if(Number(_loc5_) == this.api.datacenter.Map.id)
-   {
-      if(!this.api.datacenter.Map.bOutdoor)
-      {
-         this.api.kernel.NightManager.noEffects();
-      }
-      this.api.gfx.onMapLoaded();
-      return undefined;
-   }
-   this.api.gfx.showContainer(false);
-   this.nLastMapIdReceived = _global.parseInt(_loc5_,10);
-   var _loc4_;
-   if(_loc3_.length > 3)
-   {
-      _loc4_ = new Object();
-      _loc4_.id = _loc5_;
-      _loc4_.date = _loc6_;
-      _loc4_.width = Number(_loc3_[3]);
-      _loc4_.height = Number(_loc3_[4]);
-      _loc4_.backgroundNum = Number(_loc3_[5]);
-      _loc4_.musicId = Number(_loc3_[6]);
-      _loc4_.ambianceId = Number(_loc3_[7]);
-      _loc4_.bOutdoor = _loc3_[8];
-      _loc4_.capabilities = Number(_loc3_[9]);
-      _loc4_.mapData = _loc3_[10];
-      if(_loc3_[11] == undefined || _loc3_[11] != "1")
-      {
-         _loc4_;
-      }
-   }
-   this.api.kernel.MapsServersManager.parseMap2(_loc5_,_loc6_,_loc4_);
+_loc1.onMapData = function(sExtraData) {
+    var _loc3_ = sExtraData.split("|");
+    var _loc5_ = _loc3_[0];
+    var _loc6_ = _loc3_[1];
+    var _loc7_ = _loc3_[2];
+    if(Number(_loc5_) == this.api.datacenter.Map.id)
+    {
+        if(!this.api.datacenter.Map.bOutdoor)
+        {
+            this.api.kernel.NightManager.noEffects();
+        }
+        this.api.gfx.onMapLoaded();
+        return undefined;
+    }
+    this.api.gfx.showContainer(false);
+    this.nLastMapIdReceived = _global.parseInt(_loc5_,10);
+    var _loc4_;
+    if(_loc3_.length > 3)
+    {
+        _loc4_ = new Object();
+        _loc4_.id = _loc5_;
+        _loc4_.date = _loc6_;
+        _loc4_.width = Number(_loc3_[3]);
+        _loc4_.height = Number(_loc3_[4]);
+        _loc4_.backgroundNum = Number(_loc3_[5]);
+        _loc4_.musicId = Number(_loc3_[6]);
+        _loc4_.ambianceId = Number(_loc3_[7]);
+        _loc4_.bOutdoor = _loc3_[8];
+        _loc4_.capabilities = Number(_loc3_[9]);
+        _loc4_.mapData = _loc3_[10];
+        if(_loc3_[11] == undefined || _loc3_[11] != "1")
+        {
+            _loc4_;
+        }
+    }
+    this.api.kernel.MapsServersManager.parseMap2(_loc5_,_loc6_,_loc4_);
 };
 _loc1.onMovement = function(sExtraData, bIsSummoned)
 {
@@ -817,29 +806,27 @@ _loc1.onMovement = function(sExtraData, bIsSummoned)
    var _loc29_;
    var _loc81_;
    var _loc82_;
-   for(; _loc55_ < _loc87_.length; _loc55_ = _loc55_ + 1)
-   {
-      _loc46_ = _loc87_[_loc55_];
-      if(_loc46_.length != 0)
-      {
-         _loc56_ = false;
-         _loc37_ = false;
-         _loc57_ = _loc46_.charAt(0);
-         if(_loc57_ == "+")
-         {
-            _loc37_ = true;
-         }
-         else if(_loc57_ == "~")
-         {
-            _loc37_ = true;
-            _loc56_ = true;
-         }
-         else if(_loc57_ != "-")
-         {
-            continue;
-         }
-         if(_loc37_)
-         {
+   for(var _loc55_ = 0; _loc55_ < _loc87_.length; _loc55_++)
+    {
+        var _loc46_ = _loc87_[_loc55_];
+        if(_loc46_.length != 0)
+        {
+            var _loc37_ = false;
+            var _loc57_ = _loc46_.charAt(0);
+            if(_loc57_ == "+")
+            {
+                _loc37_ = true;
+            }
+            else if(_loc57_ == "~")
+            {
+                _loc37_ = true;
+            }
+            else if(_loc57_ != "-")
+            {
+                continue;
+            }
+            if(_loc37_)
+            {
             _loc3_ = _loc46_.substr(1).split(";");
             _loc24_ = _loc3_[0];
             _loc27_ = _loc3_[1];
@@ -905,12 +892,11 @@ _loc1.onMovement = function(sExtraData, bIsSummoned)
                _loc11_ = this.api.datacenter.Sprites.getItemAt(_loc8_);
                this.onSpriteMovement(false,_loc11_);
             }
-            loop3:
             switch(_loc19_)
             {
-               case "-1":
-               case "-2":
-                  _loc7_ = new Object();
+                    case "-1":
+                    case "-2":
+                  var _loc7_ = new Object();
                   _loc7_.spriteType = _loc19_;
                   _loc7_.gfxID = _loc23_;
                   _loc7_.scaleX = _loc21_;
@@ -953,7 +939,7 @@ _loc1.onMovement = function(sExtraData, bIsSummoned)
                   }
                   break;
                case "-3":
-                  _loc5_ = new Object();
+                  var _loc5_ = new Object();
                   _loc5_.spriteType = _loc19_;
                   _loc5_.level = _loc3_[7];
                   _loc5_.scaleX = _loc21_;
@@ -976,9 +962,8 @@ _loc1.onMovement = function(sExtraData, bIsSummoned)
                   _loc11_.isClear = false;
                   if(this.api.kernel.OptionsManager.getOption("ViewAllMonsterInGroup") == true)
                   {
-                     _loc74_ = _loc8_;
-                     _loc9_ = 1;
-                     while(_loc9_ < _loc33_.length)
+                     var _loc74_ = _loc8_;
+                     for(var _loc9_ = 1; _loc9_ < _loc33_.length; _loc9_++)
                      {
                         if(_loc33_[_loc9_] != "")
                         {
@@ -1145,7 +1130,7 @@ _loc1.onMovement = function(sExtraData, bIsSummoned)
                   _loc11_ = this.api.kernel.CharactersManager.createPrism(_loc8_,_loc15_,_loc26_);
                   break;
                default:
-                  _loc4_ = new Object();
+                  var _loc4_ = new Object();
                   _loc4_.spriteType = _loc19_;
                   _loc4_.cell = _loc24_;
                   _loc4_.scaleX = _loc21_;
@@ -1309,68 +1294,62 @@ _loc1.onMovement = function(sExtraData, bIsSummoned)
                   _loc4_.title = _loc79_;
                   _loc4_.title2 = _loc83_;
                   _loc11_ = this.api.kernel.CharactersManager.createCharacter(_loc8_,_loc15_,_loc4_);
-                  _loc11_.isClear = false;
-                  _loc11_.allowGhostMode = _loc71_;
-                  _loc53_ = _loc8_;
-                  _loc35_ = _loc45_.shape != "circle" ? 2 : 0;
-                  _loc16_ = 0;
-                  while(true)
-                  {
-                     _loc16_ = _loc16_ + 1;
-                     if(_loc16_ >= _loc34_.length)
-                     {
-                        break loop3;
-                     }
-                     if(_loc34_[_loc16_] != "")
-                     {
-                        _loc28_ = _loc8_ + "_" + _loc16_;
-                        _loc18_ = new Object();
-                        this.splitGfxForScale(_loc34_[_loc16_],_loc18_);
-                        _loc29_ = new ank.battlefield.datacenter["\x1e\x0e\x10"](_loc28_,ank.battlefield.mc["\x1e\x0e\x10"],dofus.Constants.CLIPS_PERSOS_PATH + _loc18_.gfxID + ".swf");
-                        _loc29_.allDirections = false;
-                        this.api.gfx.addLinkedSprite(_loc28_,_loc53_,_loc35_,_loc29_);
-                        if(!_global.isNaN(_loc18_.scaleX))
-                        {
-                           this.api.gfx.setSpriteScale(_loc29_.id,_loc18_.scaleX,_loc18_.scaleY);
-                        }
-                        switch(_loc45_.shape)
-                        {
-                           case "circle":
-                              _loc35_ = _loc16_;
-                              break;
-                           case "line":
-                              _loc53_ = _loc28_;
-                              _loc35_ = 2;
-                        }
-                     }
-                  }
+        _loc11_.isClear = false;
+        _loc11_.allowGhostMode = _loc71_;
+        _loc53_ = _loc8_;
+        _loc35_ = _loc45_.shape != "circle" ? 2 : 0;
+
+        // BUCLE RECONSTRUIDO CORRECTAMENTE
+        for(var _loc16_ = 1; _loc16_ < _loc34_.length; _loc16_++)
+        {
+            if(_loc34_[_loc16_] != "")
+            {
+                var _loc28_ = _loc8_ + "_" + _loc16_;
+                var _loc18_ = new Object();
+                this.splitGfxForScale(_loc34_[_loc16_],_loc18_);
+                var _loc29_ = new ank.battlefield.datacenter["\x1e\x0e\x10"](_loc28_,ank.battlefield.mc["\x1e\x0e\x10"],dofus.Constants.CLIPS_PERSOS_PATH + _loc18_.gfxID + ".swf");
+                _loc29_.allDirections = false;
+                this.api.gfx.addLinkedSprite(_loc28_,_loc53_,_loc35_,_loc29_);
+                if(!_global.isNaN(_loc18_.scaleX))
+                {
+                    this.api.gfx.setSpriteScale(_loc29_.id,_loc18_.scaleX,_loc18_.scaleY);
+                }
+                switch(_loc45_.shape)
+                {
+                    case "circle":
+                        _loc35_ = _loc16_;
+                        break;
+                    case "line":
+                        _loc53_ = _loc28_;
+                        _loc35_ = 2;
+                }
             }
-            this.onSpriteMovement(_loc37_,_loc11_,_loc86_);
-         }
-         else
-         {
-            _loc81_ = _loc46_.substr(1);
-            _loc82_ = this.api.datacenter.Sprites.getItemAt(_loc81_);
-            this.onSpriteMovement(_loc37_,_loc82_);
-         }
-      }
-   }
-};
-_loc1.onSpriteMovement = function(_loc2_, oSprite, _loc4_)
+        }
+    } // Cierre del if(this.api.datacenter.Game.isFight)
+    
+    this.onSpriteMovement(_loc37_,_loc11_,_loc86_);
+}
+else
 {
-   if(oSprite instanceof dofus.datacenter["\x13\x01"])
-   {
-      this.api.datacenter.Game.playerCount += _loc2_ ? 1 : -1;
-   }
-   var _loc4_;
-   var _loc5_;
-   if(_loc2_)
-   {
-      if(_loc4_ != undefined)
-      {
-         this.api.gfx.spriteLaunchVisualEffect.apply(this.api.gfx,_loc4_);
-      }
-      this.api.gfx.addSprite(oSprite.id);
+    var _loc81_ = _loc46_.substr(1);
+    var _loc82_ = this.api.datacenter.Sprites.getItemAt(_loc81_);
+    this.onSpriteMovement(false, _loc82_);
+            }
+        }
+    }
+};
+_loc1.onSpriteMovement = function(_loc2_, oSprite, _loc4_) {
+    if(oSprite instanceof dofus.datacenter["\x13\x01"])
+    {
+        this.api.datacenter.Game.playerCount += _loc2_ ? 1 : -1;
+    }
+    if(_loc2_)
+    {
+        if(_loc4_ != undefined)
+        {
+            this.api.gfx.spriteLaunchVisualEffect.apply(this.api.gfx,_loc4_);
+        }
+        this.api.gfx.addSprite(oSprite.id);
       if(!_global.isNaN(oSprite.scaleX))
       {
          this.api.gfx.setSpriteScale(oSprite.id,oSprite.scaleX,oSprite.scaleY);
@@ -1753,3 +1732,4 @@ _loc1.onFrameObject2 = function(sExtraData)
    }
 };
 _loc1.bSubareaHasWhiteFloor = false;
+#endinitclip

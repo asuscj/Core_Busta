@@ -1,3 +1,4 @@
+#initclip 150
 if(!dofus)
 {
    _global.dofus = new Object();
@@ -52,3 +53,4 @@ _loc1.onUseError = function()
    this.api.kernel.showMessage(undefined,this.api.lang.getText("CANT_USE_WAYPOINT"),"ERROR_CHAT");
 };
 ASSetPropFlags(_loc1,null,1);
+#endinitclip

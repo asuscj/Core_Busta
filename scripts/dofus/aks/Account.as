@@ -1,3 +1,4 @@
+#initclip 76
 var _loc1 = _global.dofus.aks.Account.prototype;
 _loc1.onCharacterAdd = function(_loc2_, _loc3_)
 {
@@ -676,3 +677,4 @@ _loc1.onRegionalVersion = function(_loc2_)
    this.getCharacters();
    this.api.network.Account.getQueuePosition();
 };
+#endinitclip

@@ -1,3 +1,4 @@
+#initclip 113
 _global.dofus["\r\x14"].gapi.ui.CambiarEmblema = function()
 {
    super();
@@ -182,3 +183,4 @@ _global.dofus["\r\x14"].gapi.ui.CambiarEmblema.CLASS_NAME = "CambiarEmblema";
 _loc1._nBackColor = 14933949;
 _loc1._nUpColor = 0;
 _loc1._sCurrentTab = "Back";
+#endinitclip

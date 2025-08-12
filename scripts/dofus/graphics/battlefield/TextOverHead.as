@@ -1,3 +1,4 @@
+#initclip 66
 if(!dofus)
 {
    _global.dofus = new Object();
@@ -86,6 +87,7 @@ _loc1.draw = function(sText, sFile, nColor, nFrame, nPvpGain, title, sFile2, nOr
          _loc3_ = Math.ceil(this._txtText.textHeight + this._txtTitle2.textHeight + this._txtTitle.textHeight + _global.palmad.dofus.graphics.battlefield.AbstractTextOverHead.HEIGHT_SPACER * 3);
          _loc4_ = Math.ceil(Math.max(Math.max(this._txtText.textWidth,this._txtTitle.textWidth),this._txtTitle2.textWidth) + _global.palmad.dofus.graphics.battlefield.AbstractTextOverHead.WIDTH_SPACER * 2);
       }
+
       else
       {
          this._txtTitle._y = this._txtText._y + _global.palmad.dofus.graphics.battlefield.AbstractTextOverHead.HEIGHT_SPACER + this._txtText.textHeight;
@@ -119,3 +121,4 @@ _loc1.draw = function(sText, sFile, nColor, nFrame, nPvpGain, title, sFile2, nOr
    }
 };
 ASSetPropFlags(_loc1,null,1);
+#endinitclip

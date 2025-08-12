@@ -1,3 +1,4 @@
+#initclip 114
 var _loc1 = _global.dofus["\r\x14"].gapi.ui.Inventory.prototype;
 _loc1.init = function()
 {
@@ -896,3 +897,4 @@ _loc1.actualizarTokens = function(nValue)
 _loc1._nTokens = 0;
 _loc1._oSet = undefined;
 _loc1._nIcono = 1;
+#endinitclip

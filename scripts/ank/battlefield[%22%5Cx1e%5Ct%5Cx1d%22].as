@@ -1,3 +1,4 @@
+#initclip 104
 var _loc1 = ank.battlefield["\x1e\t\x1d"].prototype;
 loc1.onLoadInit(_loc2_);
 var _loc3_ = _loc2_._parent.sprite;
@@ -161,3 +162,4 @@ switch(displayType)
       _loc2_.cellFrom = _loc12_;
       _loc2_.cellTo = _loc13_;
 }
+#endinitclip

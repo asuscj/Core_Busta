@@ -1,3 +1,4 @@
+#initclip 145
 _global.dofus["\r\x14"].gapi.ui.SpawnMobs = function()
 {
    super();
@@ -406,3 +407,4 @@ _loc1.onShortcut = function(sShortcut)
 _loc1._cSprite;
 ASSetPropFlags(_loc1,null,1);
 _global.dofus["\r\x14"].gapi.ui.SpawnMobs.CLASS_NAME = "SpawnMobs";
+#endinitclip

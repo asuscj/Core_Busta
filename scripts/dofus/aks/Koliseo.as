@@ -1,3 +1,4 @@
+#initclip 102
 if(!dofus)
 {
    _global.dofus = new Object();
@@ -266,3 +267,4 @@ _loc1.ignore = function(oEvent)
    }
 };
 ASSetPropFlags(_loc1,null,1);
+#endinitclip

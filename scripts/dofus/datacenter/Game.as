@@ -1,3 +1,4 @@
+#initclip 132
 var _loc1 = dofus.datacenter.Game.prototype;
 _loc1.addSprite = function(nID)
 {
@@ -41,3 +42,4 @@ _loc1.setInteractionType = function(sType)
    }
 };
 _loc1.arraySprites = new Array();
+#endinitclip

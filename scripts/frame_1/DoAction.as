@@ -973,7 +973,6 @@ _loc1.drawZone = function(nCellNum, radiusIn, radiusOut, layer, col, shape)
    var _loc34_;
    var _loc35_;
    var _loc24_;
-   loop8:
    switch(shape)
    {
       case "D":
@@ -1001,7 +1000,7 @@ _loc1.drawZone = function(nCellNum, radiusIn, radiusOut, layer, col, shape)
          }
          else
          {
-            _loc37_ = radiusIn;
+            var _loc37_ = radiusIn;
             if(radiusIn > 0)
             {
                _loc37_ = radiusIn - 1;
@@ -1054,18 +1053,13 @@ _loc1.drawZone = function(nCellNum, radiusIn, radiusOut, layer, col, shape)
          }
          break;
       default:
-         _loc20_.drawCircle(radiusOut,col,nCellNum);
-         _loc3_ = radiusIn;
-         while(true)
-         {
-            if(_loc3_ > radiusOut)
-            {
-               break loop8;
-            }
+        _loc20_.drawCircle(radiusOut,col,nCellNum);
+        for(_loc3_ = radiusIn; _loc3_ <= radiusOut; _loc3_++)
+        {
             ank.battlefield["\x1e\n\x07"]["\x1e\x16\x1a"].getCeldasPorDistancia(this._mcBattlefield.mapHandler,nCellNum,_loc3_,_loc11_);
-            _loc3_ = _loc3_ + 1;
-         }
-   }
+        }
+        break;
+}
    var _loc12_ = new Object();
    var _loc9_;
    var _loc4_;
@@ -1121,6 +1115,7 @@ _loc1.drawZone = function(nCellNum, radiusIn, radiusOut, layer, col, shape)
                _loc6_.createEmptyMovieClip(layer,_loc6_.getNextHighestDepth());
             }
             _loc17_ = _loc6_[layer].attachMovie("20003","zone" + _loc21_,_loc21_,{data:{color:col,alpha:ank.battlefield.mc.Zone.ALPHA,bordes:_loc15_}});
+
             _loc17_._x = _loc9_.x;
             _loc17_._y = _loc9_.y;
          }
@@ -1672,6 +1667,7 @@ _loc1.__get__Placaje = function()
    return this._nPlacaje;
 };
 _loc1.__set__Placaje = function(value)
+
 {
    this._nPlacaje = Number(value);
 };

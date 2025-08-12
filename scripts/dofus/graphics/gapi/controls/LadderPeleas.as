@@ -1,3 +1,4 @@
+#initclip 11
 _global.dofus["\r\x14"].gapi.controls.LadderPeleas = function()
 {
    super();
@@ -44,3 +45,4 @@ _loc1.addProperty("list",function()
 ,_loc1.__set__list);
 _loc1.sPerso = 0;
 ASSetPropFlags(_loc1,null,1);
+#endinitclip

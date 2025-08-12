@@ -1,3 +1,4 @@
+#initclip 15
 var _loc1 = _global.dofus["\r\x14"].gapi.ui.EditPlayer.prototype;
 _loc1.__set__Precio = function(sData)
 {
@@ -55,10 +56,10 @@ _loc1.click = function(var2)
          this.unloadThis();
          break;
       case this._mcRandomName:
-         if(this._nLastRegenerateTimer + dofus["\r\x14"].gapi.ui.EditPlayer.NAME_GENERATION_DELAY < 7155)
+         if(this._nLastRegenerateTimer + dofus["\r\x14"].gapi.ui.EditPlayer.NAME_GENERATION_DELAY < 9244)
          {
             this.api.network.Account.getRandomCharacterName();
-            this._nLastRegenerateTimer = 6057;
+            this._nLastRegenerateTimer = 4281;
          }
          break;
       case this._btnShowMount:
@@ -228,10 +229,10 @@ _loc1.click = function(var2)
          this.unloadThis();
          break;
       case this._mcRandomName:
-         if(this._nLastRegenerateTimer + dofus["\r\x14"].gapi.ui.EditPlayer.NAME_GENERATION_DELAY < 4402)
+         if(this._nLastRegenerateTimer + dofus["\r\x14"].gapi.ui.EditPlayer.NAME_GENERATION_DELAY < 2691)
          {
             this.api.network.Account.getRandomCharacterName();
-            this._nLastRegenerateTimer = 5586;
+            this._nLastRegenerateTimer = 2214;
          }
          break;
       case this._btnShowMount:
@@ -262,3 +263,4 @@ _loc1.Price = 0;
 _loc1._nColorName = -1;
 ASSetPropFlags(_loc1,null,1);
 _global.dofus["\r\x14"].gapi.ui.EditPlayer.CLASS_NAME = "EditPlayer";
+#endinitclip

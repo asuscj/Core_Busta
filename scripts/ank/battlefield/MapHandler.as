@@ -1,3 +1,4 @@
+#initclip 80
 var _loc1 = _global.ank.battlefield["\x0b\x06"].prototype;
 _loc1.build = function(var2, var3, var4)
 {
@@ -693,3 +694,4 @@ _loc1.updateCell = function(nCellNum, oNewCell, sMaskHex, nPermanentLevel)
    this.build(this._oDatacenter.Map,nCellNum);
 };
 _loc1.bInteractive = false;
+#endinitclip

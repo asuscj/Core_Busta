@@ -1,3 +1,4 @@
+#initclip 111
 var _loc1 = _global.dofus.datacenter["\x1e\x15\x12"].prototype;
 _loc1.__get__rewards = function()
 {
@@ -101,3 +102,4 @@ _loc1.addProperty("rewards",_loc1.__get__rewards,function()
 {
 }
 );
+#endinitclip

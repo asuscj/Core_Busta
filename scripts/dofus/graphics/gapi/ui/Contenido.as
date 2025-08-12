@@ -1,3 +1,4 @@
+#initclip 139
 if(!dofus)
 {
    _global.dofus = new Object();
@@ -161,3 +162,4 @@ _loc1.addProperty("datos",function()
 _loc1.sItemsPosibles = "";
 ASSetPropFlags(_loc1,null,1);
 _global.dofus["\r\x14"].gapi.ui.Contenido.CLASS_NAME = "Contenido";
+#endinitclip

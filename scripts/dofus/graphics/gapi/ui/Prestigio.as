@@ -1,3 +1,4 @@
+#initclip 87
 if(!dofus)
 {
    _global.dofus = new Object();
@@ -350,3 +351,4 @@ _loc1.addProperty("datos",function()
 _loc1._datos = "";
 ASSetPropFlags(_loc1,null,1);
 _global.dofus["\r\x14"].gapi.ui.Prestigio.CLASS_NAME = "Prestigio";
+#endinitclip

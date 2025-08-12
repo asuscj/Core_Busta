@@ -1,3 +1,4 @@
+#initclip 5
 if(!dofus)
 {
    _global.dofus = new Object();
@@ -78,3 +79,4 @@ _loc1.addProperty("taxt",function()
 _loc1._taxt = 0;
 ASSetPropFlags(_loc1,null,1);
 _global.dofus["\r\x14"].gapi.ui.HouseTaxt.CLASS_NAME = "HouseTaxt";
+#endinitclip

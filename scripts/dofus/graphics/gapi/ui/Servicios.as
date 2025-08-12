@@ -1,3 +1,4 @@
+#initclip 46
 if(!dofus["\r\x14"].gapi.ui)
 {
    _global.dofus["\r\x14"].gapi.ui = new Object();
@@ -128,3 +129,4 @@ _loc1._nOgrinas = 0;
 _loc1._nCreditos = 0;
 ASSetPropFlags(_loc1,null,1);
 _global.dofus["\r\x14"].gapi.ui.Servicios.CLASS_NAME = "Servicios";
+#endinitclip
