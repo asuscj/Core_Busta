@@ -43,10 +43,11 @@ Para compilar y usar este core, necesitarás tener instalado Adobe Flash CS6.
     ```
 
 4.  **Compila el Core:**
+    * Proximamente
     * En Flash CS6, ve a **Control -> Probar Película** (o presiona `Ctrl + Enter`).
     * Esto generará el archivo `core.swf` (o el nombre que tenga configurado) en la carpeta de destino.
 
-5.  **¡Listo!** Ya puedes usar el `core.swf` generado con tu emulador.
+6.  **¡Listo!** Ya puedes usar el `core.swf` generado con tu emulador.
 
 ---
 
