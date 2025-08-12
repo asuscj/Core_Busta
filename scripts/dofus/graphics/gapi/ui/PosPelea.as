@@ -100,8 +100,9 @@ _loc1.click = function(oEvent)
                     _global.COLOR_POS_PELEA = 4;
                     this.api.gfx.addPointerShape("C",0,65280,this.api.datacenter.Player.data.cellNum);
                     // Este break es para el caso del switch anidado,
-                    // y como es el último, no necesita un break para el switch principal.
+                    break;
             }
+            break;
     }
 };
 
