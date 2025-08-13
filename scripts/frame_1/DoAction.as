@@ -199,6 +199,7 @@ _global.dofus.Constants.getElementColorById = function(_loc2_)
          return undefined;
    }
 };
+      // Aqui se Generan los graficos de las tacticas
 _global.dofus.Constants.getTacticGfx = function(nSubarea, _loc3_)
 {
    var _loc3_ = String(nSubarea);

@@ -59,18 +59,29 @@ _loc1.initData = function()
 };
 _loc1.click = function(oEvent)
 {
-   switch(oEvent.target)
-   {
-      case this._btnOk:
-         if(this._cbReason.selectedItem.id <= 0)
-         {
-            this.api.kernel.showMessage(this.api.lang.getText("ERROR_WORD"),this.api.lang.getText("ERROR_MUST_SELECT_A_REASON"),"ERROR_BOX");
-            break;
-         }
-         this.api.network.send("ZRM" + this._cbReason.selectedItem.id + this.api.datacenter.Player.Name + "|" + this._itTitulo.text + "|" + this._itContenido.text);
-      case this._btnCancel:
-         this.gapi.unloadUIComponent("ReportBug");
-   }
+    switch(oEvent.target)
+    {
+        case this._btnOk:
+            // Si no se selecciona una razón, muestra un error y detente.
+            if(this._cbReason.selectedItem.id <= 0)
+            {
+                this.api.kernel.showMessage(this.api.lang.getText("ERROR_WORD"),this.api.lang.getText("ERROR_MUST_SELECT_A_REASON"),"ERROR_BOX");
+                break;
+            }
+            
+            // Envía el reporte.
+            this.api.network.send("ZRM" + this._cbReason.selectedItem.id + this.api.datacenter.Player.Name + "|" + this._itTitulo.text + "|" + this._itContenido.text);
+            
+            // Cierra la ventana explícitamente.
+            this.gapi.unloadUIComponent("ReportBug");
+            
+            // AHORA detén la ejecución.
+            break; 
+
+        case this._btnCancel:
+            this.gapi.unloadUIComponent("ReportBug");
+            break; 
+    }
 };
 ASSetPropFlags(_loc1,null,1);
 _global.dofus["\r\x14"].gapi.ui.ReportBug.CLASS_NAME = "ReportBug";

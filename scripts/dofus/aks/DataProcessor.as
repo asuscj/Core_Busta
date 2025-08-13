@@ -142,22 +142,18 @@ _loc1.postProcess = function(sType, sAction, bError, sData)
             case "I":
                _global.ITEMS_CREADOS = new Object();
                _loc15_ = sData.substr(2).split(",");
-               _loc22_ = 0;
-               while(_loc22_ < _loc15_.length)
-               {
-                  _global.ITEMS_CREADOS[_loc15_[_loc22_]] = true;
-                  _loc22_ += 1;
+               // se usa un bucle for
+               for (var i = 0; i < _loc15_.length; i++) {
+                   _global.ITEMS_CREADOS[_loc15_[i]] = true;
                }
                break;
-            case "i":
+           case "i":
                _global.CREA_TU_ITEM_PRECIOS = new Object();
                _loc15_ = sData.substr(2).split(";");
-               _loc10_ = 0;
-               while(_loc10_ < _loc15_.length)
-               {
-                  _loc7_ = _loc15_[_loc10_].split(",");
-                  _global.CREA_TU_ITEM_PRECIOS[Number(_loc7_[0])] = Number(_loc7_[1]);
-                  _loc10_ += 1;
+               // se usa un bucle for también.
+               for (var i = 0; i < _loc15_.length; i++) {
+                   _loc7_ = _loc15_[i].split(",");
+                   _global.CREA_TU_ITEM_PRECIOS[Number(_loc7_[0])] = Number(_loc7_[1]);
                }
                break;
             case "J":
@@ -1450,7 +1446,7 @@ _loc1.postProcess = function(sType, sAction, bError, sData)
          switch(sAction)
          {
             case "F":
-               _loc0_ = _loc0_ = sData.charAt(2);
+               _loc0_ = sData.charAt(2);
                if(_loc0_ === "P")
                {
                   this.api.network.Game.triggerCellFightPos(sData.substr(3));
@@ -1464,8 +1460,10 @@ _loc1.postProcess = function(sType, sAction, bError, sData)
                      break;
                   case "V":
                      this.aks.Conquest.onPrismInfosClosing(sData.substr(3));
+                     break;
                   default:
                      this.aks.defaultProcessAction(sType,sAction,bError,sData);
+                     break;
                }
                break;
             case "B":
