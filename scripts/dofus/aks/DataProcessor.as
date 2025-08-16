@@ -50,68 +50,79 @@ _loc1.postProcess = function(sType, sAction, bError, sData)
    var _loc41_;
    var _loc43_;
    switch(sType)
-{
-    case "X":
-    default:
-        if(_loc0_ !== "$")
-        {
-        }
-    case "Ñ":
-        switch(sAction)
-        {
+   {
+      case "X":
+        break;
+      default:
+         var char = sData.charAt(0);
+         if(char !== "$")
+         {
+         }
+         break;
+      case "Ñ":
+         switch(sAction)
+         {
             case "A":
-                var _loc15_ = sData.substr(2).split(";");
-                for(var _loc10_ = 0; _loc10_ < _loc15_.length; _loc10_++)
-                {
-                    var _loc7_ = _loc15_[_loc10_].split(",");
-                    _global.GFX[_loc7_[0]] = _loc7_[1];
-                }
-                break;
+               _loc15_ = sData.substr(2).split(";");
+               _loc10_ = 0;
+               while(_loc10_ < _loc15_.length)
+               {
+                  _loc7_ = _loc15_[_loc10_].split(",");
+                  _global.GFX[_loc7_[0]] = _loc7_[1];
+                  _loc10_ += 1;
+               }
+               break;
             case "a":
-                _global.FIGHT_AUTO_SKIP = sData.substr(2) == "1";
-                break;
+               _global.FIGHT_AUTO_SKIP = sData.substr(2) == "1";
+               break;
             case "B":
-                var _loc15_ = sData.substr(2).split(";");
-                for(var _loc10_ = 0; _loc10_ < _loc15_.length; _loc10_++)
-                {
-                    var _loc7_ = _loc15_[_loc10_].split(",");
-                    _global.NIVEL[_loc7_[0]] = _loc7_[1];
-                }
-                break;
+               _loc15_ = sData.substr(2).split(";");
+               _loc10_ = 0;
+               while(_loc10_ < _loc15_.length)
+               {
+                  _loc7_ = _loc15_[_loc10_].split(",");
+                  _global.NIVEL[_loc7_[0]] = _loc7_[1];
+                  _loc10_ += 1;
+               }
+               break;
             case "b":
-                _global.MAX_DATA_LENGTH = _global.parseInt(sData.substr(2));
-                break;
+               _global.MAX_DATA_LENGTH = _global.parseInt(sData.substr(2));
+               break;
             case "C":
-                var _loc15_ = sData.substr(2).split("*");
-                for(var _loc10_ = 0; _loc10_ < _loc15_.length; _loc10_++)
-                {
-                    var _loc23_ = _loc15_[_loc10_].split("~");
-                    var _loc18_ = new Object();
-                    var _loc13_ = _loc23_[1].split("|");
-                    for(var _loc8_ = 0; _loc8_ < _loc13_.length; _loc8_++)
-                    {
-                        if(!(_loc13_[_loc8_] == null || _loc13_[_loc8_] == "null" || _loc13_[_loc8_] == ""))
+               _loc15_ = sData.substr(2).split("*");
+               _loc10_ = 0;
+               while(_loc10_ < _loc15_.length)
+               {
+                  _loc23_ = _loc15_[_loc10_].split("~");
+                  _loc18_ = new Object();
+                  _loc13_ = _loc23_[1].split("|");
+                  _loc8_ = 0;
+                  while(_loc8_ < _loc13_.length)
+                  {
+                     if(!(_loc13_[_loc8_] == null || _loc13_[_loc8_] == "null" || _loc13_[_loc8_] == ""))
+                     {
+                        if(_loc8_ == 2)
                         {
-                            if(_loc8_ == 2)
+                           _loc7_ = _loc13_[_loc8_].split(";");
+                           _loc11_ = -1;
+                           _loc17_ = new Array();
+                            for(var _loc11_ = 0; _loc11_ < _loc7_.length; _loc11_++)
                             {
-                                var _loc7_ = _loc13_[_loc8_].split(";");
-                                var _loc17_ = new Array();
-                                // RECONSTRUIDO: Convertido de while(true) a for
-                                for(var _loc11_ = 0; _loc11_ < _loc7_.length; _loc11_++)
-                                {
-                                    _loc17_.push(_loc7_[_loc11_].split(","));
-                                }
-                                _loc18_[_loc8_] = _loc17_;
+                           _loc17_.push(_loc7_[_loc11_].split(","));
                             }
-                            else
-                            {
-                                _loc18_[_loc8_] = _loc13_[_loc8_].split(",");
-                            }
+                           _loc18_[_loc8_] = _loc17_;
                         }
-                    }
-                    _global.RECOMPENSAS[_loc23_[0]] = _loc18_;
-                }
-                break;
+                        else
+                        {
+                           _loc18_[_loc8_] = _loc13_[_loc8_].split(",");
+                        }
+                     }
+                     _loc8_ += 1;
+                  }
+                  _global.RECOMPENSAS[_loc23_[0]] = _loc18_;
+                  _loc10_ += 1;
+               }
+               break;
             case "c":
                this.api.kernel.clearCache();
                break;
@@ -142,18 +153,22 @@ _loc1.postProcess = function(sType, sAction, bError, sData)
             case "I":
                _global.ITEMS_CREADOS = new Object();
                _loc15_ = sData.substr(2).split(",");
-               // se usa un bucle for
-               for (var i = 0; i < _loc15_.length; i++) {
-                   _global.ITEMS_CREADOS[_loc15_[i]] = true;
+               _loc22_ = 0;
+               while(_loc22_ < _loc15_.length)
+               {
+                  _global.ITEMS_CREADOS[_loc15_[_loc22_]] = true;
+                  _loc22_ += 1;
                }
                break;
-           case "i":
+            case "i":
                _global.CREA_TU_ITEM_PRECIOS = new Object();
                _loc15_ = sData.substr(2).split(";");
-               // se usa un bucle for también.
-               for (var i = 0; i < _loc15_.length; i++) {
-                   _loc7_ = _loc15_[i].split(",");
-                   _global.CREA_TU_ITEM_PRECIOS[Number(_loc7_[0])] = Number(_loc7_[1]);
+               _loc10_ = 0;
+               while(_loc10_ < _loc15_.length)
+               {
+                  _loc7_ = _loc15_[_loc10_].split(",");
+                  _global.CREA_TU_ITEM_PRECIOS[Number(_loc7_[0])] = Number(_loc7_[1]);
+                  _loc10_ += 1;
                }
                break;
             case "J":
@@ -216,35 +231,35 @@ _loc1.postProcess = function(sType, sAction, bError, sData)
                break;
             case "Y":
                _loc7_ = sData.substr(2).split(";");
-               for(var _loc35_ in _loc7_)
-               {
-                  _loc21_ = _loc7_[_loc35_].split(",")[0];
-                  _loc16_ = _loc7_[_loc35_].split(",")[1];
-                  if(!_global.isNaN(_loc16_))
-                  {
-                     _loc16_ = Number(_loc16_);
-                  }
-                  _global[_loc21_] = _loc16_;
-               }
+               for(var _loc35_ = 0; _loc35_ < _loc7_.length; _loc35_++)
+                {
+                _loc21_ = _loc7_[_loc35_].split(",")[0];
+                _loc16_ = _loc7_[_loc35_].split(",")[1];
+                if(!_global.isNaN(_loc16_))
+                {
+                _loc16_ = Number(_loc16_);
+                }
+                _global[_loc21_] = _loc16_;
+                }
                break;
             case "z":
                _global.URL_LINK_COMPRA = sData.substr(2);
                break;
-             case "Z":
-                var _loc7_ = sData.substr(2).split(";");
-                for(var _loc35_ in _loc7_)
+            case "Z":
+               _loc7_ = sData.substr(2).split(";");
+               for(var _loc35_ = 0; _loc35_ < _loc7_.length; _loc35_++)
                 {
-                    var _loc21_ = _loc7_[_loc35_].split(",")[0];
-                    var _loc16_ = _loc7_[_loc35_].split(",")[1];
+                    _loc21_ = _loc7_[_loc35_].split(",")[0];
+                    _loc16_ = _loc7_[_loc35_].split(",")[1];
                     if(!_global.isNaN(_loc16_))
-                    {
+                        {
                         _loc16_ = Number(_loc16_);
-                    }
+                        }
                     _global.dofus["\x12\x03"][_loc21_] = _loc16_;
                 }
                 break;
-        }
-        break;
+         }
+         break;
       case "H":
          switch(sAction)
          {
@@ -340,6 +355,7 @@ _loc1.postProcess = function(sType, sAction, bError, sData)
                            break;
                         default:
                            this.aks.defaultProcessAction(sType,sAction,bError,sData);
+                           break;
                      }
                      break;
                   default:
@@ -435,8 +451,8 @@ _loc1.postProcess = function(sType, sAction, bError, sData)
                this.aks.Account.onCharactersList(!bError,sData.substr(3));
                break;
             case "M":
-               _loc0_ = _loc0_ = sData.charAt(2);
-               if(_loc0_ !== "?")
+               var migrationAction = sData.charAt(2); 
+               if(migrationAction !== "?")
                {
                   this.aks.Account.onCharactersList(!bError,sData.substr(3),true);
                }
@@ -495,8 +511,8 @@ _loc1.postProcess = function(sType, sAction, bError, sData)
                this.aks.Account.onTicketResponse(!bError,sData.substr(3));
                break;
             case "t":
-               _loc0_ = _loc0_ = sData.charAt(2);
-               if(_loc0_ === "S")
+               var actionChar = sData.charAt(2);
+               if(actionChar === "S")
                {
                   this.aks.send("AtS");
                }
@@ -803,8 +819,8 @@ _loc1.postProcess = function(sType, sAction, bError, sData)
                }
                break;
             case "P":
-               _loc0_ = _loc0_ = sData.charAt(2);
-               if(_loc0_ === "X")
+               var spellAction = sData.charAt(2);
+               if(spellAction === "X")
                {
                   this.aks.send("RPX");
                }
@@ -872,7 +888,7 @@ _loc1.postProcess = function(sType, sAction, bError, sData)
                }
                break;
             case "o":
-               api = _global.API;
+               var api = _global.API;
                if(api.ui.getUIComponent("Prestigio") != undefined)
                {
                   api.ui.getUIComponent("Prestigio").cargaTodo(sData.substr(2),false);
@@ -1010,7 +1026,6 @@ _loc1.postProcess = function(sType, sAction, bError, sData)
                break;
             case "p":
                this.aks.Exchange.onPayMovement(!bError,sData.substr(2));
-
                break;
             case "s":
                this.aks.Exchange.onStorageMovement(!bError,sData.substr(3));
@@ -1446,8 +1461,8 @@ _loc1.postProcess = function(sType, sAction, bError, sData)
          switch(sAction)
          {
             case "F":
-               _loc0_ = sData.charAt(2);
-               if(_loc0_ === "P")
+               var fightAction = sData.charAt(2);
+               if(fightAction === "P")
                {
                   this.api.network.Game.triggerCellFightPos(sData.substr(3));
                }
@@ -1460,10 +1475,8 @@ _loc1.postProcess = function(sType, sAction, bError, sData)
                      break;
                   case "V":
                      this.aks.Conquest.onPrismInfosClosing(sData.substr(3));
-                     break;
                   default:
                      this.aks.defaultProcessAction(sType,sAction,bError,sData);
-                     break;
                }
                break;
             case "B":
@@ -1496,7 +1509,7 @@ _loc1.postProcess = function(sType, sAction, bError, sData)
          break;
       case "w":
          _loc0_ = _loc0_ = sAction;
-         if(_loc0_ === "E")
+         if(sAction === "E")
          {
             _loc24_ = false;
             _loc26_ = false;
@@ -1521,41 +1534,64 @@ _loc1.postProcess = function(sType, sAction, bError, sData)
                this.api.ui.getUIComponent("Contenido").CargaObj(sData.substr(2));
                break;
             case "r":
-                    _loc6_ = sData.substr(2).split(";");
-                    var api = _global.API; // Renombrado para evitar conflicto
-                    _loc24_ = this.api.ui.getUIComponent("Banner");
-                    _loc9_ = new Object();
-                    _loc20_ = new ank.gapi.controls.util.Sort(); // Usando la clase correcta si es conocida
-
-                    // BUCLE CORREGIDO
-                    for (var i = 0; i < _loc6_.length; i++) {
-                        var objetivoData = _loc6_[i].split(",");
-                        if (objetivoData[2] == 2 || objetivoData[2] == 1 || objetivoData[2] == 4) {
-                            _loc9_.position = Number(objetivoData[0]);
-                            _loc9_.name = objetivoData[1];
-                            _loc9_.estado = objetivoData[4] + "/" + objetivoData[3];
-                            _loc9_.finalizado = objetivoData[5];
-                            _loc20_.push(_loc9_);
-                        } else {
-                            _loc9_.position = Number(objetivoData[0]);
-                            _loc9_.name = objetivoData[1];
-                            _loc9_.estado = objetivoData[4] + "/" + objetivoData[3];
-                            _loc9_.finalizado = objetivoData[5];
-                            _loc20_.push(_loc9_);
-                        }
-                        _loc9_ = new Object();
+               _loc6_ = sData.substr(2).split(";");
+               var api = _global.API;
+               _loc24_ = this.api.ui.getUIComponent("Banner");
+               _loc9_ = new Object();
+               _loc20_ = new ank["\x1e\n\x07"]["\x0e\x1c"]();
+               _loc5_ = -1;
+               while(true)
+               {
+                  _loc5_ += 1;
+                  if(_loc5_ >= _loc6_.length)
+                  {
+                     break;
+                  }
+                    var dataParts = _loc6_[_loc5_].split(",");
+                    if(dataParts[2] == 2)
+                    {
+                        _loc9_.position = Number(dataParts[0]);
+                        _loc9_.name = dataParts[1];
+                        _loc9_.estado = dataParts[4] + "/" + dataParts[3];
+                        _loc9_.finalizado = dataParts[5];
+                        _loc20_.push(_loc9_);
                     }
-
-                    _loc24_.objetivodesc.btncompletar._visible = false;
-                    _loc24_.panelobjev.generalObjetivos._winBackground.title = this.api.lang.getText("OBJETIVE_TITLE");
-                    _loc24_.panelobjev.generalObjetivos._dgMembers.columnsNames = ["Nº", this.api.lang.getText("OBJETIVE"), "%"];
-                    _loc24_.panelobjev.generalObjetivos._dgMembers.dataProvider = _loc20_;
-                    _loc24_.panelobjev.gotoAndPlay(2);
-                    _loc24_.Objetivos = true;
-                    break;
+                  else if(_loc6_[_loc5_].split(",")[2] == 1)
+                  {
+                     _loc9_.position = Number(_loc6_[_loc5_].split(",")[0]);
+                     _loc9_.name = _loc6_[_loc5_].split(",")[1];
+                     _loc9_.estado = _loc6_[_loc5_].split(",")[4] + "/" + _loc6_[_loc5_].split(",")[3];
+                     _loc9_.finalizado = _loc6_[_loc5_].split(",")[5];
+                     _loc20_.push(_loc9_);
+                  }
+                  else if(_loc6_[_loc5_].split(",")[2] == 4)
+                  {
+                     _loc9_.position = Number(_loc6_[_loc5_].split(",")[0]);
+                     _loc9_.name = _loc6_[_loc5_].split(",")[1];
+                     _loc9_.estado = _loc6_[_loc5_].split(",")[4] + "/" + _loc6_[_loc5_].split(",")[3];
+                     _loc9_.finalizado = _loc6_[_loc5_].split(",")[5];
+                     _loc20_.push(_loc9_);
+                  }
+                  else
+                  {
+                     _loc9_.position = Number(_loc6_[_loc5_].split(",")[0]);
+                     _loc9_.name = _loc6_[_loc5_].split(",")[1];
+                     _loc9_.estado = _loc6_[_loc5_].split(",")[4] + "/" + _loc6_[_loc5_].split(",")[3];
+                     _loc9_.finalizado = _loc6_[_loc5_].split(",")[5];
+                     _loc20_.push(_loc9_);
+                  }
+                  _loc9_ = new Object();
+               }
+               _loc24_.objetivodesc.btncompletar._visible = false;
+               _loc24_.panelobjev.generalObjetivos._winBackground.title = this.api.lang.getText("OBJETIVE_TITLE");
+               _loc24_.panelobjev.generalObjetivos._dgMembers.columnsNames = ["Nº",this.api.lang.getText("OBJETIVE"),"%"];
+               _loc24_.panelobjev.generalObjetivos._dgMembers.dataProvider = _loc20_;
+               _loc24_.panelobjev.gotoAndPlay(2);
+               _loc24_.Objetivos = true;
+               break;
             case "y":
                _loc9_ = sData.substr(2).split(",");
-               api = _global.API;
+               var api = _global.API;
                _loc5_ = this.api.ui.getUIComponent("Banner");
                _loc5_.objetivodesc._winBackground.title = _loc9_[0];
                _loc82_ = _loc9_[9];
@@ -1693,19 +1729,19 @@ _loc1.postProcess = function(sType, sAction, bError, sData)
          switch(sAction)
          {
             case "n":
-               api = _global.API;
+               var api = _global.API;
                api.ui.loadUIAutoHideComponent("LootBox","LootBox",{loot:sData.substr(2)});
                break;
             case "N":
-               api = _global.API;
+               var api = _global.API;
                api.ui.getUIComponent("LootBox").updateItems(sData.substr(2));
                break;
             case "f":
-               api = _global.API;
+               var api = _global.API;
                api.ui.getUIComponent("LootBox").reiniciame();
                break;
             case "d":
-               api = _global.API;
+               var api = _global.API;
                if(api.ui.getUIComponent("Hechizos") != undefined)
                {
                   api.ui.getUIComponent("Hechizos").actualizaDatos(sData);
@@ -1777,151 +1813,156 @@ _loc1.postProcess = function(sType, sAction, bError, sData)
                this.api.ui.getUIComponent("MarketShop").RefreshPoints(_loc32_);
          }
          break;
-       case "b":
-        switch(sAction)
-        {
+      case "b":
+         switch(sAction)
+         {
             case "A":
-                this.api.ui.loadUIComponent("EscogerNivel","EscogerNivel",{nivel:Number(sData.substr(2))});
-                break; // CORREGIDO
+               this.api.ui.loadUIComponent("EscogerNivel","EscogerNivel",{nivel:Number(sData.substr(2))});
+               break;
             case "B":
-                this.api.ui.loadUIAutoHideComponent("CrearItem","CrearItem");
-                break; // CORREGIDO
+               this.api.ui.loadUIAutoHideComponent("CrearItem","CrearItem");
+               break;
             case "b":
-                if(this.api.ui.getUIComponent("CrearItem") != undefined)
-                {
-                    this.api.ui.getUIComponent("CrearItem").newData(sData.substr(2));
-                }
-                break; // CORREGIDO
+               if(this.api.ui.getUIComponent("CrearItem") != undefined)
+               {
+                  this.api.ui.getUIComponent("CrearItem").newData(sData.substr(2));
+               }
+               break;
             case "C":
-                this.api.ui.loadUIAutoHideComponent("CambiarColor","CambiarColor");
-                break; // CORREGIDO
+               this.api.ui.loadUIAutoHideComponent("CambiarColor","CambiarColor");
+               break;
             case "Z":
-                var _loc25_ = sData.substr(2).split("@");
-                this.api.ui.loadUIAutoHideComponent("Logros","Logros",{data:_loc25_[0],categorias:_loc25_[1]});
-                break; // CORREGIDO
+               _loc25_ = sData.substr(2).split("@");
+               this.api.ui.loadUIAutoHideComponent("Logros","Logros",{data:_loc25_[0],categorias:_loc25_[1]});
+               break;
             case "z":
-                this.api.ui.loadUIAutoHideComponent("Recompensas","Recompensas",{data:sData.substr(2)});
-                break; // CORREGIDO
+               this.api.ui.loadUIAutoHideComponent("Recompensas","Recompensas",{data:sData.substr(2)});
+               break;
             case "D":
-                var _loc36_ = sData.substr(2);
-                this.api.ui.loadUIAutoHideComponent("Reportes","Reportes",{miembros:_loc36_});
-                break; // CORREGIDO
+               _loc36_ = sData.substr(2);
+               this.api.ui.loadUIAutoHideComponent("Reportes","Reportes",{miembros:_loc36_});
+               break;
             case "G":
-                this.api.ui.loadUIAutoHideComponent("CambiarEmblema","CambiarEmblema");
-                break; // CORREGIDO
+               this.api.ui.loadUIAutoHideComponent("CambiarEmblema","CambiarEmblema");
+               break;
             case "I":
-                var _loc25_ = sData.substr(2).split("|");
-                this.api.ui.loadUIComponent("SistemaRecurso","SistemaRecurso",{precio:Number(_loc25_[0]),tipos:_loc25_[1],objetos:_loc25_[2],ogrinas:_loc25_[3]});
-                break; // CORREGIDO
+               _loc25_ = sData.substr(2).split("|");
+               this.api.ui.loadUIComponent("SistemaRecurso","SistemaRecurso",{precio:Number(_loc25_[0]),tipos:_loc25_[1],objetos:_loc25_[2],ogrinas:_loc25_[3]});
+               break;
             case "L":
-                var _loc37_ = sData.substr(2).split("#");
-                this.api.ui.loadUIAutoHideComponent("Ladder","Ladder",{data:_loc37_[0],pvpRanking:_loc37_[1],koloReward:_loc37_[2],infoReward:_loc37_[3]});
-                break; // CORREGIDO
+               _loc37_ = sData.substr(2).split("#");
+               this.api.ui.loadUIAutoHideComponent("Ladder","Ladder",{data:_loc37_[0],pvpRanking:_loc37_[1],koloReward:_loc37_[2],infoReward:_loc37_[3]});
+               break;
             case "l":
-                if(this.api.ui.getUIComponent("Ladder") != undefined)
-                {
-                    this.api.ui.getUIComponent("Ladder").registrar(sData.substr(2));
-                }
-                break; // CORREGIDO
+               if(this.api.ui.getUIComponent("Ladder") != undefined)
+               {
+                  this.api.ui.getUIComponent("Ladder").registrar(sData.substr(2));
+               }
+               break;
             case "M":
-                this.api.ui.loadUIAutoHideComponent("Mimobionte","Mimobionte");
-                break; // CORREGIDO
+               this.api.ui.loadUIAutoHideComponent("Mimobionte","Mimobionte");
+               break;
             case "m":
-                this.api.ui.loadUIAutoHideComponent("TransformarMontura","TransformarMontura",{data:sData.substr(2)});
-                break; // CORREGIDO
+               this.api.ui.loadUIAutoHideComponent("TransformarMontura","TransformarMontura",{data:sData.substr(2)});
+               break;
             case "N":
-                this.api.ui.loadUIAutoHideComponent("CambiarNombre","CambiarNombre",{color:sData.substr(2)});
-                break; // CORREGIDO
+               this.api.ui.loadUIAutoHideComponent("CambiarNombre","CambiarNombre",{color:sData.substr(2)});
+               break;
             case "n":
-                this.api.datacenter.Player.Name(sData.substr(2));
-                if(this.api.ui.getUIComponent("CambiarNombre") != undefined)
-                {
-                    this.api.ui.getUIComponent("CambiarNombre").close();
-                }
-                break; // CORREGIDO
+               his.api.datacenter.Player.Name = sData.substr(2);
+               if(this.api.ui.getUIComponent("CambiarNombre") != undefined)
+               {
+                  this.api.ui.getUIComponent("CambiarNombre").close();
+               }
+               break;
             case "ñ":
-                this.api.ui.loadUIAutoHideComponent("Ornamento","Ornamento",{ornamentos:sData.substr(2)});
-                break; // CORREGIDO
+               this.api.ui.loadUIAutoHideComponent("Ornamento","Ornamento",{ornamentos:sData.substr(2)});
+               break;
             case "Ñ":
-                this.api.ui.loadUIAutoHideComponent("CreateTitle","CreateTitle");
-                break; // CORREGIDO
+               this.api.ui.loadUIAutoHideComponent("CreateTitle","CreateTitle");
+               break;
             case "o":
-                _global.RESTRINGIR_COLOR_DIA = sData.charAt(2) == "1";
-                break; // CORREGIDO
+               _global.RESTRINGIR_COLOR_DIA = sData.charAt(2) == "1";
+               break;
             case "O":
-                switch(sData.charAt(2))
-                {
-                    case "C":
-                        var _loc28_ = sData.substr(3).split("^");
-                        this.api.ui.loadUIAutoHideComponent("Servicios","Servicios",{creditos:_global.parseInt(_loc28_[0]),ogrinas:_global.parseInt(_loc28_[1]),data:_loc28_[2]});
-                        break;
-                    case "b":
-                        var _loc28_ = sData.substr(3).split("^");
-                        this.api.ui.loadUIAutoHideComponent("ServiciosCl","ServiciosCl",{ogrinas:_global.parseInt(_loc28_[0]),data:_loc28_[1]});
-                }
-                break; // CORREGIDO
+               switch(sData.charAt(2))
+               {
+                  case "C":
+                     _loc28_ = sData.substr(3).split("^");
+                     this.api.ui.loadUIAutoHideComponent("Servicios","Servicios",{creditos:_global.parseInt(_loc28_[0]),ogrinas:_global.parseInt(_loc28_[1]),data:_loc28_[2]});
+                     break;
+                  case "b":
+                     _loc28_ = sData.substr(3).split("^");
+                     this.api.ui.loadUIAutoHideComponent("ServiciosCl","ServiciosCl",{ogrinas:_global.parseInt(_loc28_[0]),data:_loc28_[1]});
+                     break;
+               }
+               break;
             case "P":
-                var _loc41_ = sData.substr(2).split(",");
-                this.api.ui.getUIComponent("Banner").tiempoRPG(Number(_loc41_[0]),_loc41_[1] == "1");
-                break; // CORREGIDO
+               _loc41_ = sData.substr(2).split(",");
+               this.api.ui.getUIComponent("Banner").tiempoRPG(Number(_loc41_[0]),_loc41_[1] == "1");
+               break;
             case "w":
-                this.api.ui.loadUIAutoHideComponent("Auras","Auras",{auras:sData.substr(2)});
-                break; // CORREGIDO
+               this.api.ui.loadUIAutoHideComponent("Auras","Auras",{auras:sData.substr(2)});
+               break;
             case "p":
-                this.api.ui.getUIComponent("PanelNPC").refrescar(sData.substr(2));
-                break; // CORREGIDO
+               this.api.ui.getUIComponent("PanelNPC").refrescar(sData.substr(2));
+               break;
             case "R":
-                switch(sData.charAt(2))
-                {
-                    case "I":
-                        if(this.api.ui.getUIComponent("Banner") != undefined)
-                        {
-                            this.api.ui.getUIComponent("Banner").iniciarCronometro(sData.substring(3));
-                        }
-                        break;
-                    case "S":
-                        if(this.api.ui.getUIComponent("Banner") != undefined)
-                        {
-                            this.api.ui.getUIComponent("Banner").pararCronometro();
-                            break;
-                        }
-                }
-                break; // CORREGIDO
+               switch(sData.charAt(2))
+               {
+                  case "I":
+                     if(this.api.ui.getUIComponent("Banner") != undefined)
+                     {
+                        this.api.ui.getUIComponent("Banner").iniciarCronometro(sData.substring(3));
+                     }
+                     break;
+                  case "S":
+                     if(this.api.ui.getUIComponent("Banner") != undefined)
+                     {
+                        this.api.ui.getUIComponent("Banner").pararCronometro();
+                     }
+                     break;
+               }
+               break;
             case "r":
-                switch(sData.charAt(2))
-                {
-                    case "P":
-                        var _loc43_ = sData.substr(3).split(";");
-                        this.api.ui.loadUIComponent("Ruleta","Ruleta",{premios:_loc43_[0],ficha:Number(_loc43_[1])});
-                        break;
-                    case "G":
-                        this.api.ui.getUIComponent("Ruleta").ganador(sData.substr(3));
-                }
-                break; // CORREGIDO
+               switch(sData.charAt(2))
+               {
+                  case "P":
+                     _loc43_ = sData.substr(3).split(";");
+                     this.api.ui.loadUIComponent("Ruleta","Ruleta",{premios:_loc43_[0],ficha:Number(_loc43_[1])});
+                     break;
+                  case "G":
+                     this.api.ui.getUIComponent("Ruleta").ganador(sData.substr(3));
+                     break;
+               }
+               break;
             case "S":
-                switch(sData.charAt(2))
-                {
-                    case "P":
-                        this.api.ui.loadUIComponent("SistemaItems","SistemaItems",{tipos:sData.substr(4),icono:(sData.charAt(3) == "K" ? "Kamas" : "Ogrinas")});
-                        break;
-                    case "O":
-                        this.api.ui.getUIComponent("SistemaItems").setObjetos(sData.substr(3));
-                }
-                break; // CORREGIDO
+               switch(sData.charAt(2))
+               {
+                  case "P":
+                     this.api.ui.loadUIComponent("SistemaItems","SistemaItems",{tipos:sData.substr(4),icono:(sData.charAt(3) == "K" ? "Kamas" : "Ogrinas")});
+                     break;
+                  case "O":
+                     this.api.ui.getUIComponent("SistemaItems").setObjetos(sData.substr(3));
+                     break;
+               }
+               break;
             case "t":
-                this.api.ui.loadUIAutoHideComponent("Titulos","Titulos",{titulos:sData.substr(2)});
-                break; // CORREGIDO
+               this.api.ui.loadUIAutoHideComponent("Titulos","Titulos",{titulos:sData.substr(2)});
+               break;
             case "T":
-                var _loc36_ = sData.substr(2).split(";");
-                this.api.ui.loadUIComponent("Loteria","Loteria",{coste:_loc36_[0],premio:_loc36_[1]});
-                break; // CORREGIDO
+               _loc36_ = sData.substr(2).split(";");
+               this.api.ui.loadUIComponent("Loteria","Loteria",{coste:_loc36_[0],premio:_loc36_[1]});
+               break;
             case "v":
-                this.api.ui.getUIComponent("Loteria").updatePrice(sData.substr(2));
-                break; // CORREGIDO
+               this.api.ui.getUIComponent("Loteria").updatePrice(sData.substr(2));
+               break;
             case "V":
-                this.api.ui.unloadUIComponent("Panel");
-                this.api.ui.unloadLastUIAutoHideComponent();
-        }
-}
+               this.api.ui.unloadUIComponent("Panel");
+               this.api.ui.unloadLastUIAutoHideComponent();
+               break;
+         }
+         break;
+   }
 };
 #endinitclip

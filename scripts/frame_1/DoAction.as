@@ -199,30 +199,56 @@ _global.dofus.Constants.getElementColorById = function(_loc2_)
          return undefined;
    }
 };
-      // Aqui se Generan los graficos de las tacticas
-_global.dofus.Constants.getTacticGfx = function(nSubarea, _loc3_)
+_global.dofus.Constants.getTacticGfx = function(nSubarea, nType)
 {
-   var _loc3_ = String(nSubarea);
-   var _loc2_ = _loc3_.length;
-   var _loc5_ = _global.API.kernel.OptionsManager.getOption("colorfulTactic");
-   while(_loc2_ < 3)
-   {
-      _loc3_ = "0" + _loc3_;
-      _loc2_ += 1;
-   }
-   if(nSubarea == undefined || nSubarea > 600)
-   {
-      _loc6_ = Number("1666" + String(_loc3_));
-   }
-   else if(_loc5_)
-   {
-      var _loc6_ = Number("1" + _loc3_ + String(_loc3_));
-   }
-   else
-   {
-      _loc6_ = Number("1666" + String(_loc3_));
-   }
-   return _loc6_;
+    var sSubareaPadded = String(nSubarea);
+    var len = sSubareaPadded.length;
+    var bColorful = _global.API.kernel.OptionsManager.getOption("colorfulTactic");
+
+    // Bucle para asegurar que el ID de la subárea tenga 3 dígitos
+    while(len < 3)
+    {
+        sSubareaPadded = "0" + sSubareaPadded;
+        len++;
+    }
+    var nGfxID; // Variable para almacenar el ID del gráfico final
+    // Si la opción de modo táctico colorido está desactivada o es una zona especial,
+    if (nSubarea == undefined || !bColorful)
+    {
+        switch (nType)
+        {
+            case 0: // Obstáculo
+                nGfxID = 10000;
+                break;
+            case 1: // Caminable tipo 1
+                nGfxID = 10001;
+                break;
+            case 3: // Caminable tipo 2
+                nGfxID = 10003;
+                break;
+            default: // Por si acaso
+                nGfxID = 10000;
+        }
+    }
+    else // Si el modo colorido está activado, usamos la lógica personalizada
+    {
+        switch (nType)
+        {
+            case 0: // Obstáculo colorido (ej. 10421)
+                nGfxID = Number("1" + sSubareaPadded + "0");
+                break;
+            case 1: // Caminable colorido tipo 1 (ej. 10423)
+                nGfxID = Number("1" + sSubareaPadded + "1");
+                break;
+            case 3: // Caminable colorido tipo 2 (ej. 10424)
+                nGfxID = Number("1" + sSubareaPadded + "3");
+                break;
+            default:
+                nGfxID = Number("1" + sSubareaPadded + "0");
+        }
+    }
+    
+    return nGfxID;
 };
 _global.dofus.Constants.getTacticLayerObject2 = function(nSubarea)
 {
@@ -248,10 +274,10 @@ _global.dofus.Constants.getTacticLayerObject2 = function(nSubarea)
    }
    return _loc5_;
 };
-String.prototype.replace = function(searchStr, replaceStr)
-{
-   return this.split(searchStr).join(replaceStr);
-};
+function replaceAll(targetString, searchStr, replaceStr) {
+    if (targetString == null) return "";
+    return targetString.split(searchStr).join(replaceStr);
+}
 _loc1 = dofus["\x1e\n\x07"]["\x10\x13"].prototype;
 _loc1.getListaReportes = function()
 {
@@ -354,7 +380,6 @@ _loc1.debugConsole = function(sMessage)
 _loc1.showMessage = function(_loc2_, _loc3_, _loc4_, _loc5_, _loc6_)
 {
    var _loc7_;
-   var _loc6_;
    var _loc11_;
    var _loc9_;
    var _loc10_;
@@ -738,17 +763,17 @@ _loc1.onMessage = function(sExtraData)
                      this.api.kernel.showMessage(undefined,_loc17_.substr(_loc17_.indexOf(";") + 1),"ERROR_CHAT");
                      return undefined;
                   default:
-                     if(_loc0_ !== 6)
+                     if(_loc6_ !== 6)
                      {
-                        if(_loc0_ !== 46)
+                        if(_loc6_ !== 46)
                         {
-                           if(_loc0_ !== 49)
+                           if(_loc6_ !== 49)
                            {
-                              if(_loc0_ !== 777)
+                              if(_loc6_ !== 777)
                               {
-                                 if(_loc0_ !== 7)
+                                 if(_loc6_ !== 7)
                                  {
-                                    if(_loc0_ !== 89)
+                                    if(_loc6_ !== 89)
                                     {
                                        break;
                                     }
@@ -1001,7 +1026,7 @@ _loc1.drawZone = function(nCellNum, radiusIn, radiusOut, layer, col, shape)
          }
          else
          {
-            var _loc37_ = radiusIn;
+            _loc37_ = radiusIn;
             if(radiusIn > 0)
             {
                _loc37_ = radiusIn - 1;
@@ -1054,13 +1079,18 @@ _loc1.drawZone = function(nCellNum, radiusIn, radiusOut, layer, col, shape)
          }
          break;
       default:
-        _loc20_.drawCircle(radiusOut,col,nCellNum);
-        for(_loc3_ = radiusIn; _loc3_ <= radiusOut; _loc3_++)
-        {
+         _loc20_.drawCircle(radiusOut,col,nCellNum);
+         _loc3_ = radiusIn;
+         while(true)
+         {
+            if(_loc3_ > radiusOut)
+            {
+               break;
+            }
             ank.battlefield["\x1e\n\x07"]["\x1e\x16\x1a"].getCeldasPorDistancia(this._mcBattlefield.mapHandler,nCellNum,_loc3_,_loc11_);
-        }
-        break;
-}
+            _loc3_ = _loc3_ + 1;
+         }
+   }
    var _loc12_ = new Object();
    var _loc9_;
    var _loc4_;
@@ -1093,7 +1123,7 @@ _loc1.drawZone = function(nCellNum, radiusIn, radiusOut, layer, col, shape)
             _loc4_ = ank.battlefield["\x1e\n\x07"]["\x1e\x16\x1a"].getCaseCoordonnee(this._mcBattlefield.mapHandler,_loc36_);
             _loc15_ = _loc12_[_loc4_.x][_loc4_.y];
             _loc3_ = 0;
-            while(_loc3_ <= 4)
+            while(_loc3_ < 4)
             {
                _loc13_ = _loc4_.x + _loc16_[_loc3_][0];
                _loc14_ = _loc4_.y + _loc16_[_loc3_][1];
@@ -1116,7 +1146,6 @@ _loc1.drawZone = function(nCellNum, radiusIn, radiusOut, layer, col, shape)
                _loc6_.createEmptyMovieClip(layer,_loc6_.getNextHighestDepth());
             }
             _loc17_ = _loc6_[layer].attachMovie("20003","zone" + _loc21_,_loc21_,{data:{color:col,alpha:ank.battlefield.mc.Zone.ALPHA,bordes:_loc15_}});
-
             _loc17_._x = _loc9_.x;
             _loc17_._y = _loc9_.y;
          }
@@ -1409,6 +1438,7 @@ _loc1.click = function(oEvent)
    var _loc3_;
    switch(oEvent.target)
    {
+
       case this._btnClose:
          this.callClose();
          break;
@@ -1668,7 +1698,6 @@ _loc1.__get__Placaje = function()
    return this._nPlacaje;
 };
 _loc1.__set__Placaje = function(value)
-
 {
    this._nPlacaje = Number(value);
 };
@@ -2812,6 +2841,7 @@ _loc1.onMountPark = function(sExtraData)
 };
 _loc1 = dofus["\r\x14"].gapi.ui.MountParkSale.prototype;
 _loc1.addListeners = function()
+
 {
    this._btnCancel.addEventListener("click",this);
    this._btnValidate.addEventListener("click",this);
@@ -4286,7 +4316,7 @@ _loc1.click = function(_loc2_)
 };
 _loc1.over = function(_loc2_)
 {
-   if(_loc0_ = _loc2_.target == this._mcInteraction)
+   if(_loc2_.target == this._mcInteraction)
    {
       this.zoomSprite(true);
    }

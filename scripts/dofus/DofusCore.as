@@ -423,6 +423,7 @@ _loc1.registerAllClasses = function()
    Object.registerClass("UI_RecuperarPass",dofus["\r\x14"].gapi.ui.RecuperarPass);
    Object.registerClass("UI_Recovery",dofus["\r\x14"].gapi.ui.Recovery);
    Object.registerClass("UI_Multiple",dofus["\r\x14"].gapi.ui.Multiple);
+
    Object.registerClass("UI_RecoveryPass",dofus["\r\x14"].gapi.ui.RecoveryPass);
    Object.registerClass("UI_DesactivarShield",dofus["\r\x14"].gapi.ui.DesactivarShield);
    Object.registerClass("UI_TituloVIP",dofus["\r\x14"].gapi.ui.TituloVIP);

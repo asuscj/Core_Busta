@@ -31,49 +31,29 @@ _loc1.onActionsStart = function(_loc2_)
 };
 _loc1.onActionsFinish = function(sExtraData)
 {
-    var _loc5_ = sExtraData.split("|");
-    var _loc6_ = Number(_loc5_[0]);
-    var _loc3_ = _loc5_[1];
-    var _loc4_ = this.api.datacenter.Player.data;
-    var _loc2_ = _loc4_.sequencer;
-    
-    // Se pone el semáforo en rojo 
-    _loc4_.GameActionsManager.m_bNextAction = false;
-    
-    if(this.api.datacenter.Game.isFight)
-    {
-        // Se agendan todas las tareas de limpieza
-        _loc2_.addAction(32, false, this.api.kernel.GameManager, this.api.kernel.GameManager.setEnabledInteractionIfICan, [ank.battlefield.Constants.INTERACTION_CELL_RELEASE_OVER_OUT]);
-        if(_loc3_ != undefined)
-        {
-            _loc2_.addAction(33, false, this, this.actionAck, [_loc3_]);
-        }
-        _loc2_.addAction(34, false, this.api.kernel.GameManager, this.api.kernel.GameManager.cleanPlayer, [_loc6_]);
-        
-        // INICIO DE LA CORRECCIÓN
-
-        // SE crea la función que pondrá la luz en verde.
-        var _this = this;
-        var unlockGameFlow = function () {
-            _this.api.datacenter.Player.data.GameActionsManager.m_bNextAction = true;
-        };
-        
-        // Se añade esa función como la última tarea de la cola, con prioridad alta.
-        _loc2_.addAction(99, false, this, unlockGameFlow, []);
-
-        // FIN DE LA CORRECCIÓN
-
-        // Se ejecutan las tareas de limpieza y, al final, la de desbloqueo.
-        this.api.gfx.mapHandler.resetEmptyCells();
-        this.api.gfx.clearZoneLayer("spell");
-        this.api.gfx.clearPointer();
-        _loc2_.execute();
-        
-        if(_loc3_ == 2)
-        {
-            this.api.kernel.TipsManager.showNewTip(dofus["\x0b\b"].TipsManager.TIP_FIGHT_ENDMOVE);
-        }
-    }
+   var _loc5_ = sExtraData.split("|");
+   var _loc6_ = Number(_loc5_[0]);
+   var _loc3_ = _loc5_[1];
+   var _loc4_ = this.api.datacenter.Player.data;
+   var _loc2_ = _loc4_.sequencer;
+   _loc4_.GameActionsManager.m_bNextAction = false;
+   if(this.api.datacenter.Game.isFight)
+   {
+      _loc2_.addAction(32,false,this.api.kernel.GameManager,this.api.kernel.GameManager.setEnabledInteractionIfICan,[ank.battlefield.Constants.INTERACTION_CELL_RELEASE_OVER_OUT]);
+      if(_loc3_ != undefined)
+      {
+         _loc2_.addAction(33,false,this,this.actionAck,[_loc3_]);
+      }
+      _loc2_.addAction(34,false,this.api.kernel.GameManager,this.api.kernel.GameManager.cleanPlayer,[_loc6_]);
+      this.api.gfx.mapHandler.resetEmptyCells();
+      this.api.gfx.clearZoneLayer("spell");
+      this.api.gfx.clearPointer();
+      _loc2_.execute();
+      if(_loc3_ == 2)
+      {
+         this.api.kernel.TipsManager.showNewTip(dofus["\x0b\b"].TipsManager.TIP_FIGHT_ENDMOVE);
+      }
+   }
 };
 _loc1.alternativeGameAction = function(_loc2_)
 {
@@ -212,7 +192,6 @@ _loc1.alternativeGameAction = function(_loc2_)
          this.aks.Game.onMovement(_loc11_,true);
          break;
       case 999:
-         this.aks;
          this.aks.processCommand(_loc11_);
    }
    if(!_loc10_)
@@ -759,7 +738,7 @@ _loc1.onActions = function(_loc2_)
             if(this.api.datacenter.Player.summonedCreaturesID[_loc20_])
             {
                this.api.datacenter.Player.SummonedCreatures--;
-               delete this.api.datacenter.Player.summonedCreaturesID.register56;
+               delete this.api.datacenter.Player.summonedCreaturesID[_loc20_];
                this.api.ui.getUIComponent("Banner").shortcuts.setSpellStateOnAllContainers();
             }
             if(_loc20_ == this.api.datacenter.Player.ID)
