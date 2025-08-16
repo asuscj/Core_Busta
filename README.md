@@ -1,6 +1,6 @@
 # Core Dofus Busta 6.3.7 - Reconstrucción Open Source
 
-!(https://i.imgur.com/1.png) Un proyecto comunitario para reconstruir y limpiar el cliente (Core) de Dofus 1.29, proporcionando un archivo `.fla` limpio y funcional para facilitar el desarrollo y la personalización.
+![Logo del proyecto](https://i.imgur.com/1.png) Un proyecto comunitario para reconstruir y limpiar el cliente (Core) de Dofus 1.29, proporcionando un archivo `.fla` limpio y funcional para facilitar el desarrollo y la personalización.
 
 
 
