@@ -1,6 +1,6 @@
 # Core Dofus Busta 6.3.7 - Reconstrucción Open Source
 
-![Logo del Proyecto](https://i.imgur.com/1.png) Un proyecto comunitario para reconstruir y limpiar el cliente (Core) de Dofus 1.29, proporcionando un archivo `.fla` limpio y funcional para facilitar el desarrollo y la personalización.
+!(https://i.imgur.com/1.png) Un proyecto comunitario para reconstruir y limpiar el cliente (Core) de Dofus 1.29, proporcionando un archivo `.fla` limpio y funcional para facilitar el desarrollo y la personalización.
 
 
 
@@ -33,21 +33,21 @@ El objetivo de este proyecto es hacer todo ese trabajo pesado una sola vez, ofre
 
 ## 🚀 Cómo Empezar
 
-Para compilar y usar este core, necesitarás tener instalado Adobe Flash CS6.
+Para compilar y usar este core, necesitarás tener instalado Adobe Flash CS6. Los archivos de este proyecto son los que surgieron de la decompilacion del archivo usando JPEXS sin embargo, la construccion se uso decomplilando con Sothink swf decompiler y usando los scripts de JPEXS de ahi se partio la base para reconstrucción. 
 
 ### Pasos para la Configuración
 
 1.  **Clona el repositorio:**
+    * O simpemente descarga la carpeta script no necesitas nada mas.
+
     ```sh
     git clone https://github.com/asuscj/Core_Busta
     ```
 
 4.  **Compila el Core:**
     * Proximamente
-    * En Flash CS6, ve a **Control -> Probar Película** (o presiona `Ctrl + Enter`).
-    * Esto generará el archivo `core.swf` (o el nombre que tenga configurado) en la carpeta de destino.
 
-6.  **¡Listo!** Ya puedes usar el `core.swf` generado con tu emulador.
+6.  **¡Listo!** Ya puedes usar el `core.swf` generado con tu Cliente.
 
 ---
 
@@ -57,7 +57,7 @@ Este es el estado actual de la reconstrucción. Las tareas marcadas con ✅ est�
 
 * [x] Descompilación base del SWF original a `.fla`.
 * [x] Corrección de errores críticos en bucles de `MapHandler.as` (Soluciona el dibujo de las celdas de posicionamiento de combate).
-* [ ] Reparación completa y optimización del **Modo Táctico**.
+* [x] Reparación completa y optimización del **Modo Táctico**.
 * [ ] Limpieza y renombrado de la librería de símbolos para una navegación más fácil.
 * [x] Refactorización de código ofuscado a un formato más legible.
 * [ ] Documentación interna del código para explicar funciones clave.
