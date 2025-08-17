@@ -56,56 +56,46 @@ _loc1.addListeners = function()
 };
 _loc1.click = function(oEvent)
 {
-    // La etiqueta "loop0:" ha sido eliminada.
-    switch(oEvent.target._name)
-    {
-        case "_btnClose":
-        case "_btnCancel":
-            this.callClose();
-            break;
-
-        case "_btnTactico":
-            this.api.gfx.activateTacticMode(this._btnTactico.selected);
-            break;
-
-        case "_btnTeam1":
-        case "_btnTeam2":
-        case "_btnBorrar":
-        case "_btnCercado":
-            this._btnTeam1.selected = false;
-            this._btnTeam2.selected = false;
-            this._btnBorrar.selected = false;
-            this._btnCercado.selected = false;
-            oEvent.target.selected = true;
-            
-            // Switch anidado
-            switch(oEvent.target)
-            {
-                case this._btnTeam1:
-                    _global.COLOR_POS_PELEA = 1;
-                    this.api.gfx.addPointerShape("C",0,16711680,this.api.datacenter.Player.data.cellNum);
-                    break; // CORREGIDO
-                
-                case this._btnTeam2:
-                    _global.COLOR_POS_PELEA = 2;
-                    this.api.gfx.addPointerShape("C",0,255,this.api.datacenter.Player.data.cellNum);
-                    break; // CORREGIDO
-                
-                case this._btnBorrar:
-                    _global.COLOR_POS_PELEA = 3;
-                    this.api.gfx.addPointerShape("C",0,16777215,this.api.datacenter.Player.data.cellNum);
-                    break; // CORREGIDO
-                
-                case this._btnCercado:
-                    _global.COLOR_POS_PELEA = 4;
-                    this.api.gfx.addPointerShape("C",0,65280,this.api.datacenter.Player.data.cellNum);
-                    // Este break es para el caso del switch anidado,
-                    break;
-            }
-            break;
-    }
+   switch(oEvent.target._name) 
+   {
+      case "_btnClose":
+      case "_btnCancel":
+         this.callClose();
+         break;
+      case "_btnTactico":
+         this.api.gfx.activateTacticMode(this._btnTactico.selected);
+         break;
+      case "_btnTeam1":
+      case "_btnTeam2":
+      case "_btnBorrar":
+      case "_btnCercado":
+         this._btnTeam1.selected = false;
+         this._btnTeam2.selected = false;
+         this._btnBorrar.selected = false;
+         this._btnCercado.selected = false;
+         oEvent.target.selected = true;
+         switch(oEvent.target)
+         {
+            case this._btnTeam1:
+               _global.COLOR_POS_PELEA = 1;
+               this.api.gfx.addPointerShape("C",0,16711680,this.api.datacenter.Player.data.cellNum);
+               break; //  CORREGIDO
+            case this._btnTeam2:
+               _global.COLOR_POS_PELEA = 2;
+               this.api.gfx.addPointerShape("C",0,255,this.api.datacenter.Player.data.cellNum);
+               break; //  CORREGIDO
+            case this._btnBorrar:
+               _global.COLOR_POS_PELEA = 3;
+               this.api.gfx.addPointerShape("C",0,16777215,this.api.datacenter.Player.data.cellNum);
+               break; //  CORREGIDO
+            case this._btnCercado:
+               _global.COLOR_POS_PELEA = 4;
+               this.api.gfx.addPointerShape("C",0,65280,this.api.datacenter.Player.data.cellNum);
+               break; //  CORREGIDO
+         }
+         break; // Este es el break para el grupo de casos principal
+   }
 };
-
 _loc1.objeto = new Object();
 _global.dofus["\r\x14"].gapi.ui.PosPelea.CLASS_NAME = "PosPelea";
 #endinitclip

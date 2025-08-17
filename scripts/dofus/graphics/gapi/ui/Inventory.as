@@ -353,6 +353,49 @@ _loc1.initTexts = function()
    this._lblToken.text = this.api.datacenter.Player.Ogrine;
    this._lblToken.text = new ank["\x1e\n\x07"]["\x0e\x1c"](this._lblToken.text).addMiddleChar(this.api.lang.getConfigText("THOUSAND_SEPARATOR"),3);
 };
+_loc1.overItem = function(oEvent)
+{
+    // No mostrar nada si estamos arrastrando un objeto.
+    if (!this.gapi.isCursorHidden()) {
+        return;
+    }
+
+    // Obtenemos los datos del objeto sobre el que está el cursor.
+    var oItem = oEvent.target.contentData;
+
+    // Si no hay un objeto, no hacemos nada.
+    if (oItem == undefined) {
+        return;
+    }
+
+    // 1. Construimos el texto inicial con nombre y nivel.
+    var sText = oItem.name + " (" + this.api.lang.getText("LEVEL_SMALL") + " " + oItem.level + ")";
+    var nYOffset = -20; // La posición vertical inicial del tooltip.
+    var bFirstEffect = true;
+
+    // 2. Recorremos todos los efectos (stats) del objeto.
+    var aEffects = oItem.effects;
+    for (var i = 0; i < aEffects.length; i++)
+    {
+        var oEffect = aEffects[i];
+        if (oEffect.description != undefined && oEffect.description.length > 0)
+        {
+            // Si es el primer stat, añadimos un espacio.
+            if (bFirstEffect)
+            {
+                sText += "\n";
+                nYOffset -= 10;
+                bFirstEffect = false;
+            }
+            // 3. Añadimos cada stat al texto.
+            sText += "\n" + oEffect.description;
+            nYOffset -= 12; // Movemos el tooltip hacia arriba por cada línea.
+        }
+    }
+
+    // 4. Mostramos el tooltip final.
+    this.api.ui.showTooltip(sText, oEvent.target, nYOffset, {bXLimit:true, bYLimit:false});
+};
 _loc1.mostrarPanelSet = function(bMostrar)
 {
    this._cgGrid._visible = !bMostrar;

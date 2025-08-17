@@ -5224,74 +5224,82 @@ _loc1.__set__text = function(_loc2_)
 };
 _loc1.initWindowContent = function()
 {
-   var _loc4_ = this._winBackground.content;
-   _loc4_._btnOk.addEventListener("click",this);
-   _loc4_._btnNextStep.addEventListener("click",this);
-   _loc4_._btnPreviousStep.addEventListener("click",this);
-   _loc4_._txtText.addEventListener("change",this);
-   var _loc5_;
-   var _loc3_;
-   var _loc2_;
-   if(this._sMultiPage == true)
-   {
-      this.arrayPage = new Array();
-      _loc5_ = 0;
-      _loc3_ = this._sText.split("~");
-      for(_loc5_ in _loc3_)
-      {
-         _loc2_ = _loc3_[_loc5_];
-         this.api.kernel.debug(_loc2_);
-         this.arrayPage.push(_loc2_);
-         _loc5_ = _loc5_ + 1;
-      }
-      _loc4_._txtText.text = this.arrayPage[0];
-   }
-   else
-   {
-      _loc4_._txtText.text = this._sText;
-   }
-   _loc4_.pageInformation._visible = this._sMultiPage;
-   _loc4_.pageInformation.text = this.currentPage + "/" + this.arrayPage.length;
-   _loc4_._btnOk.label = this.api.lang.getText("OK");
-   _loc4_._btnNextStep._visible = this._sMultiPage;
-   _loc4_._btnPreviousStep._visible = this._sMultiPage;
-   this.api.kernel.KeyManager.addShortcutsListener("onShortcut",this);
+    var _loc4_ = this._winBackground.content;
+    _loc4_._btnOk.addEventListener("click", this);
+    _loc4_._btnNextStep.addEventListener("click", this);
+    _loc4_._btnPreviousStep.addEventListener("click", this);
+    _loc4_._txtText.addEventListener("change", this);
+    
+    var _loc2_;
+    
+    if (this._sMultiPage == true)
+    {
+        this.arrayPage = new Array();
+        var _loc3_ = this._sText.split("~");
+        for (var i = 0; i < _loc3_.length; i++)
+        {
+            _loc2_ = _loc3_[i];
+            this.arrayPage.push(_loc2_);
+        }
+        _loc4_._txtText.text = this.arrayPage[0];
+        // CORRECCIÓN: El contador solo se actualiza si es multi-página
+        _loc4_.pageInformation.text = this.currentPage + "/" + this.arrayPage.length;
+    }
+    else
+    {
+        _loc4_._txtText.text = this._sText;
+    }
+    
+    _loc4_.pageInformation._visible = this._sMultiPage;
+    _loc4_._btnOk.label = this.api.lang.getText("OK");
+    _loc4_._btnNextStep._visible = this._sMultiPage;
+    _loc4_._btnPreviousStep._visible = this._sMultiPage;
+    this.api.kernel.KeyManager.addShortcutsListener("onShortcut", this);
 };
-_loc1.click = function(_loc2_)
+_loc1.click = function(oEvent) // Renombramos el parámetro a "oEvent" para mayor claridad
 {
-   var _loc2_ = this._winBackground.content;
-   switch(_loc2_.target._name)
-   {
-      case "_btnOk":
-         if(this._sMultiPage == true)
-         {
-            this.currentPage = 1;
-            this._sMultiPage = false;
-            this._sText = "";
-            this.arrayPage = new Array();
-            this.api.network.send("wv");
-         }
-         this.api.kernel.KeyManager.removeShortcutsListener(this);
-         this.dispatchEvent({type:"ok"});
-         this.unloadThis();
-         break;
-      case "_btnNextStep":
-         if(this.currentPage < this.arrayPage.length)
-         {
-            this.currentPage++;
-            _loc2_._txtText.text = this.arrayPage[this.currentPage - 1];
-            _loc2_.pageInformation.text = this.currentPage + "/" + this.arrayPage.length;
-         }
-         break;
-      case "_btnPreviousStep":
-         if(this.currentPage > 1)
-         {
-            this.currentPage--;
-            _loc2_._txtText.text = this.arrayPage[this.currentPage - 1];
-            _loc2_.pageInformation.text = this.currentPage + "/" + this.arrayPage.length;
-            break;
-         }
-   }
+    // Usamos una nueva variable "oContent" para no sobrescribir el evento
+    var oContent = this._winBackground.content; 
+    
+    // Ahora usamos "oEvent.target._name" para identificar el botón correctamente
+    switch(oEvent.target._name) 
+    {
+       case "_btnOk":
+          if(this._sMultiPage == true)
+          {
+             this.currentPage = 1;
+             this._sMultiPage = false;
+             this._sText = "";
+             this.arrayPage = new Array();
+             this.api.network.send("wv");
+          }
+          this.api.kernel.KeyManager.removeShortcutsListener(this);
+          this.dispatchEvent({type:"ok"});
+          
+          // Aplicamos el arreglo anterior para asegurar el cierre
+          this.api.ui.unloadUIComponent(this._name); 
+          
+          break;
+
+       case "_btnNextStep":
+          if(this.currentPage < this.arrayPage.length)
+          {
+             this.currentPage++;
+             oContent._txtText.text = this.arrayPage[this.currentPage - 1];
+             oContent.pageInformation.text = this.currentPage + "/" + this.arrayPage.length;
+          }
+          break;
+
+       case "_btnPreviousStep":
+          if(this.currentPage > 1)
+          {
+             this.currentPage--;
+             oContent._txtText.text = this.arrayPage[this.currentPage - 1];
+             oContent.pageInformation.text = this.currentPage + "/" + this.arrayPage.length;
+          }
+          // CORRECCIÓN: El break va fuera del if
+          break; 
+    }
 };
 _loc1.change = function()
 {

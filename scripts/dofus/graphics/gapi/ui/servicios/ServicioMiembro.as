@@ -92,61 +92,50 @@ _loc1.addListeners = function()
 };
 _loc1.click = function(oEvent)
 {
-    var _loc2_;
-    
-    // La etiqueta "loop0:" ha sido eliminada.
-    switch(oEvent.target)
-    {
-        case this._btnCreditos:
-            this._btnCreditos.selected = true;
-            this._btnOgrinas.selected = false;
-            this._nMedioPago = 1;
+   var _loc2_;
+   switch(oEvent.target)
+   {
+      case this._btnCreditos:
+         this._btnCreditos.selected = true;
+         this._btnOgrinas.selected = false;
+         this._nMedioPago = 1;
+         break;
+      case this._btnOgrinas:
+         this._btnCreditos.selected = false;
+         this._btnOgrinas.selected = true;
+         this._nMedioPago = 2;
+         break;
+      case this._btnOk:
+         _loc2_ = this._mcList.gapi.api;
+         if((this._oItem.creditos != "---" || this._oItem.ogrinas != "---") && this._nMedioPago == 0)
+         {
+            _loc2_.kernel.showMessage(_loc2_.lang.getText("PANEL_OGRINAS"),_loc2_.lang.getText("ESGOGE_MEDIO_PAGO"),"ERROR_BOX");
             break;
-
-        case this._btnOgrinas:
-            this._btnCreditos.selected = false;
-            this._btnOgrinas.selected = true;
-            this._nMedioPago = 2;
-            break;
-
-        case this._btnOk:
-            _loc2_ = this._mcList.gapi.api;
-            if((this._oItem.creditos != "---" || this._oItem.ogrinas != "---") && this._nMedioPago == 0)
-            {
-                _loc2_.kernel.showMessage(_loc2_.lang.getText("PANEL_OGRINAS"),_loc2_.lang.getText("ESGOGE_MEDIO_PAGO"),"ERROR_BOX");
-                break;
-            }
-            switch(this._nMedioPago)
-            {
-                case 1:
-                    _loc2_.kernel.showMessage(_loc2_.lang.getText("PANEL_OGRINAS"),_loc2_.lang.getText("CONFIRMAR_GASTO") + " " + this._lblDescripcion.text + ", " + this._oItem.creditos + " " + _loc2_.lang.getText("CREDITOS"),"CAUTION_YESNO",{listener:this});
-                    break; // CORREGIDO
-                case 2:
-                    _loc2_.kernel.showMessage(_loc2_.lang.getText("PANEL_OGRINAS"),_loc2_.lang.getText("CONFIRMAR_GASTO") + " " + this._lblDescripcion.text + ", " + this._oItem.ogrinas + " " + _loc2_.lang.getText("OGRINAS"),"CAUTION_YESNO",{listener:this});
-                    break; // CORREGIDO
-                default:
-                    this.yes();
-            }
-    }
+         }
+         switch(this._nMedioPago)
+         {
+            case 1:
+               _loc2_.kernel.showMessage(_loc2_.lang.getText("PANEL_OGRINAS"),_loc2_.lang.getText("CONFIRMAR_GASTO") + " " + this._lblDescripcion.text + ", " + this._oItem.creditos + " " + _loc2_.lang.getText("CREDITOS"),"CAUTION_YESNO",{listener:this});
+               break; 
+            case 2:
+               _loc2_.kernel.showMessage(_loc2_.lang.getText("PANEL_OGRINAS"),_loc2_.lang.getText("CONFIRMAR_GASTO") + " " + this._lblDescripcion.text + ", " + this._oItem.ogrinas + " " + _loc2_.lang.getText("OGRINAS"),"CAUTION_YESNO",{listener:this});
+               break; 
+            default:
+               this.yes();
+               break; 
+         }
+         break; // break para el "case this._btnOk"
+   }
 };
-
-
 _loc1.yes = function(oEvent)
 {
-    this._mcList.gapi.api.network.send("Zs" + this._nID + ";" + this._nMedioPago);
+   this._mcList.gapi.api.network.send("Zs" + this._nID + ";" + this._nMedioPago);
 };
-
-_loc1.onEnterFrame = function()
-{
-    // Esta función parece estar vacía en el original
-};
-
 _loc1._nMedioPago = 0;
 _loc1._nID = -1;
-
 _loc1.addProperty("list",function()
 {
-}, _loc1.__set__list);
-
-ASSetPropFlags(_loc1, null, 1);
+}
+,_loc1.__set__list);
+ASSetPropFlags(_loc1,null,1);
 #endinitclip

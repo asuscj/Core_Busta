@@ -66,7 +66,7 @@ _loc1.equipItem = function(_loc2_)
    var _loc3_;
    if(_loc13_)
    {
-      _loc10_ = 1805;
+      _loc10_ = 8868;
       _loc3_ = 0;
       while(_loc3_ < _loc4_.length)
       {

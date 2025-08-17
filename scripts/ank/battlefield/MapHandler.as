@@ -275,7 +275,7 @@ _loc1.build = function(var2, var3, var4)
          else
          {
             _loc6_.Object2["cellExt" + _loc4_].removeMovieClip();
-            delete register21.mcObjectExternal;
+            delete _loc3_.mcObjectExternal;
          }
          if(_loc3_.layerObject2Num != 0)
          {
@@ -336,13 +336,13 @@ _loc1.build = function(var2, var3, var4)
             {
                _loc3_.layerObject2Num = 0;
                _loc6_.Object2["cell" + _loc4_].removeMovieClip();
-               delete register21.mcObject2;
+               delete _loc3_.mcObject2;
             }
          }
          else
          {
             _loc6_.Object2["cell" + _loc4_].removeMovieClip();
-            delete register21.mcObject2;
+            delete _loc3_.mcObject2;
          }
       }
       else if(var4)
@@ -374,52 +374,58 @@ _loc1.build = function(var2, var3, var4)
       }
    }
 };
-_loc1.showFightCells = function(_loc2_, _loc3_)
+_loc1.showFightCells = function(placementCellsTeam1, placementCellsTeam2)
 {
-   var _loc8_;
-   var _loc2_;
-   var _loc5_;
-   var _loc3_;
-   var _loc4_;
-   if(!this.api.datacenter.Game.isFight)
-   {
-      if(this.api.kernel.OptionsManager.getOption("CellFightPos") == true)
-      {
-         this.api.kernel.OptionsManager.setOption("CellFightPos",false);
-         this.api.sounds.events.onBannerChatButtonClick();
-         this.api.gfx.unSelect(true);
-         return undefined;
-      }
+    // He renombrado los parámetros _loc2_ y _loc3_ para mayor claridad
+    var mapText;
+    var cellID1;
+    var cellID2;
+     
+     if(!this.api.datacenter.Game.isFight)
+     {
+    if(this.api.kernel.OptionsManager.getOption("CellFightPos") == true)
+    {
+     this.api.kernel.OptionsManager.setOption("CellFightPos",false);
+     this.api.sounds.events.onBannerChatButtonClick();
+        this.api.gfx.unSelect(true);
+        return undefined;
+     }
       this.api.kernel.OptionsManager.setOption("CellFightPos",true);
       this.api.sounds.events.onBannerChatButtonClick();
       this.api.network.Game.sendPacketCFP();
-   }
-   else
-   {
-      if(_loc2_ == undefined || _loc3_ == undefined)
-      {
-         _loc8_ = this.api.lang.getMapText(this._oDatacenter.Map.id);
-         if(_loc8_.p1 == undefined || _loc8_.p2 == undefined)
+     }
+     else
+     {
+      if(placementCellsTeam1 == undefined || placementCellsTeam2 == undefined)
          {
-            return undefined;
+        mapText = this.api.lang.getMapText(this._oDatacenter.Map.id);
+        if(mapText.p1 == undefined || mapText.p2 == undefined)
+        {
+         return undefined;
          }
-         _loc2_ = _loc8_.p1;
-         _loc3_ = _loc8_.p2;
+        placementCellsTeam1 = mapText.p1;
+        placementCellsTeam2 = mapText.p2;
+        }
+        this._bShowingFightCells = true;
+     // Bucle corregido para el equipo 1
+     var i = 0;
+         while(i < placementCellsTeam1.length)
+        {
+        cellID1 = ank["\x1e\n\x07"]["\x12\r"].decode64(placementCellsTeam1.charAt(i)) << 6;
+        cellID1 += ank["\x1e\n\x07"]["\x12\r"].decode64(placementCellsTeam1.charAt(i + 1));
+        this.api.gfx.select(cellID1,dofus.Constants.TEAMS_COLOR[0],"startPosition");
+        i += 2;
       }
-      this._bShowingFightCells = true;
-     // Bucle del equipo aliado 
-     for (var i = 0; i < _loc2_.length; i += 2) {
-          var cellID = ank["\x1e\n\x07"]["\x12\r"].decode64(_loc2_.charAt(i)) << 6;
-          cellID += ank["\x1e\n\x07"]["\x12\r"].decode64(_loc2_.charAt(i + 1));
-          this.api.gfx.select(cellID, dofus.Constants.TEAMS_COLOR[0], "startPosition");
+     // Bucle corregido para el equipo 2
+     var j = 0;
+      while(j < placementCellsTeam2.length)
+     {
+        cellID2 = ank["\x1e\n\x07"]["\x12\r"].decode64(placementCellsTeam2.charAt(j)) << 6;
+        cellID2 += ank["\x1e\n\x07"]["\x12\r"].decode64(placementCellsTeam2.charAt(j + 1));
+        this.api.gfx.select(cellID2,dofus.Constants.TEAMS_COLOR[1],"startPosition");
+        j += 2;
+      }
      }
-     // Bucle del equipo enemigo 
-     for (var j = 0; j < _loc3_.length; j += 2) {
-          var cellID = ank["\x1e\n\x07"]["\x12\r"].decode64(_loc3_.charAt(j)) << 6;
-          cellID += ank["\x1e\n\x07"]["\x12\r"].decode64(_loc3_.charAt(j + 1));
-          this.api.gfx.select(cellID, dofus.Constants.TEAMS_COLOR[1], "startPosition");
-     }
-   }
 };
 _loc1.showTriggers = function()
 {
@@ -438,18 +444,27 @@ _loc1.setObject2Interactive = function(nCellNum, bInteractive, nPermanentLevel, 
    _loc2_.estrellas = nEstrellas;
    this.updateCell(nCellNum,_loc2_,"1",nPermanentLevel);
 };
-_loc1.adjustAndMaskMap = function()
+_loc1.adjustAndMaskMap = function ()
 {
-   if(this._nAdjustTimer != undefined)
-   {
-      _global.clearInterval(this._nAdjustTimer);
-      this._nAdjustTimer = undefined;
-   }
-   this._mcContainer.adjusteMap();
-   if(_global.API.kernel.OptionsManager.getOption("tactico"))
-   {
-      this.api.datacenter.Game.isTacticMode = true;
-   }
+    if (this._nAdjustTimer != undefined)
+    {
+        _global.clearInterval(this._nAdjustTimer);
+        this._nAdjustTimer = undefined;
+    }
+    this._mcContainer.adjusteMap();
+    // Comprueba si la opción de modo táctico está activa
+    var bIsTacticOption = _global.API.kernel.OptionsManager.getOption("tactico");
+    // Solo ejecuta la lógica si el estado va a cambiar
+    if (bIsTacticOption != this.api.datacenter.Game.isTacticMode)
+    {
+        // Actualiza el estado global del juego
+        this.api.datacenter.Game.isTacticMode = bIsTacticOption;
+        // Bucle que recorre TODAS las celdas para activar/desactivar el modo táctico
+        for (var i = 0; i < this.getCellCount(); i++)
+        {
+            this.tacticModeRefreshCell(i, bIsTacticOption);
+        }
+    }
 };
 _loc1.initializeCell = function(var2, var3, var4)
 {
@@ -690,10 +705,4 @@ _loc1.updateCell = function(nCellNum, oNewCell, sMaskHex, nPermanentLevel)
    this.build(this._oDatacenter.Map,nCellNum);
 };
 _loc1.bInteractive = false;
-_loc1.applyTacticMode = function(bTactic) {
-    var nCellCount = this.getCellCount();
-    for (var i = 0; i < nCellCount; i++) {
-        this.tacticModeRefreshCell(i, bTactic);
-    }
-};
 #endinitclip

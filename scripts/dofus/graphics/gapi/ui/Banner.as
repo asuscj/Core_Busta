@@ -1,4 +1,5 @@
 #initclip 33
+
 var _loc1 = dofus["\r\x14"].gapi.ui.Banner.prototype;
 _loc1.createChildren = function()
 {
@@ -28,7 +29,7 @@ _loc1.createChildren = function()
    };
    this._txtConsole.maxChars = dofus.Constants.MAX_MESSAGE_LENGTH + dofus.Constants.MAX_MESSAGE_LENGTH_MARGIN;
    ank.battlefield["\x1c\n"].useCacheAsBitmapOnStaticAnim = this.api.lang.getConfigText("USE_CACHEASBITMAP_ON_STATICANIM");
-   k = 0;
+   var k = 0;
    while(k < 10)
    {
       duplicateMovieClip(this.snow,"snow" + k,16384 + k);
@@ -97,6 +98,7 @@ _loc1.updatePvPButtonState = function()
          this._btnPvP.backgroundDown = "ButtonBannerRoundDown";
          this._btnPvP.backgroundUp = "ButtonBannerRoundUp";
    }
+
 };
 _loc1.huntMatchmakingStatusChanged = function()
 {
@@ -106,6 +108,7 @@ _loc1.href = function(_loc2_)
 {
    var _loc3_ = _loc2_.params.split(",");
    var _loc4_;
+
    switch(_loc3_[0])
    {
       case "HunterAcceptPvPHunt":
@@ -385,164 +388,146 @@ _loc1.over = function(_loc2_)
    var _loc5_;
    var _loc4_;
    var _loc3_;
-switch(_loc2_.target._name)
-{
-    case "_btnHelp":
-        this.gapi.showTooltip(this.api.lang.getText("CHAT_MENU"),_loc2_.target,-20,{bXLimit:false,bYLimit:false});
-        break;
-
-    case "_btnGiveUp":
-        var _loc9_; 
-        if(this.api.datacenter.Game.isSpectator)
-        {
+   switch(_loc2_.target._name) // ✅ ETIQUETA ELIMINADA
+   {
+      case "_btnHelp":
+         this.gapi.showTooltip(this.api.lang.getText("CHAT_MENU"),_loc2_.target,-20,{bXLimit:false,bYLimit:false});
+         break;
+      case "_btnGiveUp":
+         if(this.api.datacenter.Game.isSpectator)
+         {
             _loc9_ = this.api.lang.getText("GIVE_UP_SPECTATOR");
-        }
-        else if(this.api.datacenter.Game.fightType == dofus["\x0b\b"].GameManager.FIGHT_TYPE_CHALLENGE || !this.api.datacenter.Basics.aks_current_server.isHardcore())
-        {
+         }
+         else if(this.api.datacenter.Game.fightType == dofus["\x0b\b"].GameManager.FIGHT_TYPE_CHALLENGE || !this.api.datacenter.Basics.aks_current_server.isHardcore())
+         {
             _loc9_ = this.api.lang.getText("GIVE_UP");
-        }
-        else
-        {
+         }
+         else
+         {
             _loc9_ = this.api.lang.getText("SUICIDE");
-        }
-        this.gapi.showTooltip(_loc9_,_loc2_.target,-20,{bXLimit:true,bYLimit:false});
-        break;
-
-    case "_btnPvP":
-        this.gapi.showTooltip(this.api.lang.getText("CONQUEST_WORD"),_loc2_.target,-20,{bXLimit:true,bYLimit:false});
-        break;
-
-    case "_btnMount":
-        this.gapi.showTooltip(this.api.lang.getText("MY_MOUNT"),_loc2_.target,-20,{bXLimit:true,bYLimit:false});
-        break;
-
-    case "_btnGuild":
-        this.gapi.showTooltip(this.api.lang.getText("YOUR_GUILD"),_loc2_.target,-20,{bXLimit:true,bYLimit:false});
-        break;
-
-    case "_btnStatsJob":
-        this.gapi.showTooltip(this.api.lang.getText("YOUR_STATS_JOB"),_loc2_.target,-20,{bXLimit:true,bYLimit:false});
-        if(this.api.datacenter.Player.Level == 200)
-        {
+         }
+         this.gapi.showTooltip(_loc9_,_loc2_.target,-20,{bXLimit:true,bYLimit:false});
+         break;
+      case "_btnPvP":
+         this.gapi.showTooltip(this.api.lang.getText("CONQUEST_WORD"),_loc2_.target,-20,{bXLimit:true,bYLimit:false});
+         break;
+      case "_btnMount":
+         this.gapi.showTooltip(this.api.lang.getText("MY_MOUNT"),_loc2_.target,-20,{bXLimit:true,bYLimit:false});
+         break;
+      case "_btnGuild":
+         this.gapi.showTooltip(this.api.lang.getText("YOUR_GUILD"),_loc2_.target,-20,{bXLimit:true,bYLimit:false});
+         break;
+      case "_btnStatsJob":
+         this.gapi.showTooltip(this.api.lang.getText("YOUR_STATS_JOB"),_loc2_.target,-20,{bXLimit:true,bYLimit:false});
+         if(this.api.datacenter.Player.Level == 200)
+         {
             this.gapi.showTooltip(this.api.lang.getText("YOUR_STATS_JOB"),_loc2_.target,-20,{bXLimit:true,bYLimit:false});
             break;
-        }
-        var _loc6_ = this.api.datacenter.Player.XPhigh - this.api.datacenter.Player.XPlow;
-        var _loc8_ = this.getCurrentPercent();
-        var _loc7_ = new ank["\x1e\n\x07"]["\x0e\x1c"](_loc6_).addMiddleChar(" ",3);
-        this.gapi.showTooltip(this.api.lang.getText("YOUR_STATS_JOB") + "\n\n" + this.api.lang.getText("NEXT_LEVEL") + " " + _loc8_ + "\n" + this.api.lang.getText("REQUIRED") + " " + _loc7_ + " " + this.api.lang.getText("WORD_XP"),_loc2_.target,-54,{bXLimit:true,bYLimit:false});
-        break;
-
-    case "_btnSpells":
-        this.gapi.showTooltip(this.api.lang.getText("YOUR_SPELLS"),_loc2_.target,-20,{bXLimit:true,bYLimit:false});
-        break;
-
-    case "_btnQuests":
-        this.gapi.showTooltip(this.api.lang.getText("YOUR_QUESTS"),_loc2_.target,-20,{bXLimit:true,bYLimit:false});
-        break;
-
-    case "_btnInventory":
-        var _loc6_ = new ank["\x1e\n\x07"]["\x0e\x1c"](this.api.datacenter.Player.currentWeight).addMiddleChar(" ",3);
-        var _loc8_ = new ank["\x1e\n\x07"]["\x0e\x1c"](this.api.datacenter.Player.maxWeight).addMiddleChar(" ",3);
-        var _loc7_ = this.api.lang.getText("PLAYER_WEIGHT",[_loc6_,_loc8_]);
-        this.gapi.showTooltip(this.api.lang.getText("YOUR_INVENTORY") + "\n\n" + _loc7_,_loc2_.target,-43,{bXLimit:true,bYLimit:false});
-        break;
-
-    case "_btnMap":
-        this.gapi.showTooltip(this.api.lang.getText("YOUR_BOOK"),_loc2_.target,-20,{bXLimit:true,bYLimit:false});
-        break;
-
-    case "_btnFriends":
-        this.gapi.showTooltip(this.api.lang.getText("YOUR_FRIENDS"),_loc2_.target,-20,{bXLimit:true,bYLimit:false});
-        break;
-
-    case "_btnFights":
-        if(this._nFightsCount != 0)
-        {
+         }
+         _loc6_ = this.api.datacenter.Player.XPhigh - this.api.datacenter.Player.XPlow;
+         _loc8_ = this.getCurrentPercent();
+         _loc7_ = new ank["\x1e\n\x07"]["\x0e\x1c"](_loc6_).addMiddleChar(" ",3);
+         this.gapi.showTooltip(this.api.lang.getText("YOUR_STATS_JOB") + "\n\n" + this.api.lang.getText("NEXT_LEVEL") + " " + _loc8_ + "\n" + this.api.lang.getText("REQUIRED") + " " + _loc7_ + " " + this.api.lang.getText("WORD_XP"),_loc2_.target,-54,{bXLimit:true,bYLimit:false});
+         break;
+      case "_btnSpells":
+         this.gapi.showTooltip(this.api.lang.getText("YOUR_SPELLS"),_loc2_.target,-20,{bXLimit:true,bYLimit:false});
+         break;
+      case "_btnQuests":
+         this.gapi.showTooltip(this.api.lang.getText("YOUR_QUESTS"),_loc2_.target,-20,{bXLimit:true,bYLimit:false});
+         break;
+      case "_btnInventory":
+         _loc6_ = new ank["\x1e\n\x07"]["\x0e\x1c"](this.api.datacenter.Player.currentWeight).addMiddleChar(" ",3);
+         _loc8_ = new ank["\x1e\n\x07"]["\x0e\x1c"](this.api.datacenter.Player.maxWeight).addMiddleChar(" ",3);
+         _loc7_ = this.api.lang.getText("PLAYER_WEIGHT",[_loc6_,_loc8_]);
+         this.gapi.showTooltip(this.api.lang.getText("YOUR_INVENTORY") + "\n\n" + _loc7_,_loc2_.target,-43,{bXLimit:true,bYLimit:false});
+         break;
+      case "_btnMap":
+         this.gapi.showTooltip(this.api.lang.getText("YOUR_BOOK"),_loc2_.target,-20,{bXLimit:true,bYLimit:false});
+         break;
+      case "_btnFriends":
+         this.gapi.showTooltip(this.api.lang.getText("YOUR_FRIENDS"),_loc2_.target,-20,{bXLimit:true,bYLimit:false});
+         break;
+      case "_btnFights":
+         if(this._nFightsCount != 0)
+         {
             this.gapi.showTooltip(ank["\x1e\n\x07"]["\x1e\x16\x19"].combine(this.api.lang.getText("FIGHTS_ON_MAP",[this._nFightsCount]),"m",this._nFightsCount < 2),_loc2_.target,-20,{bYLimit:false});
-        }
-        break;
-
-    case "_btnNextTurn":
-        this.gapi.showTooltip(this.api.lang.getText("NEXT_TURN"),_loc2_.target,-20,{bXLimit:true,bYLimit:false});
-        break;
-
-    case "_pvAP":
-        this.gapi.showTooltip(this.api.lang.getText("ACTIONPOINTS"),_loc2_.target,-20,{bXLimit:true,bYLimit:false});
-        break;
-
-    case "_pvMP":
-        this.gapi.showTooltip(this.api.lang.getText("MOVEPOINTS"),_loc2_.target,-20,{bXLimit:true,bYLimit:false});
-        break;
-
-    case "_mcXtra":
-        switch(this._sCurrentCircleXtra)
-        {
+         }
+         break;
+      case "_btnNextTurn":
+         this.gapi.showTooltip(this.api.lang.getText("NEXT_TURN"),_loc2_.target,-20,{bXLimit:true,bYLimit:false});
+         break;
+      case "_pvAP":
+         this.gapi.showTooltip(this.api.lang.getText("ACTIONPOINTS"),_loc2_.target,-20,{bXLimit:true,bYLimit:false});
+         break;
+      case "_pvMP":
+         this.gapi.showTooltip(this.api.lang.getText("MOVEPOINTS"),_loc2_.target,-20,{bXLimit:true,bYLimit:false});
+         break;
+      case "_mcXtra":
+         switch(this._sCurrentCircleXtra)
+         {
             case "compass":
-                var _loc10_ = _loc2_.target.targetCoords;
-                if(_loc10_ == undefined)
-                {
-                    this.gapi.showTooltip(this.api.lang.getText("BANNER_SET_FLAG"),_loc2_.target,0,{bXLimit:true,bYLimit:false});
-                }
-                else
-                {
-                    this.gapi.showTooltip(_loc10_[0] + ", " + _loc10_[1],_loc2_.target,0,{bXLimit:true,bYLimit:false});
-                }
-                break;
+               _loc10_ = _loc2_.target.targetCoords;
+               if(_loc10_ == undefined)
+               {
+                  this.gapi.showTooltip(this.api.lang.getText("BANNER_SET_FLAG"),_loc2_.target,0,{bXLimit:true,bYLimit:false});
+               }
+               else
+               {
+                  this.gapi.showTooltip(_loc10_[0] + ", " + _loc10_[1],_loc2_.target,0,{bXLimit:true,bYLimit:false});
+               }
+               break;
             case "clock":
-                this.gapi.showTooltip(this.api.kernel.NightManager.time + "\n" + this.api.kernel.NightManager.getCurrentDateString(),_loc2_.target,0,{bXLimit:true,bYLimit:false});
-        }
-        if(!this.api.datacenter.Game.isFight)
-        {
+               this.gapi.showTooltip(this.api.kernel.NightManager.time + "\n" + this.api.kernel.NightManager.getCurrentDateString(),_loc2_.target,0,{bXLimit:true,bYLimit:false});
+         }
+         if(!this.api.datacenter.Game.isFight)
+         {
             this.setXtraMask(this._mcCircleXtraMaskBig);
             this.moveHeart(true);
             dofus["\r\x14"].gapi.ui["\x1c\x10"]["\x1c\x0f"].showGaugeMode(this);
-        }
-        break;
-
-    case "_hHeart":
-        this.gapi.showTooltip(this.api.lang.getText("HELP_LIFE"),_loc2_.target,-20);
-        break;
-
-    default:
-        switch(this._msShortcuts.currentTab)
-        {
+         }
+         break;
+      case "_hHeart":
+         this.gapi.showTooltip(this.api.lang.getText("HELP_LIFE"),_loc2_.target,-20);
+         break;
+      default:
+         switch(this._msShortcuts.currentTab)
+         {
             case "Spells":
-                var _loc5_ = _loc2_.target.contentData;
-                if(_loc5_ != undefined)
-                {
-                    this.gapi.showTooltip(_loc5_.name + " (" + _loc5_.apCost + " " + this.api.lang.getText("AP") + (_loc5_.actualCriticalHit > 0 ? ", " + this.api.lang.getText("ACTUAL_CRITICAL_CHANCE") + ": 1/" + _loc5_.actualCriticalHit : "") + ")",_loc2_.target,-20,{bXLimit:true,bYLimit:false});
-                }
-                break; // CORREGIDO
+               _loc5_ = _loc2_.target.contentData;
+               if(_loc5_ != undefined)
+               {
+                  this.gapi.showTooltip(_loc5_.name + " (" + _loc5_.apCost + " " + this.api.lang.getText("AP") + (_loc5_.actualCriticalHit > 0 ? ", " + this.api.lang.getText("ACTUAL_CRITICAL_CHANCE") + ": 1/" + _loc5_.actualCriticalHit : "") + ")",_loc2_.target,-20,{bXLimit:true,bYLimit:false});
+               }
+               break;
             case "Items":
-                var _loc4_ = _loc2_.target.contentData;
-                if(_loc4_ != undefined)
-                {
-                    var _loc3_ = _loc4_.name;
-                    if(this.gapi.getUIComponent("Inventory") == undefined)
-                    {
-                        if(_loc4_.canUse && _loc4_.canTarget)
+               _loc4_ = _loc2_.target.contentData;
+               if(_loc4_ != undefined)
+               {
+                  _loc3_ = _loc4_.name;
+                  if(this.gapi.getUIComponent("Inventory") == undefined)
+                  {
+                     if(_loc4_.canUse && _loc4_.canTarget)
+                     {
+                        _loc3_ += "\n" + this.api.lang.getText("HELP_SHORTCUT_DBLCLICK_CLICK");
+                     }
+                     else
+                     {
+                        if(_loc4_.canUse)
                         {
-                            _loc3_ += "\n" + this.api.lang.getText("HELP_SHORTCUT_DBLCLICK_CLICK");
+                           _loc3_ += "\n" + this.api.lang.getText("HELP_SHORTCUT_DBLCLICK");
                         }
-                        else
+                        if(_loc4_.canTarget)
                         {
-                            if(_loc4_.canUse)
-                            {
-                                _loc3_ += "\n" + this.api.lang.getText("HELP_SHORTCUT_DBLCLICK");
-                            }
-                            if(_loc4_.canTarget)
-                            {
-                                _loc3_ += "\n" + this.api.lang.getText("HELP_SHORTCUT_CLICK");
-                            }
+                           _loc3_ += "\n" + this.api.lang.getText("HELP_SHORTCUT_CLICK");
                         }
-                    }
-                    this.gapi.showTooltip(_loc3_,_loc2_.target,-30,{bXLimit:true,bYLimit:false});
-                    break; // CORREGIDO
-                }
-        }
-      };
-}
+                     }
+                  }
+                  this.gapi.showTooltip(_loc3_,_loc2_.target,-30,{bXLimit:true,bYLimit:false});
+               }
+               break;
+         }
+   }
+};
 _loc1.SubCerrado = false;
 _loc1.click = function(oEvent)
 {
