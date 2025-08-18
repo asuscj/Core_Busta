@@ -59,6 +59,7 @@ Este es el estado actual de la reconstrucción. Las tareas marcadas con ✅ est�
 * [x] Corrección de errores críticos en bucles de `MapHandler.as` (Soluciona el dibujo de las celdas de posicionamiento de combate).
 * [x] Reparación completa y optimización del **Modo Táctico**.
 * [ ] Limpieza y renombrado de la librería de símbolos para una navegación más fácil.
+* [x] Corrección del Inventario.
 * [x] Refactorización de código ofuscado a un formato más legible.
 * [ ] Documentación interna del código para explicar funciones clave.
 * [ ] Optimización general del rendimiento.

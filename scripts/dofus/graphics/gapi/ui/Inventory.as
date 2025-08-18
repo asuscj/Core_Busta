@@ -83,12 +83,17 @@ _loc1.dblClickItem = function(_loc2_)
             },_loc8_];
             _loc7_ = _loc3_.Quantity;
             _loc9_ = _loc5_.loadUIComponent("PopupQuantityWithDescription","PopupQuantityWithDescription",{descriptionLangKey:_loc10_,descriptionLangKeyParams:_loc6_,value:1,max:_loc7_,params:{type:"batchUseItem",item:_loc3_}},{bForceLoad:true});
+           var self = this; // Guardamos la referencia a 'this' (la instancia de Inventory)
+           
             _loc4_ = new Object();
-            _loc4_.validate = function(var2)
+            // Renombramos 'var2' a 'popupData' para más claridad
+            _loc4_.validate = function(popupData) 
             {
-               var _loc3_ = var2.params.item.ID;
-               this.api.kernel.showMessage(undefined,"IDItem: " + _loc3_ + " " + var2.value,"COMMANDS_CHAT");
-               _global.API.network.send("OT" + _loc3_ + "|" + var2.value);
+               var itemID = popupData.params.item.ID;
+              // Usamos 'self' para acceder al 'api' de la clase Inventory
+               self.api.kernel.showMessage(undefined,"IDItem: " + itemID + " " + popupData.value,"COMMANDS_CHAT");
+              // Asumimos que _global.API es lo mismo que self.api
+               self.api.network.send("OT" + itemID + "|" + popupData.value);
             };
             _loc9_.addEventListener("validate",_loc4_);
          }
@@ -468,53 +473,56 @@ _loc1.dragItem = function(_loc2_)
    this.enabledFromSuperType(_loc2_.target.contentData);
    this.gapi.setCursor(_loc2_.target.contentData);
 };
-_loc1.dropItem = function(_loc2_)
+_loc1.dropItem = function(p_event)
 {
-   if(!this.api.datacenter.Player.checkCanMoveItem())
-   {
-      return undefined;
-   }
-   var _loc2_ = this.gapi.getCursor();
-   if(_loc2_ == undefined)
-   {
-      return undefined;
-   }
-   if(_loc2_.isShortcut)
-   {
-      this.api.network.InventoryShortcuts.sendInventoryShortcutRemove(_loc2_.position);
-      return undefined;
-   }
-   var _loc3_;
-   if(_loc2_.target._parent == this)
-   {
-      _loc3_ = Number(_loc2_.target._name.substr(4));
-   }
-   else
-   {
-      if(_loc2_.position == -1)
-      {
-         this.resetTwoHandClip();
-         return undefined;
-      }
-      _loc3_ = -1;
-   }
-   if(_loc2_.position == _loc3_)
-   {
-      this.resetTwoHandClip();
-      return undefined;
-   }
-   this.gapi.removeCursor();
-   var _loc4_;
-   if(_loc2_.Quantity > 1 && (_loc3_ == -1 || _loc3_ == 16))
-   {
-      _loc4_ = this.gapi.loadUIComponent("PopupQuantity","PopupQuantity",{value:_loc2_.Quantity,max:_loc2_.Quantity,params:{type:"move",position:_loc3_,item:_loc2_}});
-      _loc4_.addEventListener("validate",this);
-      this._popupQuantity = _loc4_;
-   }
-   else
-   {
-      this.api.network.Items.movement(_loc2_.ID,_loc3_);
-   }
+    if(!this.api.datacenter.Player.checkCanMoveItem())
+    {
+       return undefined;
+    }
+    // Usamos un nombre de variable diferente para el ítem del cursor
+    var itemEnCursor = this.gapi.getCursor();
+    if(itemEnCursor == undefined)
+    {
+       return undefined;
+    }
+    if(itemEnCursor.isShortcut)
+    {
+       this.api.network.InventoryShortcuts.sendInventoryShortcutRemove(itemEnCursor.position);
+       return undefined;
+    }
+    var nuevaPosicion;
+    // Ahora usamos el parámetro original 'p_event' para obtener el target
+    if(p_event.target._parent == this)
+    {
+       nuevaPosicion = Number(p_event.target._name.substr(4));
+    }
+    else
+    {
+       if(itemEnCursor.position == -1)
+       {
+          this.resetTwoHandClip();
+          return undefined;
+       }
+       nuevaPosicion = -1;
+    }
+    // El resto de la lógica usaría itemEnCursor y nuevaPosicion
+    if(itemEnCursor.position == nuevaPosicion)
+    {
+       this.resetTwoHandClip();
+       return undefined;
+    }
+    this.gapi.removeCursor();
+    var popup;
+    if(itemEnCursor.Quantity > 1 && (nuevaPosicion == -1 || nuevaPosicion == 16))
+    {
+       popup = this.gapi.loadUIComponent("PopupQuantity","PopupQuantity",{value:itemEnCursor.Quantity,max:itemEnCursor.Quantity,params:{type:"move",position:nuevaPosicion,item:itemEnCursor}});
+       popup.addEventListener("validate",this);
+       this._popupQuantity = popup;
+    }
+    else
+    {
+       this.api.network.Items.movement(itemEnCursor.ID, nuevaPosicion);
+    }
 };
 _loc1.initFilter = function()
 {

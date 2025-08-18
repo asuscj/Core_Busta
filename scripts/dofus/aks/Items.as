@@ -62,18 +62,25 @@ _loc1.equipItem = function(_loc2_)
       _loc6_ += 1;
    }
    var _loc13_ = _loc9_ == undefined;
-   var _loc10_;
-   var _loc3_;
    if(_loc13_)
    {
-      _loc10_ = 8868;
-      _loc3_ = 0;
+      // Si no se encontró un slot vacío, procedemos a elegir uno para reemplazar.
+      var slotEncontrado = false;
+      var _loc10_ = 0; // Guardará el timestamp del item más antiguo
+      var _loc3_ = 0;
+      
       while(_loc3_ < _loc4_.length)
       {
-         if(this.api.kernel.GameManager.getLastModified(_loc4_[_loc3_]) < _loc10_)
+         var slotActual = Number(_loc4_[_loc3_]);
+         var timestampItemActual = this.api.kernel.GameManager.getLastModified(slotActual);
+
+         // Si es el primer slot que revisamos O si este item es más antiguo que el que ya encontramos...
+         if (!slotEncontrado || timestampItemActual < _loc10_)
          {
-            _loc10_ = this.api.kernel.GameManager.getLastModified(_loc4_[_loc3_]);
-            _loc9_ = _loc4_[_loc3_];
+            // ...lo seleccionamos como el objetivo.
+            _loc10_ = timestampItemActual;
+            _loc9_ = slotActual;
+            slotEncontrado = true;
          }
          _loc3_ += 1;
       }

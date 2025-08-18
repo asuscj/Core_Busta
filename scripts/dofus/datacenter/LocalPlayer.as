@@ -118,54 +118,61 @@ _loc1.getSet = function(nID)
    }
    return _loc2_.item;
 };
-_loc1.updateItem = function(_loc2_)
+_loc1.updateItem = function(p_itemData) 
 {
-   var _loc2_ = this.Inventory.findFirstItem("ID",_loc2_.ID);
-   if(_loc2_.item.ID == _loc2_.ID && _loc2_.item.maxSkin != _loc2_.maxSkin)
-   {
-      if(!_loc2_.item.isLeavingItem && _loc2_.isLeavingItem)
-      {
-         this.api.kernel.SpeakingItemsManager.triggerPrivateEvent(dofus["\x0b\b"].SpeakingItemsManager.SPEAK_TRIGGER_ASSOCIATE);
-      }
-      if(_loc2_.item.isLeavingItem && _loc2_.isLeavingItem)
-      {
-         this.api.kernel.SpeakingItemsManager.triggerPrivateEvent(dofus["\x0b\b"].SpeakingItemsManager.SPEAK_TRIGGER_LEVEL_UP);
-      }
-   }
-   if(_loc2_ != undefined && _loc2_.isEquiped)
-   {
-      this.InventoryByItemPositions.removeItemAt(_loc2_.position);
-   }
-   this.Inventory.startNoEventDispatchsPeriod(dofus.Constants.DELAYED_INVENTORY_ITEMS_VISUAL_REFRESH);
-   this.Inventory.updateItem(_loc2_.index,_loc2_);
-   if(_loc2_.isEquiped)
-   {
-      this.InventoryByItemPositions.addItemAt(_loc2_.position,_loc2_);
-   }
+    // Buscamos el ítem en el inventario usando el ID de los datos que llegaron
+    var itemEnInventario = this.Inventory.findFirstItem("ID", p_itemData.ID);
+    
+    // Comparamos el ítem del inventario con los datos nuevos
+    if(itemEnInventario.item.ID == p_itemData.ID && itemEnInventario.item.maxSkin != p_itemData.maxSkin)
+    {
+       if(!itemEnInventario.item.isLeavingItem && p_itemData.isLeavingItem)
+       {
+          this.api.kernel.SpeakingItemsManager.triggerPrivateEvent(dofus["\x0b\b"].SpeakingItemsManager.SPEAK_TRIGGER_ASSOCIATE);
+       }
+       if(itemEnInventario.item.isLeavingItem && p_itemData.isLeavingItem)
+       {
+          this.api.kernel.SpeakingItemsManager.triggerPrivateEvent(dofus["\x0b\b"].SpeakingItemsManager.SPEAK_TRIGGER_LEVEL_UP);
+       }
+    }
+    // Y actualizamos el resto.
+    if(itemEnInventario != undefined && itemEnInventario.isEquiped)
+    {
+       this.InventoryByItemPositions.removeItemAt(itemEnInventario.position);
+    }
+    this.Inventory.startNoEventDispatchsPeriod(dofus.Constants.DELAYED_INVENTORY_ITEMS_VISUAL_REFRESH);
+    this.Inventory.updateItem(itemEnInventario.index, p_itemData); // Actualizamos con los datos nuevos
+    if(p_itemData.isEquiped) // Usamos los datos nuevos para ver si está equipado
+    {
+       this.InventoryByItemPositions.addItemAt(p_itemData.position, p_itemData);
+    }
 };
-_loc1.updateItemPosition = function(_loc2_, _loc3_)
+_loc1.updateItemPosition = function(p_itemID, p_newPosition)
 {
-   var _loc3_ = this.Inventory.findFirstItem("ID",_loc2_);
-   var _loc2_ = _loc3_.item;
-   if(_loc2_.position == 1)
-   {
-      this.setWeaponItem();
-   }
-   else if(_loc3_ == 1)
-   {
-      this.setWeaponItem(_loc2_);
-   }
-   if(_loc2_.isEquiped)
-   {
-      this.InventoryByItemPositions.removeItemAt(_loc2_.position);
-   }
-   _loc2_.position = _loc3_;
-   this.Inventory.startNoEventDispatchsPeriod(dofus.Constants.DELAYED_INVENTORY_ITEMS_VISUAL_REFRESH);
-   this.Inventory.updateItem(_loc3_.index,_loc2_);
-   if(_loc2_.isEquiped)
-   {
-      this.InventoryByItemPositions.addItemAt(_loc2_.position,_loc2_);
-   }
+    
+    var itemEnInventario = this.Inventory.findFirstItem("ID", p_itemID);
+    var itemObject = itemEnInventario.item; // El objeto del ítem real
+
+    if(itemObject.position == 1) // Si la posición ANTIGUA era el arma
+    {
+       this.setWeaponItem();
+    }
+    else if(p_newPosition == 1) // Si la posición NUEVA es el arma
+    {
+       this.setWeaponItem(itemObject);
+    }
+
+    if(itemObject.isEquiped)
+    {
+       this.InventoryByItemPositions.removeItemAt(itemObject.position);
+    }
+    itemObject.position = p_newPosition; // Asignamos la NUEVA posición
+    this.Inventory.startNoEventDispatchsPeriod(dofus.Constants.DELAYED_INVENTORY_ITEMS_VISUAL_REFRESH);
+    this.Inventory.updateItem(itemEnInventario.index, itemObject);
+    if(itemObject.isEquiped)
+    {
+       this.InventoryByItemPositions.addItemAt(itemObject.position, itemObject);
+    }
 };
 _loc1.dropItem = function(_loc2_)
 {
