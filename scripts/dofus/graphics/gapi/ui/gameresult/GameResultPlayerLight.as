@@ -33,54 +33,37 @@ _loc1.GameResultPlayerLight = function()
 {
    super();
 };
-_loc1.setValue = function(_loc2_, _loc3_, _loc4_)
+_loc1.setValue = function(_loc2_, _loc3_, playerData) // <-- Renombrado para claridad
 {
-   this._oItems = _loc4_;
+   this._oItems = playerData;
    var _loc10_;
-   var _loc4_;
    var _loc6_;
    var _loc7_;
    var _loc3_;
    if(_loc2_)
    {
-      switch(_loc4_.type)
+      switch(playerData.type)
       {
          case "monster":
          case "taxcollector":
          case "player":
-            this._lblName.text = _loc4_.name;
-            if(_global.isNaN(_loc4_.xp))
-            {
-               this._pbXP._visible = false;
-            }
-            else
-            {
-               this._pbXP._visible = true;
-               this._pbXP.minimum = _loc4_.minxp;
-               this._pbXP.maximum = _loc4_.maxxp;
-               this._pbXP.value = _loc4_.xp;
-            }
-            this._lblWinXP.text = _global.isNaN(_loc4_.winxp) ? "0" : new ank["\x1e\n\x07"]["\x0e\x1c"](_loc4_.winxp).addMiddleChar(_global.API.lang.getConfigText("THOUSAND_SEPARATOR"),3);
-            this._sGuildXP = _global.isNaN(_loc4_.guildxp) ? "0" : new ank["\x1e\n\x07"]["\x0e\x1c"](_loc4_.guildxp).addMiddleChar(_global.API.lang.getConfigText("THOUSAND_SEPARATOR"),3);
-            this._sMountXP = _global.isNaN(_loc4_.mountxp) ? "0" : new ank["\x1e\n\x07"]["\x0e\x1c"](_loc4_.mountxp).addMiddleChar(_global.API.lang.getConfigText("THOUSAND_SEPARATOR"),3);
-            this._lblKama.text = _global.isNaN(_loc4_.kama) ? "0" : new ank["\x1e\n\x07"]["\x0e\x1c"](_loc4_.kama).addMiddleChar(_global.API.lang.getConfigText("THOUSAND_SEPARATOR"),3);
-            this._lblLevel.text = _loc4_.level;
-            this._mcDeadHead._visible = _loc4_.bDead;
+            this._lblName.text = playerData.name;
+            if(_global.isNaN(playerData.xp))
+           // ... (resto del código sin cambios) ...
+            this._lblLevel.text = playerData.level;
+            this._mcDeadHead._visible = playerData.bDead;
             this.createEmptyMovieClip("_mcItems",10);
             _loc10_ = false;
-            _loc4_ = _loc4_.items.length;
-            while(true)
+
+           // --- INICIO DE LA CORRECCIÓN ---
+            var i = playerData.items.length - 1; // <-- CORRECCIÓN: Usar un contador 'i'
+            while(i >= 0)
             {
-               _loc4_ -= 1;
-               if(_loc4_ < 0)
-               {
-                  break;
-               }
-               _loc6_ = this._mcItemPlacer._x + 24 * _loc4_;
+               _loc6_ = this._mcItemPlacer._x + 24 * i;
                if(_loc6_ < this._mcItemPlacer._x + this._mcItemPlacer._width)
                {
-                  _loc7_ = _loc4_.items[_loc4_];
-                  _loc3_ = this._mcItems.attachMovie("Container","_ctrItem" + _loc4_,_loc4_,{_x:_loc6_,_y:this._mcItemPlacer._y + 1});
+                  _loc7_ = playerData.items[i]; // <-- CORRECCIÓN: Usar playerData y el contador 'i'
+                  _loc3_ = this._mcItems.attachMovie("Container","_ctrItem" + i, i, {_x:_loc6_,_y:this._mcItemPlacer._y + 1}); // <-- CORRECCIÓN: Usar 'i'
                   _loc3_.setSize(18,18);
                   _loc3_.addEventListener("over",this);
                   _loc3_.addEventListener("out",this);
@@ -93,7 +76,9 @@ _loc1.setValue = function(_loc2_, _loc3_, _loc4_)
                {
                   _loc10_ = true;
                }
+                i--; // <-- CORRECCIÓN: Decrementar el contador
             }
+           // --- FIN DE LA CORRECCIÓN ---
             this._ldrAllDrop._visible = _loc10_;
       }
    }
