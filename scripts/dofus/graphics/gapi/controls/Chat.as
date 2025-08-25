@@ -207,6 +207,7 @@ _loc1.click = function(oEvent)
          break;
       case "_btnOrnamentos":
          this.api.sounds.events.onBannerChatButtonClick();
+
          this.api.kernel.Console.process(".ornamentos");
          break;
       case "_btnGlobalFights":

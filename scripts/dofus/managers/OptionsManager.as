@@ -131,7 +131,6 @@ _loc1.applyOption = function(_loc2_, _loc3_)
          this.api.kernel.AudioManager.environmentMute = _loc3_;
          break;
       case "tactico":
-         this.api.datacenter.Game.isTacticMode = _loc3_;
          break;
       case "TimestampInChat":
          this.api.kernel.ChatManager.refresh();
