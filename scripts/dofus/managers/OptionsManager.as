@@ -1,6 +1,7 @@
 #initclip 67
 var _loc1 = dofus["\x0b\b"].OptionsManager.prototype;
-dofus["\x0b\b"].OptionsManager.DEFAULT_VALUES = {loaded:true,Grid:false,Transparency:false,SpriteInfos:true,SpriteMove:true,MapInfos:true,AutoHideSmileys:false,StringCourse:true,PointsOverHead:true,ChatEffects:true,CreaturesMode:50,Buff:true,GuildMessageSound:false,BannerShortcuts:true,StartTurnSound:true,TipsOnStart:true,DisplayStyle:"normal",DebugSizeIndex:0,ServerPortIndex:0,MovableBar:false,ViewAllMonsterInGroup:true,MovableBarSize:5,ShortcutSet:1,ShortcutSetDefault:1,CharacterPreview:true,MapFilters:[0,1,1,1,1,1,1],Aura:true,AudioMusicVol:20,AudioEffectVol:15,AudioEnvVol:15,AudioMusicMute:false,AudioEffectMute:false,AudioEnvMute:false,FloatingTipsCoord:new com
+dofus.managers.OptionsManager.DISPLAY_STYLE_WIDESCREEN_PANELS = "widescreenpanels";
+dofus["\x0b\b"].OptionsManager.DEFAULT_VALUES = {loaded:true,Grid:false,Transparency:false,SpriteInfos:true,SpriteMove:true,MapInfos:true,AutoHideSmileys:false,StringCourse:true,PointsOverHead:true,ChatEffects:true,CreaturesMode:50,Buff:true,GuildMessageSound:false,BannerShortcuts:true,StartTurnSound:true,TipsOnStart:true,DisplayStyle:"normal",chatReplacementPanel: dofus.graphics.gapi.ui.ChatReplacementPanelsManager.MINIMAP,EnableWidescreenPanels: false,DebugSizeIndex:0,ServerPortIndex:0,MovableBar:false,ViewAllMonsterInGroup:true,MovableBarSize:5,ShortcutSet:1,ShortcutSetDefault:1,CharacterPreview:true,MapFilters:[0,1,1,1,1,1,1],Aura:true,AudioMusicVol:20,AudioEffectVol:15,AudioEnvVol:15,AudioMusicMute:false,AudioEffectMute:false,AudioEnvMute:false,FloatingTipsCoord:new com
 .ankamagames.types["\x1e\x16\x0e"](415,30),DisplayingFreshTips:true,CensorshipFilter:true,BigStoreSellFilter:false,RememberAccountName:false,LastAccountNameUsed:"",DefaultQuality:"low",ConquestFilter:-2,FightGroupAutoLock:false,BannerIllustrationMode:"artwork",BannerGaugeMode:"xp",AskForWrongCraft:true,AdvancedLineOfSight:false,RemindTurnTime:true,HideSpellBar:false,SeeAllSpell:true,UseSpeakingItems:true,ConfirmDropItem:true,TimestampInChat:true,ViewDicesDammages:false,SeeDamagesColor:true,RemasteredSpellIconsPack:3,SkipFightAnimations:false,SkipLootPanel:false,colorfulTactic:true,NightMode:true,ornamento:false,tactico:false,hidePrestige:false,noPrestige:false,ViewHPAsBar:true,AnimateHPBar:true,ViewOrnements:true};
 _loc1.applyOption = function(_loc2_, _loc3_)
 {
@@ -21,6 +22,14 @@ _loc1.applyOption = function(_loc2_, _loc3_)
          {
             this.api.gfx.activateTacticMode(false);
             this.api.gfx.activateTacticMode(true);
+         }
+         break;
+      case "EnableWidescreenPanels":
+         this.api.electron.setWidescreenEnabled(bValue); // Llama a la API de Electron
+         var oBanner = this.api.ui.getUIComponent("Banner");
+         if (oBanner != undefined)
+         {
+        oBanner.configureUseFlashChat(this.api.datacenter.Basics.forceFlashChat || (!bValue || !this.api.electron.isShowingWidescreenPanel));
          }
          break;
       case "Transparency":
@@ -129,8 +138,6 @@ _loc1.applyOption = function(_loc2_, _loc3_)
          break;
       case "AudioEnvMute":
          this.api.kernel.AudioManager.environmentMute = _loc3_;
-         break;
-      case "tactico":
          break;
       case "TimestampInChat":
          this.api.kernel.ChatManager.refresh();

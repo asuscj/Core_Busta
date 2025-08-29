@@ -29,6 +29,8 @@ _loc1.createChildren = function()
    };
    this._txtConsole.maxChars = dofus.Constants.MAX_MESSAGE_LENGTH + dofus.Constants.MAX_MESSAGE_LENGTH_MARGIN;
    ank.battlefield["\x1c\n"].useCacheAsBitmapOnStaticAnim = this.api.lang.getConfigText("USE_CACHEASBITMAP_ON_STATICANIM");
+   var bUseNormalChat = this.api.datacenter.Basics.forceFlashChat || (!this.api.kernel.OptionsManager.getOption("EnableWidescreenPanels") || !this.api.electron.isShowingWidescreenPanel);
+   this.addToQueue({object:this, method:this.configureUseFlashChat, params:[bUseNormalChat]});
    var k = 0;
    while(k < 10)
    {
@@ -41,6 +43,35 @@ _loc1.createChildren = function()
    this._btnPrestigio._visible = false;
    this._btnRuleta._visible = false;
 };
+_loc1.configureUseFlashChat = function(bUse)
+{
+    this._bUseFlashChat = bUse;
+    
+    this._cChat.useReplacementPanel(bUse ? dofus.graphics.gapi.ui.ChatReplacementPanelsManager.NO_REPLACEMENT_PANEL : this.api.kernel.OptionsManager.getOption("chatReplacementPanel"));
+    
+    // Muestra u oculta los elementos del Banner según el modo
+    this._txtConsole._visible = bUse;
+    this._mcBgTxtConsole._visible = bUse;
+    this._cChat._btnOpenClose._visible = bUse;
+    
+    // Este es un botón de ayuda que solo aparece en modo panorámico
+    this._cChat._btnHelpForPanel._visible = !bUse;
+    
+    this._btnHelp._visible = bUse;
+    
+    // Si no se usa el chat de Flash (modo panorámico), fuerza la apertura del chat
+    if (!bUse)
+    {
+       this._cChat.open(true);
+    }
+};
+
+_loc1.__get__useFlashChat = function()
+{
+    return this._bUseFlashChat;
+};
+
+_loc1.addProperty("useFlashChat", _loc1.__get__useFlashChat, function() {});
 _loc1.__get__currentOverItem = function()
 {
    return this._msShortcuts.currentOverItem;
@@ -388,7 +419,7 @@ _loc1.over = function(_loc2_)
    var _loc5_;
    var _loc4_;
    var _loc3_;
-   switch(_loc2_.target._name) // ✅ ETIQUETA ELIMINADA
+   switch(_loc2_.target._name)
    {
       case "_btnHelp":
          this.gapi.showTooltip(this.api.lang.getText("CHAT_MENU"),_loc2_.target,-20,{bXLimit:false,bYLimit:false});
