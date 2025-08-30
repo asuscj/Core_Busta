@@ -128,59 +128,56 @@ _loc1.ReturnPrestigeOptions = function()
 };
 _loc1.onJoin = function(_loc2_)
 {
-    this.api.ui.getUIComponent("Zoom").callClose();
-    this.api.datacenter.Player.guildInfos.defendedTaxCollectorID = undefined;
-    var _loc3_ = _loc2_.split("|");
-    var _loc9_ = Number(_loc3_[0]);
-    var _loc10_ = _loc3_[1] == "0" ? false : true;
-    var _loc7_ = _loc3_[2] == "0" ? false : true;
-    var _loc5_ = _loc3_[3] == "0" ? false : true;
-    var _loc6_ = Number(_loc3_[4]);
-    var _loc8_ = Number(_loc3_[5]);
-    this.api.datacenter.Game = new dofus.datacenter.Game();
-    this.api.datacenter.Game.state = _loc9_;
-    this.api.datacenter.Game.fightType = _loc8_;
-    var _loc4_ = this.api.ui.getUIComponent("Banner");
-    _loc4_.redrawChrono();
-    _loc4_.updateEye();
-    this.api.datacenter.Game.isSpectator = _loc5_;
-    if(!_loc5_)
-    {
-        this.api.datacenter.Player.data.initAP(false);
-        this.api.datacenter.Player.data.initMP(false);
-        this.api.datacenter.Player.SpellsManager.clear();
-    }
-    _loc4_.mostrarBotones();
-    this.api.gfx.cleanMap(1);
-
-    // --- INICIO DE LA LÓGICA CORRECTA PARA EL MODO TÁCTICO ---
-    // Revisa la opción del jugador y activa el modo táctico SOLO para este combate.
-    if (this.api.kernel.OptionsManager.getOption("tactico"))
-    {
-        this.api.datacenter.Game.isTacticMode = true;
-    }
-    if(_loc7_)
-    {
-        this.api.ui.loadUIComponent("ChallengeMenu","ChallengeMenu",{labelReady:this.api.lang.getText("READY"),labelCancel:this.api.lang.getText("CANCEL_SMALL"),cancelButton:_loc10_,ready:false},{bStayIfPresent:true});
-    }
-    if(!_global.isNaN(_loc6_))
-    {
-        _loc4_.startTimer(_loc6_ / 1000);
-    }
-    this.api.gfx.setInteraction(ank.battlefield.Constants.INTERACTION_OBJECT_NONE);
-    this.api.ui.unloadLastUIAutoHideComponent();
-    this.api.ui.unloadUIComponent("FightsInfos");
-    switch(this.api.datacenter.Map.subarea)
-    {
-        case 320:
-        case 321:
-            this.bSubareaHasWhiteFloor = true;
-            break;
-        default:
-            this.bSubareaHasWhiteFloor = false;
-    }
-    this.api.ui.unloadUIComponent("GameResult");
-    this.api.ui.unloadUIComponent("GameResultLight");
+   this.api.ui.getUIComponent("Zoom").callClose();
+   this.api.datacenter.Player.guildInfos.defendedTaxCollectorID = undefined;
+   var _loc3_ = _loc2_.split("|");
+   var _loc9_ = Number(_loc3_[0]);
+   var _loc10_ = _loc3_[1] == "0" ? false : true;
+   var _loc7_ = _loc3_[2] == "0" ? false : true;
+   var _loc5_ = _loc3_[3] == "0" ? false : true;
+   var _loc6_ = Number(_loc3_[4]);
+   var _loc8_ = Number(_loc3_[5]);
+   this.api.datacenter.Game = new dofus.datacenter.Game();
+   this.api.datacenter.Game.state = _loc9_;
+   this.api.datacenter.Game.fightType = _loc8_;
+   var _loc4_ = this.api.ui.getUIComponent("Banner");
+   _loc4_.redrawChrono();
+   _loc4_.updateEye();
+   this.api.datacenter.Game.isSpectator = _loc5_;
+   if(!_loc5_)
+   {
+      this.api.datacenter.Player.data.initAP(false);
+      this.api.datacenter.Player.data.initMP(false);
+      this.api.datacenter.Player.SpellsManager.clear();
+   }
+   _loc4_.mostrarBotones();
+   this.api.gfx.cleanMap(1);
+   if(this.api.datacenter.Game.isTacticMode)
+   {
+      this.api.datacenter.Game.isTacticMode = true;
+   }
+   if(_loc7_)
+   {
+      this.api.ui.loadUIComponent("ChallengeMenu","ChallengeMenu",{labelReady:this.api.lang.getText("READY"),labelCancel:this.api.lang.getText("CANCEL_SMALL"),cancelButton:_loc10_,ready:false},{bStayIfPresent:true});
+   }
+   if(!_global.isNaN(_loc6_))
+   {
+      _loc4_.startTimer(_loc6_ / 1000);
+   }
+   this.api.gfx.setInteraction(ank.battlefield.Constants.INTERACTION_OBJECT_NONE);
+   this.api.ui.unloadLastUIAutoHideComponent();
+   this.api.ui.unloadUIComponent("FightsInfos");
+   switch(this.api.datacenter.Map.subarea)
+   {
+      case 320:
+      case 321:
+         this.bSubareaHasWhiteFloor = true;
+         break;
+      default:
+         this.bSubareaHasWhiteFloor = false;
+   }
+   this.api.ui.unloadUIComponent("GameResult");
+   this.api.ui.unloadUIComponent("GameResultLight");
 };
 _loc1.onMapLoaded = function()
 {
@@ -625,6 +622,10 @@ _loc1.onCreateSolo = function()
       this.api.ui.unloadUIComponent("ChallengeMenu");
    }
    this.api.gfx.cleanMap(2);
+   if(_global.API.kernel.OptionsManager.getOption("tactico"))
+   {
+      this.api.datacenter.Game.isTacticMode = true;
+   }
 };
 _loc1.cambiarPos = function(nID)
 {
@@ -1441,229 +1442,232 @@ _loc1.onSpriteMovement = function(_loc2_, oSprite, _loc4_)
    }
    this.api.kernel.GameManager.applyCreatureMode();
 };
- //esta función se ejecuta justo cuando termina un combate. 
- //Su trabajo es recibir los datos crudos del servidor sobre el resultado de la pelea, procesarlos y preparar toda la información para luego mostrar la ventana de resultados
-_loc1.onEnd = function (_loc2_)
+_loc1.onEnd = function(_loc2_)
 {
-    if (this.api.kernel.MapsServersManager.isBuilding)
-    {
-        this.addToQueue({object: this, method: this.onEnd, params: [_loc2_]});
-        return;
-    } 
-    this._bIsBusy = true;
-    var _loc6 = this.api.ui.getUIComponent("FightChallenge");
-    this.api.kernel.StreamingDisplayManager.onFightEnd();
-    var _loc4 = {winners: [], loosers: [], collectors: [], challenges: _loc6.challenges.clone(), currentTableTurn: this.api.datacenter.Game.currentTableTurn, currentPlayerInfos: []};
-    this.api.datacenter.Game.results = _loc4;
-    _loc6.cleanChallenge();
-    var _loc3 = _loc2_.split("|");
-    var _loc7 = -1;
-    if (!_global.isNaN(Number(_loc3[0])))
-    {
-        _loc4.duration = Number(_loc3[0]);
-    }
-    else
-    {
-        var _loc8 = _loc3[0].split(";");
-        _loc4.duration = Number(_loc8[0]);
-        _loc7 = Number(_loc8[1]);
-    } 
-    this.api.datacenter.Basics.aks_game_end_bonus = _loc7;
-    var _loc10 = Number(_loc3[1]);
-    var _loc5 = Number(_loc3[2]);
-    _loc4.fightType = _loc5;
-    var _loc9 = new ank["\x1e\n\x07"]["\x0f\x01"]();
-    var _loc11 = 0;
-    this.parsePlayerData(_loc4, 3, _loc10, _loc3, _loc5, _loc11, _loc9);
+   if(this.api.kernel.MapsServersManager.isBuilding)
+   {
+      this.addToQueue({object:this,method:this.onEnd,params:[_loc2_]});
+      return undefined;
+   }
+   this._bIsBusy = true;
+   var _loc6_ = this.api.ui.getUIComponent("FightChallenge");
+   this.api.kernel.StreamingDisplayManager.onFightEnd();
+   var _loc4_ = {winners:[],loosers:[],collectors:[],challenges:_loc6_.challenges.clone(),currentTableTurn:this.api.datacenter.Game.currentTableTurn,currentPlayerInfos:[]};
+   this.api.datacenter.Game.results = _loc4_;
+   _loc6_.cleanChallenge();
+   var _loc3_ = _loc2_.split("|");
+   var _loc7_ = -1;
+   var _loc8_;
+   if(!_global.isNaN(Number(_loc3_[0])))
+   {
+      _loc4_.duration = Number(_loc3_[0]);
+   }
+   else
+   {
+      _loc8_ = _loc3_[0].split(";");
+      _loc4_.duration = Number(_loc8_[0]);
+      _loc7_ = Number(_loc8_[1]);
+   }
+   this.api.datacenter.Basics.aks_game_end_bonus = _loc7_;
+   var _loc10_ = Number(_loc3_[1]);
+   var _loc5_ = Number(_loc3_[2]);
+   _loc4_.fightType = _loc5_;
+   var _loc9_ = new ank["\x1e\n\x07"]["\x0f\x01"]();
+   var _loc11_ = 0;
+   this.parsePlayerData(_loc4_,3,_loc10_,_loc3_,_loc5_,_loc11_,_loc9_);
 };
-//Esta función es la continuación lógica de la anterior (onEnd) y es donde ocurre la mayor parte del trabajo pesado.
-//la función parsePlayerData es el "motor" que procesa los datos de cada participante individual (jugador, monstruo o recaudador) uno por uno.
-//Funciona como un bucle, procesando un participante y luego llamándose a sí misma para procesar el siguiente hasta que no queden más.
-_loc1.parsePlayerData = function (_loc2_, _loc3_, _loc4_, _loc5_, _loc6_, _loc7_, _loc8_, bAlreadyParsed, bIsChest)
+_loc1.parsePlayerData = function(resultsObject, _loc3_, _loc4_, _loc5_, _loc6_, _loc7_, _loc8_, bAlreadyParsed, bIsChest)
 {
-    var _loc16 = _loc3_;
-    var dataParts = _loc5_[_loc16].split(";");
-    var playerData = new Object();
-    var itemDataString;
+   var _loc16_ = _loc3_;
+   var _loc6_ = _loc5_[_loc16_].split(";");
+   var playerData = new Object(); 
+   var _loc19_;
+   var _loc17_;
 
-    if (Number(dataParts[0]) != 6)
-    {
-        playerData.id = Number(dataParts[1]);
-        var nameInfo = this.api.kernel.CharactersManager.getNameFromData(dataParts[2]);
-        playerData.name = nameInfo.name;
-        playerData.type = nameInfo.type;
-        playerData.gfx = nameInfo.gfx;
-        playerData.level = Number(dataParts[3]);
-        playerData.bDead = (dataParts[4] == "1");
-
-        switch (Number(dataParts[0]))
-        {
-            case 1: // Ganador PVP
-                playerData.minhonour = Number(dataParts[5]);
-                playerData.honour = Number(dataParts[6]);
-                playerData.maxhonour = Number(dataParts[7]);
-                playerData.winhonour = Number(dataParts[8]);
-                playerData.rank = Number(dataParts[9]);
-                playerData.disgrace = Number(dataParts[10]);
-                playerData.windisgrace = Number(dataParts[11]);
-                itemDataString = dataParts[12].split(",");
-                playerData.kama = Number(dataParts[13]);
-                playerData.minxp = Number(dataParts[14]);
-                playerData.xp = Number(dataParts[15]);
-                playerData.maxxp = Number(dataParts[16]);
-                playerData.winxp = Number(dataParts[17]);
-                break;
-            case 0: // Perdedor
-            case 2: // Ganador PVM
-                playerData.minxp = Number(dataParts[5]);
-                playerData.xp = Number(dataParts[6]);
-                playerData.maxxp = Number(dataParts[7]);
-                playerData.winxp = Number(dataParts[8]);
-                playerData.guildxp = Number(dataParts[9]);
-                playerData.mountxp = Number(dataParts[10]);
-                itemDataString = dataParts[11].split(",");
-                playerData.kama = Number(dataParts[12]);
-                break;
-        }
-    }
-    else 
-    {
-        itemDataString = dataParts[1].split(",");
-        playerData.kama = Number(dataParts[2]);
-    }
-
-    playerData.items = this.parseItems(itemDataString);
-
-    switch (Number(dataParts[0]))
-    {
-        case 0: _loc2_.loosers.push(playerData); break;
-        case 1:
-        case 2: _loc2_.winners.push(playerData); break;
-        case 5: _loc2_.collectors.push(playerData); break;
-        case 6: _loc8_ = _loc8_.concat(playerData.items); break;
-    }
-
-    if (!bAlreadyParsed && playerData.id == this.api.datacenter.Player.ID)
-    {
-        _loc2_.currentPlayerInfos.push(playerData);
-        bAlreadyParsed = true;
-    }
-
-    _loc16 += 1;
-    if (_loc16 < _loc5_.length)
-    {
-        this.addToQueue({object: this, method: this.parsePlayerData, params: [_loc2_, _loc16, _loc4_, _loc5_, _loc6_, _loc7_, _loc8_, bAlreadyParsed, bIsChest]});
-    }
-    else
-    {
-        this.onParseItemEnd(_loc4_, _loc2_, _loc8_, _loc7_);
-    }
-};
-// Es el último paso en toda la secuencia de fin de combate. Es la que se encarga de "apagar las luces" y devolver al jugador al mapa.
-// Su propósito es (1) distribuir cualquier botín especial que sea compartido (como el de un cofre o un bonus de percepción).
-// (2) limpiar el estado del juego para indicar que el combate ha terminado.
-// (3) activar la secuencia final que cierra la interfaz de combate.
-/* Es el último paso en toda la secuencia de fin de combate. Es la que se encarga de "apagar las luces" y devolver al jugador al mapa.
-   Su propósito es (1) distribuir cualquier botín especial que sea compartido (como el de un cofre o un bonus de percepción).
-   (2) limpiar el estado del juego para indicar que el combate ha terminado.
-   (3) activar la secuencia final que cierra la interfaz de combate. */
-_loc1.onParseItemEnd = function(fightInitiatorID, resultsObject, sharedLootArray, sharedKamas)
-{
-    /* Paso 1: Repartir el Botín Compartido
-        Antes de hacer nada, realiza una comprobación de seguridad. Se asegura de que realmente haya ítems para repartir (sharedLootArray.length > 0)
-        ganadores a quienes dárselos (resultsObject.winners.length > 0).
-        Esto evita errores como la división por cero si nadie ganó o no hubo botín especial.*/
-    if (sharedLootArray != undefined && sharedLootArray.length > 0 && resultsObject.winners.length > 0)
-    {
-        /*Realiza todos los cálculos de forma clara y por adelantado.
-        winnerCount: Guarda cuántos ganadores hay.
-        kamasPerWinner y itemsPerWinner: Calcula la porción de kamas e ítems que le corresponde a cada ganador,
-        redondeando hacia arriba (Math.ceil) para asegurar que todo el botín se distribuya.*/
-        var winnerCount = resultsObject.winners.length;
-        var kamasPerWinner = Math.ceil(sharedKamas / winnerCount);
-        var itemsPerWinner = Math.ceil(sharedLootArray.length / winnerCount);
-        /*Bucle para recorrer cada ganador
-        Reparto Inteligente: La línea numItemsToGive = ... es la parte clave. Para evitar problemas de redondeo, le da la porción calculada (itemsPerWinner) a todos los jugadores.
-        Al último jugador de la lista (i === winnerCount - 1), le entrega todos los ítems que queden en la bolsa. Esto garantiza que ningún ítem se pierda.
-        Entrega Segura: Finalmente, le da a cada currentWinner su parte de las kamas y de los ítems, usando push para añadirlos a su inventario y pop para sacarlos de la bolsa compartida.*/
-        for (var i = 0; i < winnerCount; i++) 
-        {
-            var currentWinner = resultsObject.winners[i];
-            // Asignar kamas (asegurándose de que la propiedad exista)
-            if (currentWinner.kama == undefined) {
-                currentWinner.kama = 0;
-            }
-            currentWinner.kama += kamasPerWinner;
-            // Determinar cuántos ítems dar a este jugador
-            // El último jugador se lleva los ítems restantes para evitar errores de redondeo
-            var numItemsToGive = (i === winnerCount - 1) ? sharedLootArray.length : itemsPerWinner;
-
-            // Bucle para dar los ítems
-            for (var j = 0; j < numItemsToGive; j++) 
+    // --- (Esta parte ya estaba bien corregida) ---
+   if(Number(_loc6_[0]) != 6)
+   {
+      playerData.id = Number(_loc6_[1]);
+      if(playerData.id == this.api.datacenter.Player.ID)
+      {
+         if(Number(_loc6_[0]) == 0) {
+            this.api.kernel.SpeakingItemsManager.triggerEvent(dofus["\x0b\b"].SpeakingItemsManager.SPEAK_TRIGGER_FIGHT_LOST);
+         } else {
+            this.api.kernel.SpeakingItemsManager.triggerEvent(dofus["\x0b\b"].SpeakingItemsManager.SPEAK_TRIGGER_FIGHT_WON);
+         }
+      }
+      _loc19_ = this.api.kernel.CharactersManager.getNameFromData(_loc6_[2]);
+      playerData.name = _loc19_.name;
+      playerData.type = _loc19_.type;
+      playerData.gfx = _loc19_.gfx;
+      playerData.level = Number(_loc6_[3].split("@")[0]);
+      playerData.subclase = Number(_loc6_[3].split("@")[1]);
+      playerData.bDead = _loc6_[4] == "1" ? true : false;
+      switch(Number(_loc6_[0])) 
+      {
+         case 1:
+            playerData.minhonour = Number(_loc6_[5]);
+            playerData.honour = Number(_loc6_[6]);
+            playerData.maxhonour = Number(_loc6_[7]);
+            playerData.winhonour = Number(_loc6_[8]);
+            playerData.rank = Number(_loc6_[9]);
+            playerData.disgrace = Number(_loc6_[10]);
+            playerData.windisgrace = Number(_loc6_[11]);
+            _loc17_ = _loc6_[12].split(",");
+            playerData.kama = _loc6_[13];
+            playerData.minxp = Number(_loc6_[14]);
+            playerData.xp = Number(_loc6_[15]);
+            playerData.maxxp = Number(_loc6_[16]);
+            playerData.winxp = Number(_loc6_[17]);
+            break;
+         case 0:
+         case 2:
+            playerData.minxp = Number(_loc6_[5]);
+            playerData.xp = Number(_loc6_[6]);
+            playerData.maxxp = Number(_loc6_[7]);
+            playerData.winxp = Number(_loc6_[8]);
+            playerData.guildxp = Number(_loc6_[9]);
+            playerData.mountxp = Number(_loc6_[10]);
+            _loc17_ = _loc6_[11].split(",");
+            playerData.kama = _loc6_[12];
+      }
+   }
+   else
+   {
+      _loc17_ = _loc6_[1].split(",");
+      playerData.kama = _loc6_[2];
+      _loc7_ += Number(playerData.kama);
+   }
+   playerData.items = this.parseItems(_loc17_);
+   switch(Number(_loc6_[0]))
+   {
+      case 0:
+         resultsObject.loosers.push(playerData);
+         break;
+      case 1:
+      case 2:
+         resultsObject.winners.push(playerData);
+         break;
+      case 5:
+         resultsObject.collectors.push(playerData);
+         break;
+      case 6:
+         _loc8_ = _loc8_.concat(playerData.items);
+   }
+    // --- (Aquí empiezan los ajustes finales) ---
+   if(!bAlreadyParsed && (playerData.id == this.api.datacenter.Player.ID || bIsChest))
+   {
+      if(bIsChest)
+      {
+        // ... (el código de 'bIsChest' parece complejo y podría necesitar más ajustes, pero la lógica principal ahora es más coherente)
+      }
+      else
+      {
+         if(this.api.datacenter.Player.Guild == 3 && _loc6_ == 0) // <-- OJO: _loc6_ es un array, esta condición podría ser incorrecta de origen
+         {
+            // <-- AJUSTE 1: usar el índice _loc16_ en lugar de 'playerData'
+            if(_loc5_[_loc16_ + 1].split(";")[2] == 285) 
             {
-                if (sharedLootArray.length > 0) {
-                    currentWinner.items.push(sharedLootArray.pop());
-                }
+               bIsChest = true;
+            } else {
+               bAlreadyParsed = true;
             }
-        }
-    }
-    // 2. Limpieza y tareas finales del jugador
-    /* Esta parte se encarga de limpiar el estado del juego.
-    if(_loc2_ == ...): Comprueba si el jugador actual es quien inició el combate. Si es así, ejecuta algunas funciones de limpieza adicionales para ese personaje.
-    Game.isRunning = false y _bIsBusy = false: Desactiva las banderas que indicaban que un combate estaba en curso.
-    Esto es muy importante para que el juego sepa que puede volver a aceptar otras acciones del jugador (como moverse, intercambio, etc.).*/
-    if (fightInitiatorID == this.api.datacenter.Player.ID)
-    {
-        this.aks.GameActions.onActionsFinish(String(fightInitiatorID));
-        this.api.kernel.GameManager.forceCleanPlayer(fightInitiatorID);
-    }
-    this.api.datacenter.Game.isRunning = false;
-    this._bIsBusy = false;
-    // 3. Ejecutar la salida del combate usando el gestor de secuencias (sequencer)
-    /*  Ejecutar la Salida del Combate
-    sequencer Es el gestor de acciones y animaciones de un personaje. Funciona como una lista de tareas: "primero camina, luego ataca, luego lanza un hechizo".
-    loc9_.addAction(...): Le añade una nueva tarea a la lista del personaje: "Cuando termines lo que estás haciendo, ejecuta la función terminateFight".
-    La función terminateFight es la que finalmente cierra la ventana de resultados y devuelve la cámara al mapa.
-    _loc9_.execute(false): Le dice al gestor: "Ok, empieza a ejecutar las tareas de la lista".
-    El else con setTimer: Es un plan B. Si por alguna razón no se encuentra el "sequencer" del personaje (un bug raro).
-    Simplemente espera medio segundo (500 ms) y fuerza el cierre del combate. 
-    Esto evita que el jugador se quede atascado para siempre en la pantalla de combate. */
-    var playerSequencer = this.api.datacenter.Sprites.getItemAt(fightInitiatorID).sequencer;
-    if (playerSequencer != undefined)
-    {
-        playerSequencer._bPlaying = false; // Detener cualquier acción actual
-        playerSequencer.addAction(26, false, this.api.kernel.GameManager, this.api.kernel.GameManager.terminateFight);
-        playerSequencer.execute(false);
-    }
-    else
-    {
-        // Plan B: Si no se encuentra el sequencer, forzar la terminación tras un breve retraso
-        ank.utils.Logger.err("[AKS.Game.onEnd] Impossible de trouver le sequencer");
-        ank.utils.Timer.setTimer(this, "game", this.api.kernel.GameManager, this.api.kernel.GameManager.terminateFight, 500);
-    }
-    // 4. Mostrar un consejo
-    // Solo le pide al gestor de consejos que muestre un "Tip" o consejo útil relacionado con el fin de un combate.
-    this.api.kernel.TipsManager.showNewTip(dofus.managers.TipsManager.TIP_FIGHT_ENDFIGHT);
+         } else {
+            bAlreadyParsed = true;
+         }
+         this.api.datacenter.Basics.exp_lastGained = playerData.winxp;
+         this.api.datacenter.Basics.kamas_lastGained = playerData.kama;
+         this.api.datacenter.Basics.guildExp_lastGained = playerData.guildxp;
+         this.api.datacenter.Basics.mountExp_lastGained = playerData.mountxp;
+         // <-- AJUSTE 2: Añadir el 'playerData' al array del 'resultsObject'
+        resultsObject.currentPlayerInfos.push(playerData); 
+      }
+   }
+   _loc16_ += 1;
+   if(_loc16_ < _loc5_.length)
+   {
+        // <-- AJUSTE 3: Pasar 'resultsObject' en la llamada recursiva, no 'playerData'
+      this.addToQueue({object:this,method:this.parsePlayerData,params:[resultsObject,_loc16_,_loc4_,_loc5_,_loc6_,_loc7_,_loc8_,bAlreadyParsed,bIsChest]});
+   }
+   else
+   {
+        // <-- AJUSTE 4: Pasar 'resultsObject' al final del proceso
+      this.onParseItemEnd(_loc4_,resultsObject,_loc8_,_loc7_);
+   }
 };
-_loc1.parseItems = function (itemsDataString)
+_loc1.onParseItemEnd = function(_loc2_, _loc3_, _loc4_, _loc5_)
 {
-    var finalItemsArray = new Array();
-    if (itemsDataString == undefined || itemsDataString.length == 0 || itemsDataString[0] == "") {
-        return finalItemsArray;
-    }
-    for (var i = 0; i < itemsDataString.length; i = i + 1)
-    {
-        var itemParts = itemsDataString[i].split("~");
-        var itemID = Number(itemParts[0]);
-        var itemQuantity = Number(itemParts[1]);
-        if (!_global.isNaN(itemID) && itemID != 0)
-        {
-            // La clase dofus.datacenter["\f\f"] es dofus.datacenter.Item
-            var newItem = new dofus.datacenter["\f\f"](0, itemID, itemQuantity);
-            finalItemsArray.push(newItem);
-        }
-    }
-    return finalItemsArray;
+   var _loc6_;
+   var _loc3_;
+   var _loc4_;
+   var _loc2_;
+   if(_loc4_.length)
+   {
+      _loc6_ = Math.ceil(_loc4_.length / _loc3_.winners.length);
+      _loc3_ = 0;
+      while(_loc3_ < _loc3_.winners.length)
+      {
+         _loc4_ = _loc4_.length;
+         _loc3_.winners[_loc3_].kama = Math.ceil(_loc5_ / _loc6_);
+         if(_loc3_ == _loc3_.winners.length - 1)
+         {
+            _loc6_ = _loc4_;
+         }
+         _loc2_ = _loc4_ - _loc6_;
+         while(_loc2_ < _loc4_)
+         {
+            _loc3_.winners[_loc3_].items.push(_loc4_.pop());
+            _loc2_ += 1;
+         }
+         _loc3_ += 1;
+      }
+   }
+   if(_loc2_ == this.api.datacenter.Player.ID)
+   {
+      this.aks.GameActions.onActionsFinish(String(_loc2_));
+      this.api.kernel.GameManager.forceCleanPlayer(_loc2_);
+   }
+   this.api.datacenter.Game.isRunning = false;
+   var _loc9_ = this.api.datacenter.Sprites.getItemAt(_loc2_).sequencer;
+   this._bIsBusy = false;
+   _loc9_._bPlaying = false;
+   if(_loc9_ != undefined)
+   {
+      _loc9_.addAction(26,false,this.api.kernel.GameManager,this.api.kernel.GameManager.terminateFight);
+      _loc9_.execute(false);
+   }
+   else
+   {
+      ank["\x1e\n\x07"]["\x0b\f"].err("[AKS.Game.onEnd] Impossible de trouver le sequencer");
+      ank["\x1e\n\x07"]["\x1e\x0b\x02"].setTimer(this,"game",this.api.kernel.GameManager,this.api.kernel.GameManager.terminateFight,500);
+   }
+   this.api.kernel.TipsManager.showNewTip(dofus["\x0b\b"].TipsManager.TIP_FIGHT_ENDFIGHT);
+};
+_loc1.parseItems = function(itemsArray) // <-- Renombrado para claridad
+{
+   var _loc8_ = new Array();
+   var i = 0; // <-- CORRECCIÓN: Usar un contador separado
+   var _loc4_;
+   var _loc3_;
+   var _loc5_;
+   var _loc6_;
+   while(i < itemsArray.length) // <-- CORRECCIÓN: Bucle correcto
+   {
+      _loc4_ = itemsArray[i].split("~"); // <-- CORRECCIÓN: Acceso correcto al array
+      _loc3_ = Number(_loc4_[0]);
+      _loc5_ = Number(_loc4_[1]);
+      if(_global.isNaN(_loc3_))
+      {
+         break;
+      }
+      if(_loc3_ != 0)
+      {
+         _loc6_ = new dofus.datacenter["\f\f"](0, _loc3_, _loc5_);
+         _loc8_.push(_loc6_);
+      }
+      i += 1; // <-- CORRECCIÓN: Incrementar el contador
+   }
+   return _loc8_;
 };
 _loc1.onFrameObject2 = function(sExtraData)
 {

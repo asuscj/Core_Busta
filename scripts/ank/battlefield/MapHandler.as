@@ -452,6 +452,19 @@ _loc1.adjustAndMaskMap = function ()
         this._nAdjustTimer = undefined;
     }
     this._mcContainer.adjusteMap();
+    // Comprueba si la opción de modo táctico está activa
+    var bIsTacticOption = _global.API.kernel.OptionsManager.getOption("tactico");
+    // Solo ejecuta la lógica si el estado va a cambiar
+    if (bIsTacticOption != this.api.datacenter.Game.isTacticMode)
+    {
+        // Actualiza el estado global del juego
+        this.api.datacenter.Game.isTacticMode = bIsTacticOption;
+        // Bucle que recorre TODAS las celdas para activar/desactivar el modo táctico
+        for (var i = 0; i < this.getCellCount(); i++)
+        {
+            this.tacticModeRefreshCell(i, bIsTacticOption);
+        }
+    }
 };
 _loc1.initializeCell = function(var2, var3, var4)
 {
@@ -605,7 +618,6 @@ _loc1.updateCell = function(nCellNum, oNewCell, sMaskHex, nPermanentLevel)
    var _loc13_ = (_loc5_ & 2) != 0;
    var _loc22_ = (_loc5_ & 1) != 0;
    var _loc3_ = this._oDatacenter.Map.data[nCellNum];
-
    var _loc6_;
    if(nPermanentLevel > 0)
    {
