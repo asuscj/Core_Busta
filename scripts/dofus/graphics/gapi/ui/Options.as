@@ -2,41 +2,27 @@
 var _loc1 = dofus["\r\x14"].gapi.ui.Options.prototype;
 _loc1.init = function()
 {
-    super.init(false,dofus["\r\x14"].gapi.ui.Options.CLASS_NAME);
-    this._eaDisplayStyles = new ank["\x1e\n\x07"]["\x0f\x01"](); 
-    // Mantenemos toda la lógica nueva para Electron
-    var bIsElectron = _root.electron; 
-
-    if (bIsElectron)
-    {
-        this._eaDisplayStyles.push({label: this.api.lang.getText("DISPLAYSTYLE_CLASSIC"), style: "normal"});
-        this._eaDisplayStyles.push({label: this.api.lang.getText("DISPLAYSTYLE_WIDESCREENCHATPANEL"), style: dofus.managers.OptionsManager.DISPLAY_STYLE_WIDESCREEN_PANELS});
-    }
-    else
-    {
-        var bIsWindowsStandalone = System.capabilities.playerType == "StandAlone" && System.capabilities.os.indexOf("Windows") != -1;
-        this._eaDisplayStyles.push({label: this.api.lang.getText("DISPLAYSTYLE_NORMAL"), style: "normal"});
-        if (System.capabilities.screenResolutionY > 950 || bIsWindowsStandalone)
-        {
-           this._eaDisplayStyles.push({label: this.api.lang.getText("DISPLAYSTYLE_MEDIUM" + (bIsWindowsStandalone ? "_RES" : "")), style: "medium"});
-        }
-        this._eaDisplayStyles.push({label: this.api.lang.getText("DISPLAYSTYLE_MAXIMIZED" + (bIsWindowsStandalone ? "_RES" : "")), style: "maximized"});
-    }
-    // El resto del código para las otras opciones se mantiene igual
-    this._eaFlashQualities = new ank["\x1e\n\x07"]["\x0f\x01"]();
-    this._eaFlashQualities.push({label:this.api.lang.getText("QUALITY_LOW"),quality:"low"});
-    this._eaFlashQualities.push({label:this.api.lang.getText("QUALITY_MEDIUM"),quality:"medium"});
-    this._eaFlashQualities.push({label:this.api.lang.getText("QUALITY_HIGH"),quality:"high"});
-    this._eaFlashQualities.push({label:this.api.lang.getText("QUALITY_BEST"),quality:"best"});
-    
-    this._eaSpellIconsPacks = new ank["\x1e\n\x07"]["\x0f\x01"]();
-    this._eaSpellIconsPacks.push({label:this.api.lang.getText("UI_OPTION_SPELLCOLOR_CLASSIC"),frame:3});
-    this._eaSpellIconsPacks.push({label:this.api.lang.getText("UI_OPTION_SPELLCOLOR_REMASTERED"),frame:1});
-    this._eaSpellIconsPacks.push({label:this.api.lang.getText("UI_OPTION_SPELLCOLOR_CONTRAST"),frame:2});
-    
-    this._eaRemasteredClipsHD = new ank["\x1e\n\x07"]["\x0f\x01"]();
-    this._eaRemasteredClipsHD.push({label:this.api.lang.getText("UI_OPTION_CLIPSHD_REMASTERED"),value:"remastered"});
-    this._eaRemasteredClipsHD.push({label:this.api.lang.getText("UI_OPTION_CLIPSHD_CLASSIC"),value:"classic"});
+   super.init(false,dofus["\r\x14"].gapi.ui.Options.CLASS_NAME);
+   var _loc3_ = System.capabilities.playerType == "StandAlone" && System.capabilities.os.indexOf("Windows") != -1;
+   this._eaDisplayStyles = new ank["\x1e\n\x07"]["\x0f\x01"]();
+   this._eaDisplayStyles.push({label:this.api.lang.getText("DISPLAYSTYLE_NORMAL"),style:"normal"});
+   if(System.capabilities.screenResolutionY > 950 || _loc3_)
+   {
+      this._eaDisplayStyles.push({label:this.api.lang.getText("DISPLAYSTYLE_MEDIUM" + (_loc3_ ? "_RES" : "")),style:"medium"});
+   }
+   this._eaDisplayStyles.push({label:this.api.lang.getText("DISPLAYSTYLE_MAXIMIZED" + (_loc3_ ? "_RES" : "")),style:"maximized"});
+   this._eaFlashQualities = new ank["\x1e\n\x07"]["\x0f\x01"]();
+   this._eaFlashQualities.push({label:this.api.lang.getText("QUALITY_LOW"),quality:"low"});
+   this._eaFlashQualities.push({label:this.api.lang.getText("QUALITY_MEDIUM"),quality:"medium"});
+   this._eaFlashQualities.push({label:this.api.lang.getText("QUALITY_HIGH"),quality:"high"});
+   this._eaFlashQualities.push({label:this.api.lang.getText("QUALITY_BEST"),quality:"best"});
+   this._eaSpellIconsPacks = new ank["\x1e\n\x07"]["\x0f\x01"]();
+   this._eaSpellIconsPacks.push({label:this.api.lang.getText("UI_OPTION_SPELLCOLOR_CLASSIC"),frame:3});
+   this._eaSpellIconsPacks.push({label:this.api.lang.getText("UI_OPTION_SPELLCOLOR_REMASTERED"),frame:1});
+   this._eaSpellIconsPacks.push({label:this.api.lang.getText("UI_OPTION_SPELLCOLOR_CONTRAST"),frame:2});
+   this._eaRemasteredClipsHD = new ank["\x1e\n\x07"]["\x0f\x01"]();
+   this._eaRemasteredClipsHD.push({label:this.api.lang.getText("UI_OPTION_CLIPSHD_REMASTERED"),value:"remastered"});
+   this._eaRemasteredClipsHD.push({label:this.api.lang.getText("UI_OPTION_CLIPSHD_CLASSIC"),value:"classic"});
 };
 _loc1.initTabTexts = function()
 {
@@ -104,11 +90,6 @@ _loc1.initTabTexts = function()
    this._mcTabViewer._lblRemasteredClipsHD.text = this.api.lang.getText("REMASTERED_CLIPS_HD_FRAME_RATE");
    this._mcTabViewer._lblRemasteredSpellIcons.text = this.api.lang.getText("DOFUS_REMASTERED_SPELL_ICONS");
    this._mcTabViewer._lblSkipLootPanel.text = this.api.lang.getText("OPTION_SKIP_LOOT_PANEL");
-   if (!this.api.electron.enabled)
-   {
-    this._mcTabViewer._lblDisplayStyle._visible = false;
-    this._mcTabViewer._cbDisplayStyle._visible = false;
-   }
 };
 _loc1.addTabListeners = function()
 {
@@ -597,18 +578,17 @@ _loc1.itemSelected = function(_loc2_)
    var _loc10_;
    switch(_loc2_.target._name)
    {
-   case "_cbDisplayStyle":
-    var oSelectedItem = _loc2_.target.selectedItem;
-
-    if (oSelectedItem.style == "normal" || this.api.electron.enabled)
-    {
-       this.api.kernel.OptionsManager.setOption("DisplayStyle", oSelectedItem.style);
-    }
-    else
-    {
-       this.api.kernel.showMessage(this.api.lang.getText("OPTIONS_DISPLAY"), this.api.lang.getText("DO_U_CHANGE_DISPLAYSTYLE"), "CAUTION_YESNO", {name: "Display", listener: this, params: {style: oSelectedItem.style}});
-    }
-    break;
+      case "_cbDisplayStyle":
+         _loc6_ = _loc2_.target.selectedItem;
+         if(_loc6_.style == "normal")
+         {
+            this.api.kernel.OptionsManager.setOption("DisplayStyle",_loc6_.style);
+         }
+         else
+         {
+            this.api.kernel.showMessage(this.api.lang.getText("OPTIONS_DISPLAY"),this.api.lang.getText("DO_U_CHANGE_DISPLAYSTYLE"),"CAUTION_YESNO",{name:"Display",listener:this,params:{style:_loc6_.style}});
+         }
+         break;
       case "_cbDefaultQuality":
          _loc8_ = _loc2_.target.selectedItem;
          this.api.kernel.showMessage(this.api.lang.getText("OPTIONS_DISPLAY"),this.api.lang.getText("DO_U_CHANGE_QUALITY_" + String(_loc8_.quality).toUpperCase()),"CAUTION_YESNO",{name:"Quality",listener:this,params:{quality:_loc8_.quality}});

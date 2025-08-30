@@ -1553,40 +1553,43 @@ _loc1.setValue = function(bUsed, sSuggested, oItem)
 };
 _loc1.click = function(_loc2_)
 {
-   var _loc3_;
-   var _loc4_;
-   var _loc5_;
-   switch(_loc2_.target._name)
-   {
-      case "_ctrItemIcon":
-      case "_lblItemIcon":
-         if(Key.isDown(dofus.Constants.CHAT_INSERT_ITEM_KEY) && this._oItem != undefined)
-         {
-            this._mcList._parent.gapi.api.kernel.GameManager.insertItemInChat(this._oItem.craftItem,"","=");
-            _loc3_ = 0;
-            while(_loc3_ < this._oItem.items.length)
+    var _loc3_;
+    var _loc4_;
+    var _loc5_;
+    switch(_loc2_.target._name)
+    {
+        case "_ctrItemIcon":
+        case "_lblItemIcon":
+            if(Key.isDown(dofus.Constants.CHAT_INSERT_ITEM_KEY) && this._oItem != undefined)
             {
-               _loc4_ = this._oItem.items[_loc3_];
-               this._mcList._parent.gapi.api.kernel.GameManager.insertItemInChat(_loc4_,_loc4_.Quantity + "x",this._oItem.items.length - 1 > 0 ? "+" : "");
-               _loc3_ += 1;
+                this._mcList._parent.gapi.api.kernel.GameManager.insertItemInChat(this._oItem.craftItem,"","=");
+                _loc3_ = 0;
+                while(_loc3_ < this._oItem.items.length)
+                {
+                    _loc4_ = this._oItem.items[_loc3_];
+                    this._mcList._parent.gapi.api.kernel.GameManager.insertItemInChat(_loc4_,_loc4_.Quantity + "x",this._oItem.items.length - 1 > 0 ? "+" : "");
+                    _loc3_ += 1;
+                }
             }
-         }
-         else
-         {
-            this._mcList._parent.craftItem(this._ctrItemIcon.contentData);
-         }
-         break;
-      default:
-         _loc5_ = _loc2_.target.contentData;
-         if(Key.isDown(dofus.Constants.CHAT_INSERT_ITEM_KEY) && _loc5_ != undefined)
-         {
-            this._mcList._parent.gapi.api.kernel.GameManager.insertItemInChat(_loc5_);
+            else
+            {
+                this._mcList._parent.craftItem(this._ctrItemIcon.contentData);
+            }
             break;
-         }
-         api = _global.API;
-         api.network.send("wh" + _loc5_.unicID);
-         break;
-   }
+        default:
+            _loc5_ = _loc2_.target.contentData;
+            if(Key.isDown(dofus.Constants.CHAT_INSERT_ITEM_KEY) && _loc5_ != undefined)
+            {
+                this._mcList._parent.gapi.api.kernel.GameManager.insertItemInChat(_loc5_);
+            }
+            else
+            {
+                // CORRECCIÓN: Se eliminó el envío de paquete innecesario y el break prematuro.
+                // Ahora sí se llama a la función para craftear.
+                this._mcList._parent.craftItem(_loc5_);
+            }
+            break;
+    }
 };
 _loc1.init = function()
 {
@@ -2895,27 +2898,28 @@ _loc1.initTexts = function()
 };
 _loc1.initData = function()
 {
-   this._txtDescription.text = this.api.lang.getText("MOUNTPARK_DESCRIPTION",[this._oMountPark.size,this._oMountPark.items]);
-   if(this.isMine)
-   {
-      this._txtPrice.text = String(this._oMountPark.price != 0 ? this._oMountPark.price : this.defaultPrice);
-      this._txtPriceOg.text = String(this._oMountPark.priceOg);
-      this._btnCancel._visible = this._oMountPark.price != 0;
-      this._mcPrice._visible = true;
-      this._mcPrice2._visible = true;
-      this._btnValidateOgrinas._visible = false;
-   }
-   else
-   {
-      this._txtPrice.text = String(this._oMountPark.price);
-      this._txtPrice.editable = false;
-      this._txtPrice.selectable = false;
-      this._txtPriceOg.text = String(this.ogPrice);
-      this._txtPriceOg.editable = false;
-      this._txtPriceOg.selectable = false;
-      this._mcPrice._visible = false;
-      this._mcPrice2._visible = false;
-   }
+    this._txtDescription.text = this.api.lang.getText("MOUNTPARK_DESCRIPTION",[this._oMountPark.size,this._oMountPark.items]);
+    if(this.isMine)
+    {
+        this._txtPrice.text = String(this._oMountPark.price != 0 ? this._oMountPark.price : this.defaultPrice);
+        this._txtPriceOg.text = String(this._oMountPark.priceOg);
+        this._btnCancel._visible = this._oMountPark.price != 0;
+        this._mcPrice._visible = true;
+        this._mcPrice2._visible = true;
+        this._btnValidateOgrinas._visible = false;
+    }
+    else
+    {
+        this._txtPrice.text = String(this._oMountPark.price);
+        this._txtPrice.editable = false;
+        this._txtPrice.selectable = false;
+        // CORRECCIÓN: Ahora lee el precio en ogrinas del cercado.
+        this._txtPriceOg.text = String(this._oMountPark.priceOg); 
+        this._txtPriceOg.editable = false;
+        this._txtPriceOg.selectable = false;
+        this._mcPrice._visible = false;
+        this._mcPrice2._visible = false;
+    }
 };
 _loc1.click = function(_loc2_)
 {
@@ -4626,94 +4630,95 @@ _loc1.init = function()
    this.addToQueue({object:this,method:this.addListeners});
    this._Liston._visible = false;
 };
-_loc1.setValue = function(_loc2_, _loc3_, _loc4_)
+_loc1.setValue = function (_loc2_, _loc3_, _loc4_)
 {
-   this._oItems = _loc4_;
-   var _loc10_;
-   var _loc4_;
-   var _loc6_;
-   var _loc7_;
-   var _loc3_;
-   if(_loc2_)
-   {
-      switch(_loc4_.type)
-      {
-         case "taxcollector":
-         case "player":
-         case "monster":
-            if(_loc4_.subclase > 0)
+    this._oItems = _loc4_;
+    if (_loc2_)
+    {
+        switch (_loc4_.type)
+        {
+            case "taxcollector":
+            case "player":
+            case "monster":
             {
-               this._Liston._visible = true;
-               this._lblLevel.styleName = "BlackCenterSmallLabel";
+                if (_loc4_.subclase > 0)
+                {
+                    this._Liston._visible = true;
+                    this._lblLevel.styleName = "BlackCenterSmallLabel";
+                }
+                this._lblName.text = _loc4_.name;
+                if (_global.isNaN(_loc4_.xp))
+                {
+                    this._pbXP._visible = false;
+                }
+                else
+                {
+                    this._pbXP._visible = true;
+                    this._pbXP.minimum = _loc4_.minxp;
+                    this._pbXP.maximum = _loc4_.maxxp;
+                    this._pbXP.value = _loc4_.xp;
+                    this._pbXP.uberValue = _loc4_.xp - (!_global.isNaN(_loc4_.winxp) ? (_loc4_.winxp) : (0));
+                }
+                this._lblWinXP.text = _global.isNaN(_loc4_.winxp) ? ("") : (new ank["\x1e\n\x07"]["\x0e\x1c"](_loc4_.winxp).addMiddleChar(_global.API.lang.getConfigText("THOUSAND_SEPARATOR"), 3));
+                this._lblGuildXP.text = _global.isNaN(_loc4_.guildxp) ? ("") : (new ank["\x1e\n\x07"]["\x0e\x1c"](_loc4_.guildxp).addMiddleChar(_global.API.lang.getConfigText("THOUSAND_SEPARATOR"), 3));
+                this._lblMountXP.text = _global.isNaN(_loc4_.mountxp) ? ("") : (new ank["\x1e\n\x07"]["\x0e\x1c"](_loc4_.mountxp).addMiddleChar(_global.API.lang.getConfigText("THOUSAND_SEPARATOR"), 3));
+                this._lblKama.text = _global.isNaN(_loc4_.kama) ? ("") : (new ank["\x1e\n\x07"]["\x0e\x1c"](_loc4_.kama).addMiddleChar(_global.API.lang.getConfigText("THOUSAND_SEPARATOR"), 3));
+                this._lblLevel.text = _loc4_.subclase > 0 ? (_loc4_.subclase) : (_loc4_.level);
+                this._mcDeadHead._visible = _loc4_.bDead;
+                if (!_loc4_.bDead)
+                {
+                    this._ldrGuild.contentPath = _loc4_.gfx;
+                }
+                this.createEmptyMovieClip("_mcItems", 10);
+                var _loc10 = false;
+                
+                // --- INICIO DE LA CORRECCIÓN FINAL ---
+                // Usaremos un bucle 'for' estándar y asignaremos la profundidad (depth) usando
+                // el contador 'i'. Esto es más seguro y evita que los ítems se sobreescriban.
+                var itemsList = _loc4_.items;
+                for (var i = 0; i < itemsList.length; i++) 
+                {
+                    var currentItem = itemsList[i];
+                    var posX = this._mcItemPlacer._x + 24 * i;
+
+                    if (posX < this._mcItemPlacer._x + this._mcItemPlacer._width)
+                    {
+                        // La profundidad ahora es 'i'. Cada ítem tendrá una profundidad única (0, 1, 2, ...).
+                        var itemContainer = this._mcItems.attachMovie("Container", "_ctrItem" + i, i, {_x: posX, _y: this._mcItemPlacer._y + 1});
+                        itemContainer.setSize(18, 18);
+                        itemContainer.addEventListener("over", this);
+                        itemContainer.addEventListener("out", this);
+                        itemContainer.addEventListener("click", this);
+                        itemContainer.enabled = true;
+                        itemContainer.margin = 0;
+                        itemContainer.contentData = currentItem;
+                    } 
+                    else 
+                    {
+                        _loc10 = true; 
+                        break; 
+                    }
+                }
+                // --- FIN DE LA CORRECCIÓN FINAL ---
+
+                this._ldrAllDrop._visible = _loc10;
             }
-            this._lblName.text = _loc4_.name;
-            if(_global.isNaN(_loc4_.xp))
-            {
-               this._pbXP._visible = false;
-            }
-            else
-            {
-               this._pbXP._visible = true;
-               this._pbXP.minimum = _loc4_.minxp;
-               this._pbXP.maximum = _loc4_.maxxp;
-               this._pbXP.value = _loc4_.xp;
-               this._pbXP.uberValue = _loc4_.xp - (_global.isNaN(_loc4_.winxp) ? 0 : _loc4_.winxp);
-            }
-            this._lblWinXP.text = !_global.isNaN(_loc4_.winxp) ? new ank["\x1e\n\x07"]["\x0e\x1c"](_loc4_.winxp).addMiddleChar(_global.API.lang.getConfigText("THOUSAND_SEPARATOR"),3) : "";
-            this._lblGuildXP.text = !_global.isNaN(_loc4_.guildxp) ? new ank["\x1e\n\x07"]["\x0e\x1c"](_loc4_.guildxp).addMiddleChar(_global.API.lang.getConfigText("THOUSAND_SEPARATOR"),3) : "";
-            this._lblMountXP.text = !_global.isNaN(_loc4_.mountxp) ? new ank["\x1e\n\x07"]["\x0e\x1c"](_loc4_.mountxp).addMiddleChar(_global.API.lang.getConfigText("THOUSAND_SEPARATOR"),3) : "";
-            this._lblKama.text = !_global.isNaN(_loc4_.kama) ? new ank["\x1e\n\x07"]["\x0e\x1c"](_loc4_.kama).addMiddleChar(_global.API.lang.getConfigText("THOUSAND_SEPARATOR"),3) : "";
-            this._lblLevel.text = _loc4_.subclase <= 0 ? _loc4_.level : _loc4_.subclase;
-            this._mcDeadHead._visible = _loc4_.bDead;
-            if(!_loc4_.bDead)
-            {
-               this._ldrGuild.contentPath = _loc4_.gfx;
-            }
-            this.createEmptyMovieClip("_mcItems",10);
-            _loc10_ = false;
-            _loc4_ = _loc4_.items.length;
-            while(true)
-            {
-               _loc4_ -= 1;
-               if(_loc4_ < 0)
-               {
-                  break;
-               }
-               _loc6_ = this._mcItemPlacer._x + 24 * _loc4_;
-               if(_loc6_ < this._mcItemPlacer._x + this._mcItemPlacer._width)
-               {
-                  _loc7_ = _loc4_.items[_loc4_];
-                  _loc3_ = this._mcItems.attachMovie("Container","_ctrItem" + _loc4_,_loc4_,{_x:_loc6_,_y:this._mcItemPlacer._y + 1});
-                  _loc3_.setSize(18,18);
-                  _loc3_.addEventListener("over",this);
-                  _loc3_.addEventListener("out",this);
-                  _loc3_.addEventListener("click",this);
-                  _loc3_.enabled = true;
-                  _loc3_.margin = 0;
-                  _loc3_.contentData = _loc7_;
-               }
-               else
-               {
-                  _loc10_ = true;
-               }
-            }
-            this._ldrAllDrop._visible = _loc10_;
-      }
-   }
-   else if(this._lblName.text != undefined)
-   {
-      this._pbXP._visible = false;
-      this._lblName.text = "";
-      this._pbXP.minimum = 0;
-      this._pbXP.maximum = 100;
-      this._pbXP.value = random(99);
-      this._lblWinXP.text = "";
-      this._lblKama.text = "";
-      this._pbXP.uberValue = 0;
-      this._mcDeadHead._visible = false;
-      this._mcItems.removeMovieClip();
-      this._ldrAllDrop._visible = false;
-   }
+        }
+    }
+    else if (this._lblName.text != undefined)
+    {
+        this._pbXP._visible = false;
+        this._lblName.text = "";
+        this._pbXP.minimum = 0;
+        this._pbXP.maximum = 100;
+        this._pbXP.value = random(99);
+        this._lblWinXP.text = "";
+        this._lblKama.text = "";
+        this._pbXP.uberValue = 0;
+        this._mcDeadHead._visible = false;
+        this._mcItems.removeMovieClip();
+        this._ldrAllDrop._visible = false;
+    }
 };
 _loc1 = dofus["\r\x14"].gapi.ui["\r\x1c"].GameResultPlayerPVP.prototype;
 _loc1.setValue = function(_loc2_, _loc3_, _loc4_)
@@ -4917,23 +4922,27 @@ _loc1.initData = function()
    this._sdStars._y = this._winBackground._y + 30;
    var _loc2_;
    var _loc3_;
-   var _loc0_;
+   var _loc0_; // Declarada aquí está bien
+
    if(this._oData.challenges && this._oData.challenges.length)
-   {
-      this._lblChallenges._y = this._lblBonus._y + 17;
-      this._mcChallengesPlacer._y = this._lblBonus._y + 18;
-      _loc2_ = 0;
-      while(_loc2_ < this._oData.challenges.length)
-      {
-         _loc3_ = this.attachMovie("FightChallengeIcon","fci" + _loc2_,this.getNextHighestDepth(),{challenge:this._oData.challenges[_loc2_],displayUiOnClick:false});
-         _loc0_ = _loc0_ = 17;
-         _loc3_._height = _loc0_;
-         _loc3_._width = _loc0_;
-         _loc3_._x = _loc2_ * (_loc3_._width + 5) + this._mcChallengesPlacer._x;
-         _loc3_._y = this._mcChallengesPlacer._y;
-         _loc2_ += 1;
-      }
-   }
+{
+    this._lblChallenges._y = this._lblBonus._y + 17;
+    this._mcChallengesPlacer._y = this._lblBonus._y + 18;
+    _loc2_ = 0;
+    while(_loc2_ < this._oData.challenges.length)
+    {
+        _loc3_ = this.attachMovie("FightChallengeIcon","fci" + _loc2_,this.getNextHighestDepth(),{challenge:this._oData.challenges[_loc2_],displayUiOnClick:false});
+        
+        // CORRECCIÓN: Se asigna el valor correcto a _loc0_ antes de usarlo.
+        _loc0_ = 17; 
+        
+        _loc3_._height = _loc0_;
+        _loc3_._width = _loc0_;
+        _loc3_._x = _loc2_ * (_loc3_._width + 5) + this._mcChallengesPlacer._x;
+        _loc3_._y = this._mcChallengesPlacer._y;
+        _loc2_ += 1;
+    }
+}
 };
 _loc1.click = function(_loc2_)
 {

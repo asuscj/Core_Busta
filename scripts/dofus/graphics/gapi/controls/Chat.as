@@ -194,13 +194,6 @@ _loc1.addListeners = function()
    }
    this.api.kernel.ChatManager.setTypeVisible(1,true);
    this.api.kernel.ChatManager.refresh();
-   var chat = this;
-   this._mcReplacementPanelMask.onRelease = function()
-   {
-    var _loc2_ = {};
-    _loc2_.target = this;
-    chat._replacementPanelsManager.click(_loc2_); // Asegúrate que _replacementPanelsManager exista
-};
 };
 _loc1.click = function(oEvent)
 {
@@ -214,6 +207,7 @@ _loc1.click = function(oEvent)
          break;
       case "_btnOrnamentos":
          this.api.sounds.events.onBannerChatButtonClick();
+
          this.api.kernel.Console.process(".ornamentos");
          break;
       case "_btnGlobalFights":
@@ -426,35 +420,6 @@ _loc1.addProperty("filters",_loc1.__get__filters,function()
 {
 }
 );
-_loc1.useReplacementPanel = function(nReplacementPanel, aArgs)
-{
-    // Esta variable es TRUE si estamos en modo chat normal, FALSE si estamos en modo panel (widescreen).
-    var bIsNormalChat = nReplacementPanel == dofus.graphics.gapi.ui.ChatReplacementPanelsManager.NO_REPLACEMENT_PANEL;
-
-    // Muestra u oculta los elementos del chat normal
-    this._chatFilters._visible = bIsNormalChat;
-    this._txtChat._visible = bIsNormalChat;
-    
-    // Bucle para mostrar u ocultar todos los botones de filtro (_btnFilter0, _btnFilter1, etc.)
-    var i = 0;
-    while(i < 14) // El original usa 14, ajústalo si tienes más o menos filtros
-    {
-       if (this["_btnFilter" + i] != undefined) {
-          this["_btnFilter" + i]._visible = bIsNormalChat;
-       }
-       i = i + 1;
-    }
-
-    // Muestra u oculta los contenedores de los paneles de reemplazo
-    this._mcReplacementPanel._visible = !bIsNormalChat;
-    this._mcReplacementPanelMask._visible = !bIsNormalChat;
-    
-    // Lógica específica para el minimapa
-    this._mcMiniMapReplacementPanel._visible = nReplacementPanel == dofus.graphics.gapi.ui.ChatReplacementPanelsManager.MINIMAP && (!bIsNormalChat && !this._replacementPanelsManager.isCurrentReplacementPanelTemporary);
-    
-    // Llama al gestor de paneles para que cargue el contenido correcto (minimapa, etc.)
-    this.addToQueue({object:this._replacementPanelsManager, method:this._replacementPanelsManager.changeReplacementPanel, params:[nReplacementPanel, undefined, aArgs]});
-};
 ASSetPropFlags(_loc1,null,1);
 _global.dofus["\r\x14"].gapi.controls.Chat.CLASS_NAME = "Chat";
 _global.dofus["\r\x14"].gapi.controls.Chat.OPEN_OFFSET = 350;
